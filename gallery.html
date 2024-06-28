@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Aquarius Spa</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
+
+    <style>
+        /* Add these styles to style.css */
+
+        .gallery-carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        .gallery-carousel .slick-slide {
+            padding: 0 10px;
+        }
+
+        .gallery-carousel .slick-center img {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-carousel .slick-slide img {
+            width: auto;
+            height: 60vh;
+            object-fit: cover;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .gallery-carousel .slick-prev,
+        .gallery-carousel .slick-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--main-color);
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            z-index: 1000;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery-carousel .slick-prev {
+            left: -3rem;
+        }
+
+        .gallery-carousel .slick-next {
+            right: -3rem;
+        }
+
+        .gallery-carousel .slick-slide:not(.slick-center) img {
+            opacity: 0.5;
+            transform: scale(0.8);
+        }
+
+        .thumbnail-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        .thumbnail-grid img {
+            width: 100px;
+            height: 60px;
+            object-fit: cover;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        @media (max-width: 768px) {
+            #menu-icon {
+            display: block;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            padding: 1rem 3%;
+            background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
+            border-top: .1rem solid rgba(0, 0, 0, .2);
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+            display: none;
+        }
+
+        .navbar.active {
+            display: block;
+        }
+
+        .navbar a {
+            display: block;
+            font-size: 2rem;
+            margin: 3rem 0;
+        }
+    }
+
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Aquarius Spa</a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html#home">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html" class="active">Gallery</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="booking.html">Book Now</a>
+        </nav>
+    </header>
+
+    <section class="gallery">
+        <h2 class="heading">Picture <span>Gallery</span></h2>
+        <div class="gallery-carousel">
+            <!-- Add all images to the gallery carousel -->
+            <div><img src="images/0eef6d8d-2a48-480b-993b-c4b387667d09.JPG" alt="Gallery Image"></div>
+            <div><img src="images/1f46f146-2e40-4e48-a34b-873b98824a4a.JPG" alt="Gallery Image"></div>
+            <div><img src="images/25d79713-80be-4eee-b307-517f65a16a03.JPG" alt="Gallery Image"></div>
+            <div><img src="images/c1862762-7cc5-494a-a96a-853d685534a4.JPG" alt="Gallery Image"></div>
+            <div><img src="images/e3a89a3a-b1bc-488d-ae33-a2a9080a24be.JPG" alt="Gallery Image"></div>
+            <div><img src="images/ee37b21e-0681-47bd-900f-2ff792e95f3c.JPG" alt="Gallery Image"></div>
+            <div><img src="images/f8feeae2-f09e-4b29-ad75-4854336ec7f7.JPG" alt="Gallery Image"></div>
+            <div><img src="images/PHOTO-2024-05-22-20-23-01.jpg" alt="Gallery Image"></div>
+
+        </div>
+        <div class="thumbnail-grid">
+            <!-- Add all images to the thumbnail grid -->
+            <img src="images/0eef6d8d-2a48-480b-993b-c4b387667d09.JPG" alt="Gallery Image">
+            <img src="images/1f46f146-2e40-4e48-a34b-873b98824a4a.JPG" alt="Gallery Image">
+            <img src="images/25d79713-80be-4eee-b307-517f65a16a03.JPG" alt="Gallery Image">
+            <img src="images/c1862762-7cc5-494a-a96a-853d685534a4.JPG" alt="Gallery Image">
+            <img src="images/e3a89a3a-b1bc-488d-ae33-a2a9080a24be.JPG" alt="Gallery Image">
+            <img src="images/ee37b21e-0681-47bd-900f-2ff792e95f3c.JPG" alt="Gallery Image">
+            <img src="images/f8feeae2-f09e-4b29-ad75-4854336ec7f7.JPG" alt="Gallery Image">
+            <img src="images/PHOTO-2024-05-22-20-23-01.jpg" alt="Gallery Image">
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2023 by Aquarius Spa | All Rights Reserved.</p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.gallery-carousel').slick({
+                infinite: true,
+                slidesToShow: 1,
+                centerMode: true,
+                variableWidth: true,
+                prevArrow: '<button type="button" class="slick-prev">&lt;</button>',
+                nextArrow: '<button type="button" class="slick-next">&gt;</button>',
+            });
+
+            // Remove the Slick carousel for the thumbnails
+            $('.thumbnail-grid img').on('click', function() {
+                var index = $(this).index();
+                $('.gallery-carousel').slick('slickGoTo', index);
+            });
+
+            $('.gallery-carousel').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+                var nextCaption = slick.$slides.eq(nextSlide).find('img').data('caption');
+                $('#carousel-caption').fadeOut(function() {
+                    $(this).text(nextCaption).fadeIn();
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    let menuIcon = document.querySelector('#menu-icon');
+    let navbar = document.querySelector('.navbar');
+
+    if (menuIcon && navbar) {
+        menuIcon.onclick = () => {
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+        };
+    }
+
+    // Other scripts...
+});
+    </script>
+</body>
+
+</html>

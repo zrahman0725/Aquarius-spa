@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking | Aquarius Spa</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
+
+    <style>
+        @media (max-width: 768px) {
+            #menu-icon {
+            display: block;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            padding: 1rem 3%;
+            background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
+            border-top: .1rem solid rgba(0, 0, 0, .2);
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+            display: none;
+        }
+
+        .navbar.active {
+            display: block;
+        }
+
+        .navbar a {
+            display: block;
+            font-size: 2rem;
+            margin: 3rem 0;
+        }
+    }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">Aquarius Spa</a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html#home">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="booking.html" class="active">Book Now</a>
+        </nav>
+    </header>
+
+    <section class="booking" id="booking">
+        <div class="booking-container">
+            <div class="form-container">
+                <h2 class="heading">Book <span>Your Appointment</span></h2>
+                <form id="booking-form">
+                    <div class="input-box">
+                        <label for="services">Select Service:</label>
+                        <select id="services" name="service" required onchange="updateServiceOptions()">
+                            <option value="">Select a service</option>
+                            <option value="dry-sauna">Dry Sauna</option>
+                            <option value="steam-room">Steam Room</option>
+                            <option value="busy-bees">Busy Bees</option>
+                            <option value="ritual-rejuvenation">Ritual Rejuvenation</option>
+                            <option value="bachelorettes-birthdays">Bachelorettes and Birthdays</option>
+                        </select>
+                    </div>
+                    <div class="input-box" id="people-box" style="display: none;">
+                        <label for="people">Number of People:</label>
+                        <select id="people" name="people"></select>
+                    </div>
+                    <div class="input-box" id="duration-box" style="display: none;">
+                        <label for="duration">Select Duration:</label>
+                        <select id="duration" name="duration" required></select>
+                    </div>
+                    <div class="input-box" id="addons-box">
+                        <label for="addons">Additional Services:</label>
+                        <select id="addons" name="addons" multiple>
+                            <option value="basic-facial">Basic Facial</option>
+                            <option value="body-scrub">Body Scrub</option>
+                            <option value="oak-leaf-steam">Oak Leaf Whisk Steam</option>
+                            <option value="disposable-underwear-flip-flops">Disposable Underwear + Flip Flops</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <label for="date">Select Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="time">Select Time:</label>
+                        <select id="time" name="time" required></select>
+                    </div>
+                    <div class="input-box input-box-inline">
+                        <label for="first-name">First Name:</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="input-box input-box-inline">
+                        <label for="last-name">Last Name:</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>                    
+                    <input type="submit" value="Confirm Appointment" class="btn">
+                </form>
+                
+            </div>
+            <div class="calendar-container">
+                <div id='calendar'></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2023 by Aquarius Spa | All Rights Reserved.</p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#booking"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBR9BxUQ4Z8XY-ojlAaWJbhyLQUNc957kA",
+            authDomain: "aquariusspa-54d5a.firebaseapp.com",
+            projectId: "aquariusspa-54d5a",
+            storageBucket: "aquariusspa-54d5a.appspot.com",
+            messagingSenderId: "241744416515",
+            appId: "1:241744416515:web:a35fc232551049b2f0e336",
+            measurementId: "G-WGMEQS2B4Y"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Populate Time Options
+        function populateTimeOptions() {
+            const timeSelect = document.getElementById('time');
+            timeSelect.innerHTML = '';
+
+            const startHour = 9;
+            const endHour = 21;
+
+            for (let hour = startHour; hour < endHour; hour++) {
+                for (let minutes = 0; minutes < 60; minutes += 30) {
+                    const timeString = `${String(hour).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+                    const option = document.createElement('option');
+                    option.value = timeString;
+                    option.textContent = timeString;
+                    timeSelect.appendChild(option);
+                }
+            }
+        }
+
+        // Update Service Options
+        function updateServiceOptions() {
+            const service = document.getElementById("services").value;
+            const peopleBox = document.getElementById("people-box");
+            const durationBox = document.getElementById("duration-box");
+            const peopleSelect = document.getElementById("people");
+            const durationSelect = document.getElementById("duration");
+
+            peopleBox.style.display = "none";
+            durationBox.style.display = "none";
+            peopleSelect.innerHTML = "";
+            durationSelect.innerHTML = "";
+
+            if (service === "dry-sauna" || service === "steam-room") {
+                peopleBox.style.display = "block";
+                durationBox.style.display = "block";
+                for (let i = 1; i <= 6; i++) {
+                    peopleSelect.innerHTML += `<option value="${i}">${i}</option>`;
+                }
+                ["2.5 hrs", "3 hrs", "3.5 hrs", "4 hrs"].forEach(duration => {
+                    durationSelect.innerHTML += `<option value="${duration}">${duration}</option>`;
+                });
+            } else if (service === "busy-bees") {
+                durationBox.style.display = "block";
+                durationSelect.innerHTML += `<option value="2.5 hrs">2.5 hrs</option>`;
+            } else if (service === "ritual-rejuvenation") {
+                durationBox.style.display = "block";
+                durationSelect.innerHTML += `<option value="4 hrs">4 hrs</option>`;
+            } else if (service === "bachelorettes-birthdays") {
+                peopleBox.style.display = "block";
+                durationBox.style.display = "block";
+                for (let i = 1; i <= 6; i++) {
+                    peopleSelect.innerHTML += `<option value="${i}">${i}</option>`;
+                }
+                durationSelect.innerHTML += `<option value="4 hrs">4 hrs</option>`;
+            }   
+        }
+
+        // Initialize the calendar and fetch events from Firestore
+        document.addEventListener('DOMContentLoaded', () => {
+            const bookingForm = document.getElementById('booking-form');
+
+            if (bookingForm) {
+                populateTimeOptions();
+
+                const calendarEl = document.getElementById('calendar');
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    selectable: true,
+                    selectMirror: true,
+                    editable: true,
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },
+                    contentHeight: 'auto',
+                    slotMinTime: '09:00:00',
+                    slotMaxTime: '21:00:00',
+                    events: [],
+
+                    // Fetch events from Firestore
+                    eventSources: [{
+                        events: function(fetchInfo, successCallback, failureCallback) {
+                            db.collection('appointments').get().then((querySnapshot) => {
+                                let events = [];
+                                querySnapshot.forEach((doc) => {
+                                    const appointment = doc.data();
+                                    const event = {
+                                        title: `${appointment.service}\n${appointment.firstName} ${appointment.lastName}\nPhone: ${appointment.phone}\nEmail: ${appointment.email}`,
+                                        start: new Date(`${appointment.date}T${appointment.time}`),
+                                        end: new Date(new Date(`${appointment.date}T${appointment.time}`).getTime() + (parseFloat(appointment.durationString) * 60 * 60 * 1000)),
+                                        allDay: false
+                                    };
+                                    events.push(event);
+                                });
+                                successCallback(events);
+                            }).catch((error) => {
+                                console.error('Error fetching events: ', error);
+                                failureCallback(error);
+                            });
+                        }
+                    }]
+                });
+                calendar.render();
+
+                bookingForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+
+                    const service = bookingForm.services.value;
+                    const date = bookingForm.date.value;
+                    const time = bookingForm.time.value;
+                    const firstName = bookingForm['first-name'].value;
+                    const lastName = bookingForm['last-name'].value;
+                    const phone = bookingForm.phone.value;
+                    const email = bookingForm.email.value;
+                    const durationString = bookingForm.duration.value;
+                    const addons = Array.from(bookingForm.addons.selectedOptions).map(option => option.value);
+
+                    const appointment = {
+                        service,
+                        date,
+                        time,
+                        firstName,
+                        lastName,
+                        phone,
+                        email,
+                        durationString,
+                        addons
+                    };
+
+                    console.log("Appointment data to save:", appointment);
+
+                    // Save the appointment to Firestore
+                    db.collection('appointments').add(appointment)
+                    .then((docRef) => {
+                        console.log("Document written with ID: ", docRef.id);
+                        //alert('Appointment booked successfully!');
+                        bookingForm.reset();
+                        // Optionally, you can refresh the calendar or fetch the appointments again
+                        calendar.refetchEvents();
+
+
+                        emailjs.send('service_81lfhxu', 'template_et5scnp', {
+                        service: service,
+                        date: date,
+                        time: time,
+                        firstName: firstName,
+                        lastName: lastName,
+                        phone: phone,
+                        email: email,
+                        duration: durationString,
+                        addons: addons
+                    }).then((response) => {
+                        console.log('Email sent successfully:', response.status, response.text);
+                        alert('Appointment booked successfully and email sent!');
+                    }, (error) => {
+                        console.error('Failed to send email:', error);
+                        alert('Appointment booked successfully, but failed to send email.');
+                    });
+                    })
+
+                    .catch((error) => {
+                        console.error('Error adding document: ', error);
+                        alert('Error booking appointment. Please try again.');
+                    });
+                });
+            }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+    let menuIcon = document.querySelector('#menu-icon');
+    let navbar = document.querySelector('.navbar');
+
+    if (menuIcon && navbar) {
+        menuIcon.onclick = () => {
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+        };
+    }
+
+    // Other scripts...
+});
+    </script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    (function(){
+        emailjs.init("5AsumHpeUfNEPWBFp");
+    })();
+</script>
+
+</body>
+
+</html>

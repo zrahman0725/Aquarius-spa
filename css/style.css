@@ -1,0 +1,891 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --bg-color: #e0f7fa; /* Light Aqua */
+    --second-bg-color: #b2dfdb; /* Light Mint */
+    --text-color: #004d40; /* Dark Green */
+    --main-color: #00796b; /* Teal */
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+section {
+    min-height: 100vh;
+    padding: 10rem 9% 2rem;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, #e0f7fa, #80deea, #4dd0e1, #26c6da, #00796b); /* Gradient for header and footer */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.header.sticky {
+    border-bottom: .1rem solid rgba(0, 0, 0, .2);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: default;
+}
+
+.navbar a {
+    font-size: 1.7rem;
+    color: var(--text-color);
+    margin-left: 4rem;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+}
+
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-img img {
+    width: 35vw;
+    animation: floatImage 4s ease-in-out infinite;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@keyframes floatImage {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2.4rem);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.home-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.home-content h3 {
+    font-size: 3.2rem;
+    font-weight: 700;
+}
+
+.home-content h3:nth-of-type(2) {
+    margin-bottom: 2rem;
+}
+
+span {
+    color: var(--main-color);
+}
+
+.home-content h1 {
+    font-size: 5.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.home-content p {
+    font-size: 1.6rem;
+}
+
+.social-media a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background: transparent;
+    border: .2rem solid var(--main-color);
+    border-radius: 50%;
+    font-size: 2rem;
+    color: var(--main-color);
+    margin: 3rem 1.5rem 3rem 0;
+    transition: .5s ease;
+}
+
+.social-media a:hover {
+    background: var(--main-color);
+    color: var(--second-bg-color);
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background: var(--main-color);
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem var(--main-color);
+    font-size: 1.6rem;
+    color: var(--second-bg-color);
+    letter-spacing: .1rem;
+    font-weight: 600;
+    transition: .5s ease;
+}
+
+.btn:hover {
+    box-shadow: none;
+    background: var(--text-color);
+    color: var(--main-color);
+}
+
+.about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    background: var(--second-bg-color);
+}
+
+.about-img img {
+    width: 35vw;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.heading {
+    text-align: center;
+    font-size: 4.5rem;
+}
+
+.about-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.about-content h2 {
+    text-align: left;
+    line-height: 1.2;
+}
+
+.about-content h3 {
+    font-size: 2.6rem;
+}
+
+.about-content p {
+    font-size: 1.6rem;
+    margin: 2rem 0 3rem;
+}
+
+.services h2 {
+    margin-bottom: 5rem;
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.services-container .services-box {
+    flex-direction: 1 1 30rem;
+    background: var(--second-bg-color);
+    padding: 3rem 2rem 4rem;
+    border-radius: 2rem;
+    text-align: center;
+    border: .2rem solid var(--bg-color);
+    transition: .5s ease;
+}
+
+.services-container .services-box:hover {
+    border-color: var(--main-color);
+    transform: scale(1.02);
+}
+
+.services-box i {
+    font-size: 7rem;
+    color: var(--main-color);
+}
+
+.services-box h3 {
+    font-size: 2.6rem;
+}
+
+.services-box p {
+    font-size: 1.6rem;
+    margin: 1rem 0 3rem;
+}
+
+.gallery {
+    background: var(--second-bg-color);
+}
+
+.gallery h2 {
+    margin-bottom: 4rem;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.gallery-container .gallery-box {
+    position: relative;
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem var(--bg-color);
+    overflow: hidden;
+    display: flex;
+}
+
+.gallery-box img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: .5s ease;
+}
+
+.gallery-box:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-box .gallery-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, .1), var(--main-color));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 4rem;
+    transform: translateY(100%);
+    transition: .5s ease;
+}
+
+.gallery-box:hover .gallery-layer {
+    transform: translateY(0);
+}
+
+.gallery-layer h4 {
+    font-size: 3rem;
+}
+
+.gallery-layer p {
+    font-size: 1.6rem;
+    margin: .3rem 0 1rem;
+}
+
+.gallery-layer a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    background: var(--text-color);
+    border-radius: 50%;
+}
+
+.gallery-layer a i {
+    font-size: 2rem;
+    color: var(--second-bg-color);
+}
+
+.contact h2 {
+    margin-bottom: 3rem;
+}
+
+.contact form {
+    max-width: 70rem;
+    margin: 1rem auto;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.contact form .input-box {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.contact form .input-box input,
+.contact form textarea {
+    width: 100%;
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background: var(--second-bg-color);
+    border-radius: .8rem;
+    margin: .7rem 0;
+}
+
+.contact form .input-box input {
+    width: 49%;
+}
+
+.contact textarea {
+    resize: none;
+}
+
+.contact form .btn {
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, #e0f7fa, #80deea, #4dd0e1, #26c6da, #00796b); /* Gradient for header and footer */
+}
+
+.footer-text p {
+    font-size: 1.6rem;
+}
+
+.footer-iconTop a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: .8rem;
+    background: var(--main-color);
+    border-radius: .8rem;
+    transition: .5s ease;
+}
+
+.footer-iconTop a:hover {
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.footer-iconTop a i {
+    font-size: 2.4rem;
+    color: var (--second-bg-color);
+}
+
+.gradient-background {
+    background: linear-gradient(120deg, #80deea, #4dd0e1, #26c6da, #00acc1); /* Gradient from aqua to teal */
+}
+
+.text-on-gradient {
+    color: #ffffff; /* Ensures readability on gradient */
+}
+
+.btn {
+    background-color: #26c6da; /* Teal */
+    color: white; /* Ensures readability */
+}
+
+.btn:hover {
+    background: var (--text-color);
+    color: var (--main-color);
+}
+
+.navbar a {
+    color: #00796b; /* Teal */
+}
+
+.navbar a.active,
+.navbar a:hover {
+    color: #004d40; /* Dark Green for active/hover states */
+}
+
+.social-media a,
+.footer-iconTop a {
+    border-color: var (--text-color); /* White borders */
+    color: var (--text-color); /* White icons */
+}
+
+.social-media a:hover,
+.footer-iconTop a:hover {
+    background: var (--text-color); /* White background on hover */
+    color: var (--main-color); /* Teal text/icon on hover */
+}
+
+.services-container .services-box,
+.gallery-container .gallery-box {
+    border-color: var (--main-color); /* Teal borders */
+}
+
+.home,
+.about,
+.services,
+.gallery,
+.contact,
+.footer {
+    background: var (--bg-color); /* Aqua background for sections */
+}
+
+.about,
+.gallery,
+.footer {
+    background: var (--second-bg-color); /* Mint background for alternate sections */
+}
+
+@media (max-width: 1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 3%;
+    }
+
+    section {
+        padding: 10rem 3% 2rem;
+    }
+
+    .services {
+        padding-bottom: 7rem;
+    }
+
+    .gallery {
+        padding-bottom: 7rem;
+    }
+
+    .contact {
+        min-height: auto;
+    }
+
+    .footer {
+        padding: 2rem 3%;
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem 3%;
+        background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
+        border-top: .1rem solid rgba(0, 0, 0, .2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+        display: none;
+    }
+
+    .navbar.active {
+        display: block;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
+    }
+
+    .home {
+        flex-direction: column;
+    }
+
+    .home-content h3 {
+        font-size: 2.6rem;
+    }
+
+    .home-content h1 {
+        font-size: 5rem;
+    }
+
+    .home-img img {
+        width: 70vw;
+        margin-top: 4rem;
+    }
+
+    .about {
+        flex-direction: column-reverse;
+    }
+
+    .about-img {
+        width: 70vw;
+        margin-top: 4rem;
+    }
+
+    .services h2 {
+        margin-bottom: 3rem;
+    }
+
+    .gallery h2 {
+        margin-bottom: 3rem;
+    }
+
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 617px) {
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+    .contact form .input-box input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 365px) {
+    .home-img img {
+        width: 90vw;
+    }
+
+    .about-img {
+        width: 90vw;
+    }
+
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .footer p {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+
+.booking {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var (--second-bg-color);
+    padding: 10rem 0; /* Increase padding-top to ensure content is visible below the navbar */
+    text-align: center; /* Center the text */
+}
+
+.booking-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1200px; /* Set a maximum width */
+    width: 100%;
+    margin: 0 auto; /* Center the container */
+}
+
+.form-container {
+    flex: 1;
+    max-width: 40%; /* Adjust this value to make the form narrower */
+}
+
+.calendar-container {
+    flex: 2; /* Adjust this value to make the calendar wider */
+    height: 70vh; /* Adjust the height as needed */
+    max-width: 60%; /* Adjust this value to make the calendar container take more space */
+    overflow: hidden; /* Prevent overflow */
+}
+
+#calendar {
+    max-width: 100%;
+    height: 100%; /* Ensure the calendar takes up the full height of the container */
+    margin: 2rem 0;
+}
+
+.booking .container {
+    max-width: 50rem;
+    margin: auto;
+    background: var (--bg-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+.booking .heading {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.booking .input-box {
+    margin-bottom: 1.5rem;
+}
+
+.booking .input-box label {
+    display: block;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.booking .input-box input,
+.booking .input-box select {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.booking .input-box select[multiple] {
+    height: 10rem;
+}
+
+.booking .btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background: var (--main-color);
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem var (--main-color);
+    font-size: 1.6rem;
+    color: var (--second-bg-color);
+    letter-spacing: .1rem;
+    font-weight: 600;
+    transition: .5s ease;
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+}
+
+.booking .btn:hover {
+    box-shadow: none;
+    background: var (--text-color);
+    color: var (--main-color);
+}
+
+.language-switcher {
+    position:absolute; /* Changed from fixed to absolute */
+    top: 85px; /* Adjusted top position to move it down */
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000; /* Ensure it appears on top of other elements */
+}
+
+.flag-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.flag-icon:hover {
+    transform: scale(1.1);
+}
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.contact-info {
+    flex: 1;
+    max-width: 45%;
+}
+
+.contact-form {
+    flex: 1;
+    max-width: 45%;
+}
+
+.contact .map-container {
+    margin-bottom: 1.5rem;
+}
+
+.translucent-container {
+    background: rgba(176, 223, 219, 0.8); /* Light Mint color with 80% opacity */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+.contact .address-info {
+    font-size: 1.6rem;
+    line-height: 2.5rem;
+}
+
+.contact .address-info a {
+    color: var (--text-color);
+    text-decoration: none;
+}
+
+.contact .address-info a:hover {
+    text-decoration: underline;
+}
+
+.contact .address-info p {
+    margin: 1rem 0;
+}
+
+.booking .input-box select {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.booking .input-box-inline {
+    display: inline-block;
+    width: 48%;
+    box-sizing: border-box;
+}
+
+.booking .input-box-inline:first-child {
+    margin-right: 4%;
+}
+
+.booking .input-box-inline input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+/* Other CSS rules */
+
+/* Style for small-text in popup */
+.small-text {
+    font-size: 1.4rem; /* Adjust the size as needed */
+    line-height: 1.5; /* Optional: Adjust line-height for better readability */
+}
+
+.smaller-text {
+    font-size: 0.8rem; /* Adjust the size as needed */
+    line-height: 0; /* Optional: Adjust line-height for better readability */
+}
+/* Popup overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup content */
+.popup-content {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds the maximum height */
+    position: relative;
+}
+
+/* Close button */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2.4rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* Popup title */
+#popup-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Popup content paragraphs */
+.popup-content p {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Popup icon */
+.popup-content i {
+    font-size: 2rem;
+    vertical-align: middle;
+}
+
+/* Specific adjustment for length */
+#popup-length {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+}
+
+#popup-length i {
+    margin-right: 0.5rem;
+    font-size: 2rem;
+}
+
+.icon-align {
+    display: flex; /* Use flexbox for better alignment control */
+    align-items: flex-start; /* Align items to the start (top) */
+}
+
+.icon-align i {
+    margin-right: 0.5rem; /* Adds some spacing between the icon and the text */
+    margin-top: 0.75rem;
+}
+
+.icon-align .length-text {
+    display: inline-block; /* Ensure the text stays inline */
+}
+
+
+
+
+

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Aquarius Spa</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
+    <style>
+        .services-carousel {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 5rem; /* Add padding to prevent overlap with header */
+        }
+
+        .services-box {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .services-box img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin: 0 auto 2rem;
+        }
+
+        .services-box i {
+            font-size: 7rem;
+            color: var(--main-color);
+        }
+
+        .services-box h3 {
+            font-size: 2.6rem;
+            margin: 1rem 0;
+        }
+
+        .services-box p {
+            font-size: 1.6rem;
+            margin: 1rem 0 3rem;
+        }
+
+        .price-list {
+            width: 80%;
+            margin: 5rem auto;
+            padding: 2rem;
+            background: #f4f4f4;
+            border-radius: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .price-list h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .price-list h3 {
+            font-size: 2.4rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .price-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .price-list ul li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-list ul li span {
+            font-weight: bold;
+        }
+
+        .price-list ul li .extra-info {
+            font-size: 1.2rem;
+            color: #666;
+            text-align: right;
+            width: 100%;
+        }
+        .services-carousel {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 5rem;
+}
+
+.services-box {
+    display: flex;
+    margin-bottom: 2rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-img {
+    flex: 1;
+    max-width: 50%;
+    overflow: hidden;
+}
+
+.service-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.service-description {
+    flex: 2;
+    padding: 1rem 2rem;
+    background-color: #f9f9f9;
+}
+
+.service-description h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.service-description p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.service-description p.people,
+.service-description p.duration,
+.service-description p.price {
+    display: flex;
+    align-items: center;
+}
+
+.service-description p.people i,
+.service-description p.duration i,
+.service-description p.price i {
+    margin-right: 0.5rem;
+}
+
+.service-description .btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #26c6da;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.service-description .btn:hover {
+    background-color: #00796b;
+}
+
+@media (max-width: 768px) {
+            #menu-icon {
+            display: block;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            padding: 1rem 3%;
+            background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
+            border-top: .1rem solid rgba(0, 0, 0, .2);
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+            display: none;
+        }
+
+        .navbar.active {
+            display: block;
+        }
+
+        .navbar a {
+            display: block;
+            font-size: 2rem;
+            margin: 3rem 0;
+        }
+    }
+
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Aquarius Spa</a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html#home">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="booking.html">Book Now</a>
+        </nav>
+    </header>
+
+    <section class="services">
+        <h2 class="heading">Our <span>Services</span></h2>
+
+        <div class="price-list">
+            <h2>Price List</h2>
+            <ul>
+                <h3>SAUNA RENTAL (1-6 People)</h3>
+                <li><span>2.5hrs</span> <span>$300</span></li>
+                <li class="extra-info" style="font-size: 1rem;">every additional person - $50</li>
+                <li><span>3hrs</span> <span>$330</span></li>
+                <li class="extra-info" style="font-size: 1rem;">every additional person - $55</li>
+                <li><span>3.5hrs</span> <span>$360</span></li>
+                <li class="extra-info" style="font-size: 1rem;">every additional person - $60</li>
+                <li><span>4hrs</span> <span>$390</span></li>
+                <li class="extra-info" style="font-size: 1rem;">every additional person - $65</li>
+                <li class="extra-info" style="font-size: 1rem;">+30% after midnight bookings</li>
+                
+                <h3>SOCIAL DAYS SAUNA</h3>
+                <li><span>Tuesdays - Gentlemen Only</span> <span>$40</span></li>
+                <li class="extra-info" style="font-size: 1rem;">4:30p.m. - 6:45p.m.</li>
+                <li class="extra-info" style="font-size: 1rem;">7:15p.m. - 9:30p.m.</li>
+                <li><span>Women Only Wednesdays</span> <span>$40</span></li>
+                <li class="extra-info" style="font-size: 1rem;">4:30p.m. - 6:45p.m.</li>
+                <li class="extra-info" style="font-size: 1rem;">7:15p.m. - 9:30p.m.</li>
+
+                <h3>SPA PROCEDURES</h3>
+                <li><span>Busy Bee</span> <span>$249</span></li>
+                <li><span>Ritual Rejuvenation</span> <span>$449</span></li>
+                <li><span>Spa Birthdays/Bachelorette Parties</span> <span>$990</span></li>
+                <li class="extra-info" style="font-size: 1rem;">every additional person - $100</li>
+
+
+                <h3>Additional Services</h3>
+                <li class="extra-info" style="font-size: 1rem;">Exclusively available during sauna rental</li>
+                <li><span>Flip Flops</span> <span>$5</span></li>
+                <li><span>Basic facial</span> <span>$25</span></li>
+                <li><span>Body scrub</span> <span>$25</span></li>
+                <li><span>Oak leaves broom</span> <span>$30</span></li>
+                <li><span>Body scrub and oak leaf whisk steam</span> <span>$35</span></li>
+                <li><span>Basic facial, body scrub, oak leaf whisk steam</span> <span>$50</span></li>
+            </ul>
+        </div>
+
+        <div class="services-box">
+            <div class="service-img">
+                <img src="images/PHOTO-2024-05-22-20-22-53 2.jpg" alt="Sauna Steam Room">
+            </div>
+            <div class="service-description">
+                <h3>Sauna Steam Room</h3>
+                <p>Experience ultimate relaxation with our exclusive sauna and steam room rentals. Enjoy the serene environment of our luxurious sauna, designed to relax muscles and improve circulation, and our humid steam room, perfect for detoxification and respiratory health. Complimentary robes, towels, tea, coffee, honey, and candies enhance your experience. Our meticulously maintained facilities ensure a clean and safe visit. Flexible rental options are available, and our professional staff is always ready to assist you. Book your session today and rejuvenate at our spa.</p>
+                <a href="booking.html" class="btn">Book Now</a>
+            </div>
+        </div>
+
+        <div class="services-box">
+            <div class="service-img">
+                <img src="images/0eef6d8d-2a48-480b-993b-c4b387667d09.JPG" alt="Busy Bees">
+            </div>
+            <div class="service-description">
+                <h3>Busy Bees</h3>
+                <p>For those with a packed schedule, our Busy Bee package offers the perfect retreat. Begin with a relaxing steam in both dry and wet saunas, enhanced by soothing aromatherapy. Refresh your skin with a gentle body brushing, and choose between a revitalizing body scrub or a polishing treatment. Unwind with a calming massage and treat your skin to a clay mask or a nourishing full-body lotion/oil. Finish with a basic facial, and enjoy a delightful selection of tea and snacks. As a special touch, take home a souvenir to remember your serene experience.</p>
+                <a href="booking.html" class="btn">Book Now</a>
+            </div>
+        </div>
+
+        <div class="services-box">
+            <div class="service-img">
+                <img src="images/PHOTO-2024-05-22-20-22-50 3.jpg" alt="Ritual Rejuvenation">
+            </div>
+            <div class="service-description">
+                <h3>Ritual Rejuvenation</h3>
+                <p>Experience total relaxation from head to toe with our Ritual Rejuvenation package. Begin with a soothing steam in both dry and wet saunas, accompanied by calming aromatherapy and sound healing. Refresh your skin with a gentle body brushing and the invigorating Alekseev’ shower. Choose between a revitalizing body scrub or a polishing treatment, followed by a full-body clay mask. Enjoy a luxurious massage with your choice of lotion or oil, complemented by dedicated treatments for your hands and feet, a head massage, and a nourishing hair treatment. Complete your journey with a basic facial, and savor a delicious lunch with tea. Take home a special gift to remember your serene escape.</p>
+                <a href="booking.html" class="btn">Book Now</a>
+            </div>
+        </div>
+
+        <div class="services-box">
+            <div class="service-img">
+                <img src="images/ae0730c6-743a-45af-8c21-68b62d7942c2.JPG" alt="Party Package">
+            </div>
+            <div class="service-description">
+                <h3>Party Package</h3>
+
+                <p>Celebrate in style with our all-inclusive Bachelorettes and Birthdays package, perfect for creating unforgettable memories. Enjoy over 3 hours of exclusive access to both dry and wet saunas. Each participant will be pampered with a basic facial and full-body polishing, while the guest of honor receives special treatments, including oak leaf whisk steaming, a body scrub, facial, body and face mask, or a full-body massage with lotion.
+
+Delight in a lavish snack tray featuring ham, sausage, cheese, bread, crackers, nuts, chips, and veggies, alongside a fresh fruit tray and a choice of cake or cupcakes. Sip on coffee, tea, or lemonade served in elegant glass teapots.
+
+The celebration space will be beautifully decorated with a 'Happy Birthday' ribbon, a backdrop for photos, and 6-8 large balloons. Enjoy your festivities with melamine cups and dishes. Each guest will receive a fleece mask and the guest of honor will take home a small bath set in a gorgeous bag.
+
+Note: No alcohol is included, but it is permitted.</p>
+                <a href="booking.html" class="btn">Book Now</a>
+            </div>
+        </div>
+
+        <div class="services-box">
+            <div class="service-img">
+                <img src="images/PHOTO-2024-05-22-20-22-51 2.jpg" alt="Add Ons">
+            </div>
+            <div class="service-description">
+                <h3>Add Ons</h3>
+                <p>Customize your spa visit with our premium add-ons:
+
+Oak Leaves Broom - $30
+Disposable Underwear + Flip Flops - $5
+Body Scrub with Moisturizing Effect - $25
+Body Scrub and Oak Leaf Whisk Steam - $35
+Basic Facial - $25
+Basic Facial, Body Scrub, Oak Leaf Whisk Steam - $50
+Each service is designed to elevate your relaxation and rejuvenation. Choose your favorites for a personalized spa experience.</p>
+                <a href="booking.html" class="btn">Book Now</a>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2023 by Aquarius Spa | All Rights Reserved.</p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.services-carousel').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+            });
+        });
+
+        // Toggle Navbar
+document.addEventListener('DOMContentLoaded', () => {
+    let menuIcon = document.querySelector('#menu-icon');
+    let navbar = document.querySelector('.navbar');
+
+    if (menuIcon && navbar) {
+        menuIcon.onclick = () => {
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+        };
+    }
+
+    // Other scripts...
+});
+
+    </script>
+</body>
+
+</html>
