@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Aquarius Spa</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
+    <!-- Correct order for including Chart.js and the date adapter -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <style>
         .dashboard-container {
             padding: 2rem;
@@ -53,10 +57,15 @@
             margin: 0.5rem 0;
         }
 
+        .chart-container {
+            width: 100%;
+            margin-top: 2rem;
+        }
+
         body {
             margin-top: 120px;
         }
-        
+
         /* Second Navbar Styles */
         .second-navbar {
             background-color: #00796b;
@@ -79,6 +88,56 @@
 
         .second-navbar a:hover {
             text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            #menu-icon {
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem 3%;
+                background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
+                border-top: .1rem solid rgba(0, 0, 0, .2);
+                box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+                display: none;
+            }
+
+            .navbar.active {
+                display: block;
+            }
+
+            .navbar a {
+                display: block;
+                font-size: 2rem;
+                margin: 3rem 0;
+            }
+        }
+
+        .chart-view-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .chart-view-controls button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            background-color: #00796b; /* Darker teal color */
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .chart-view-controls button:hover {
+            background-color: #004d40; /* Even darker teal on hover */
         }
     </style>
 </head>
@@ -123,6 +182,19 @@
                     <p id="waivers">0</p>
                 </div>
             </div>
+
+            <!-- Chart Section -->
+            <div class="chart-container">
+                <canvas id="statsChart"></canvas>
+            </div>
+
+            <!-- Chart View Controls -->
+            <div class="chart-view-controls">
+                <button onclick="changeChartView('hours')">Hours</button>
+                <button onclick="changeChartView('days')">Days</button>
+                <button onclick="changeChartView('weeks')">Weeks</button>
+                <button onclick="changeChartView('months')">Months</button>
+            </div>
         </div>
     </section>
 
@@ -132,7 +204,7 @@
         </div>
 
         <div class="footer-iconTop">
-            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
         </div>
     </footer>
 
@@ -163,7 +235,7 @@
             }
         });
 
-        // Function to update stats
+        // Function to update stats in real-time
         function updateStats() {
             db.collection('appointmentRequests').onSnapshot((snapshot) => {
                 document.getElementById('pending-appointments').innerText = snapshot.size;
@@ -178,9 +250,167 @@
             });
         }
 
-        // Fetch data on load
+        // Initialize Chart.js chart
+        let statsChart;
+        function initializeChart() {
+            const ctx = document.getElementById('statsChart').getContext('2d');
+            statsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [], // Dynamic labels based on view
+                    datasets: [{
+                        label: 'Pending Appointments',
+                        data: [], // Dynamic data based on view
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        fill: false
+                    }, {
+                        label: 'Total Bookings',
+                        data: [], // Dynamic data based on view
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        fill: false
+                    }, {
+                        label: 'Waivers',
+                        data: [], // Dynamic data based on view
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'hour' // Default to hours
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+            console.log("Chart initialized.");
+        }
+
+        // Function to fetch data for the chart based on the selected view
+        async function fetchChartData(view) {
+            console.log(`Fetching data for view: ${view}`);
+            const now = new Date();
+            let startTime;
+
+            if (view === 'hours') {
+                startTime = new Date(now.getTime() - 24 * 60 * 60 * 1000); // Last 24 hours
+            } else if (view === 'days') {
+                startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7); // Last 7 days
+            } else if (view === 'weeks') {
+                startTime = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate()); // Last 4 weeks
+            } else if (view === 'months') {
+                startTime = new Date(now.getFullYear(), now.getMonth() - 12, now.getDate()); // Last 12 months
+            }
+
+            try {
+                const appointmentRequests = await db.collection('appointmentRequests')
+                    .where('timestamp', '>=', startTime).get();
+                const appointments = await db.collection('appointments')
+                    .where('timestamp', '>=', startTime).get();
+                const waivers = await db.collection('waivers')
+                    .where('timestamp', '>=', startTime).get();
+
+                console.log(`Data fetched: appointmentRequests=${appointmentRequests.size}, appointments=${appointments.size}, waivers=${waivers.size}`);
+                return {
+                    appointmentRequests: appointmentRequests.size,
+                    appointments: appointments.size,
+                    waivers: waivers.size,
+                    startTime
+                };
+            } catch (error) {
+                console.error("Error fetching chart data: ", error);
+            }
+        }
+
+        // Function to change the chart view
+        async function changeChartView(view) {
+            console.log(`Changing chart view to: ${view}`);
+            const chartData = await fetchChartData(view);
+
+            let timeUnit;
+            if (view === 'hours') {
+                timeUnit = 'hour';
+            } else if (view === 'days') {
+                timeUnit = 'day';
+            } else if (view === 'weeks') {
+                timeUnit = 'week';
+            } else if (view === 'months') {
+                timeUnit = 'month';
+            }
+
+            console.log("Chart data:", chartData);
+
+            statsChart.data.labels = generateLabels(chartData.startTime, view);
+            statsChart.data.datasets[0].data = Array(statsChart.data.labels.length).fill(chartData.appointmentRequests);
+            statsChart.data.datasets[1].data = Array(statsChart.data.labels.length).fill(chartData.appointments);
+            statsChart.data.datasets[2].data = Array(statsChart.data.labels.length).fill(chartData.waivers);
+
+            console.log("Dataset[0] (Pending Appointments):", statsChart.data.datasets[0].data);
+            console.log("Dataset[1] (Total Bookings):", statsChart.data.datasets[1].data);
+            console.log("Dataset[2] (Waivers):", statsChart.data.datasets[2].data);
+
+            statsChart.options.scales.x.time.unit = timeUnit;
+            statsChart.update();
+            console.log("Chart updated.");
+        }
+
+        // Generate labels for the chart based on the view
+        function generateLabels(startTime, view) {
+            console.log(`Generating labels for view: ${view}`);
+            const labels = [];
+            const now = new Date();
+
+            if (view === 'hours') {
+                for (let i = 0; i < 24; i++) {
+                    labels.push(new Date(startTime.getTime() + i * 60 * 60 * 1000));
+                }
+            } else if (view === 'days') {
+                for (let i = 0; i < 7; i++) {
+                    labels.push(new Date(startTime.getTime() + i * 24 * 60 * 60 * 1000));
+                }
+            } else if (view === 'weeks') {
+                for (let i = 0; i < 4; i++) {
+                    labels.push(new Date(startTime.getTime() + i * 7 * 24 * 60 * 60 * 1000));
+                }
+            } else if (view === 'months') {
+                for (let i = 0; i < 12; i++) {
+                    labels.push(new Date(startTime.getFullYear(), startTime.getMonth() + i, 1));
+                }
+            }
+
+            console.log(`Labels generated: ${labels}`);
+            return labels;
+        }
+
+        // Initialize chart and update stats on load
         window.addEventListener('load', () => {
+            initializeChart();
             updateStats();
+            changeChartView('hours'); // Default view
+        });
+
+        // Toggle Navbar
+        document.addEventListener('DOMContentLoaded', () => {
+            let menuIcon = document.querySelector('#menu-icon');
+            let navbar = document.querySelector('.navbar');
+
+            if (menuIcon && navbar) {
+                menuIcon.onclick = () => {
+                    menuIcon.classList.toggle('bx-x');
+                    navbar.classList.toggle('active');
+                };
+            }
         });
     </script>
 </body>
