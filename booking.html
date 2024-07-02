@@ -81,8 +81,7 @@
                         <label for="services">Select Service:</label>
                         <select id="services" name="service" required onchange="updateServiceOptions()">
                             <option value="">Select a service</option>
-                            <option value="dry-sauna">Dry Sauna</option>
-                            <option value="steam-room">Steam Room</option>
+                            <option value="sauna-rental">Sauna Rental</option>
                             <option value="busy-bees">Busy Bees</option>
                             <option value="ritual-rejuvenation">Ritual Rejuvenation</option>
                             <option value="bachelorettes-birthdays">Bachelorettes and Birthdays</option>
@@ -148,7 +147,7 @@
         </div>
 
         <div class="footer-iconTop">
-            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
         </div>
     </footer>
 
@@ -200,7 +199,7 @@
             peopleSelect.innerHTML = "";
             durationSelect.innerHTML = "";
 
-            if (service === "dry-sauna" || service === "steam-room") {
+            if (sservice === "sauna-rental") {
                 peopleBox.style.display = "block";
                 durationBox.style.display = "block";
                 for (let i = 1; i <= 6; i++) {
@@ -266,7 +265,7 @@
                                 querySnapshot.forEach((doc) => {
                                     const appointment = doc.data();
                                     const event = {
-                                        title: `${appointment.service}\n${appointment.firstName} ${appointment.lastName}\nPhone: ${appointment.phone}\nEmail: ${appointment.email}`,
+                                        title: `${appointment.service}\n${appointment.firstName} ${appointment.lastName}`,
                                         start: new Date(`${appointment.date}T${appointment.time}`),
                                         end: new Date(new Date(`${appointment.date}T${appointment.time}`).getTime() + (parseFloat(appointment.durationString) * 60 * 60 * 1000)),
                                         allDay: false
@@ -314,7 +313,9 @@
                 email,
                 durationString,
                 addons,
-                additionalNotes
+                additionalNotes,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp() // Add timestamp here
+
             };
 
             console.log("Appointment data to save:", appointment);
