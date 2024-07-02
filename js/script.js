@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     allDay: false
                 });
 
-                alert(`You have booked: ${service} on ${date} at ${time}.\nName: ${firstName} ${lastName}\nPhone: ${phone}\nEmail: ${email}`);
+                alert(`You have requested: ${service} on ${date} at ${time}.\nName: ${firstName} ${lastName}\nPhone: ${phone}\nEmail: ${email}`);
                 bookingForm.reset();
             });
         }
@@ -246,18 +246,21 @@ function updateServiceOptions() {
     const service = document.getElementById("services").value;
     const peopleBox = document.getElementById("people-box");
     const durationBox = document.getElementById("duration-box");
+    const addonsBox = document.getElementById("addons-box"); // New line to select the add-ons box
     const peopleSelect = document.getElementById("people");
     const durationSelect = document.getElementById("duration");
 
     if (peopleBox && durationBox && peopleSelect && durationSelect) {
         peopleBox.style.display = "none";
         durationBox.style.display = "none";
+        addonsBox.style.display = "none"; // New line to hide the add-ons box initially
         peopleSelect.innerHTML = "";
         durationSelect.innerHTML = "";
 
         if (service === "dry-sauna" || service === "steam-room") {
             peopleBox.style.display = "block";
             durationBox.style.display = "block";
+            addonsBox.style.display = "block"; // New line to show the add-ons box for these services
             for (let i = 1; i <= 6; i++) {
                 peopleSelect.innerHTML += `<option value="${i}">${i}</option>`;
             }
