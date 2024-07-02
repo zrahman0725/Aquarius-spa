@@ -11,186 +11,187 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
-
         .search-bar {
-                    display: flex;
-                    justify-content: center;
-                    margin-bottom: 2rem;
-                }
-        
-                .search-bar input {
-                    padding: 0.75rem;
-                    border: 1px solid #ccc;
-                    border-radius: 25px;
-                    width: 50%;
-                    max-width: 400px;
-                    font-size: 1rem;
-                    transition: all 0.3s ease;
-                }
-        
-                .search-bar input:focus {
-                    border-color: #00796b;
-                    outline: none;
-                    box-shadow: 0 0 5px rgba(0, 121, 107, 0.5);
-                }
-        
-                .waivers-grid {
-                    flex: 1;
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                    gap: 2rem;
-                }
-                .dashboard-container {
-                    padding: 2rem;
-                    padding-top: 5rem;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2rem;
-                }
-        
-                .waiver-card {
-                    background-color: #b2dfdb;
-                    padding: 1rem;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-                }
-        
-                .waiver-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                }
-        
-                .waiver-card h3 {
-                    margin-bottom: 0.5rem;
-                    font-size: 1.25rem;
-                }
-        
-                .waiver-card p {
-                    margin: 0.25rem 0;
-                }
-        
-                .waiver-card img {
-                    margin: 0.5rem 0;
-                }
-        
-                .waiver-card .btn {
-                    background-color: #00796b;
-                    color: white;
-                    border: none;
-                    padding: 0.5rem 1rem;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    transition: background-color 0.3s;
-                    font-size: 0.9rem;
-                }
-        
-                .waiver-card .btn:hover {
-                    background-color: #004d40;
-                }
-        
-                /* Pagination styles */
-                .pagination {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 2rem 0;
-                    gap: 0.5rem;
-                }
-        
-                .pagination .btn {
-                    background-color: #00796b;
-                    color: white;
-                    border: none;
-                    padding: 0.3rem 0.6rem;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    transition: background-color 0.3s;
-                    font-size: 0.9rem;
-                }
-        
-                .pagination .btn:hover {
-                    background-color: #004d40;
-                }
-        
-                /* Second Navbar Styles */
-                .second-navbar {
-                    background-color: #00796b;
-                    color: white;
-                    padding: 1rem;
-                    text-align: right;
-                    position: fixed;
-                    width: 30%;
-                    top: 77px;
-                    z-index: 999;
-                    padding-right: 10rem;
-                    margin-left: 70%;
-                }
-        
-                .second-navbar a {
-                    color: white;
-                    margin: 0 1rem;
-                    text-decoration: none;
-                }
-        
-                .second-navbar a:hover {
-                    text-decoration: underline;
-                }
-        
-                /* Modal styles */
-                .modal {
-                    display: none;
-                    position: fixed;
-                    z-index: 9999;
-                    left: 0;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: auto;
-                    background-color: rgb(0, 0, 0);
-                    background-color: rgba(0, 0, 0, 0.4);
-                    padding-top: 60px;
-                }
-        
-                .modal-content {
-                    background-color: #fefefe;
-                    margin: 5% auto;
-                    padding: 20px;
-                    border: 1px solid #888;
-                    width: 80%;
-                    max-width: 600px;
-                    border-radius: 8px;
-                }
-        
-                .close {
-                    color: #aaa;
-                    float: right;
-                    font-size: 28px;
-                    font-weight: bold;
-                }
-        
-                .close:hover,
-                .close:focus {
-                    color: black;
-                    text-decoration: none;
-                    cursor: pointer;
-                }
-        
-                .modal h2 {
-                    margin-top: 0;
-                }
-        
-                .modal p {
-                    margin: 0.5rem 0;
-                }
-                .waiver-card .btn.delete {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-bar input {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            width: 50%;
+            max-width: 400px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: #00796b;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 121, 107, 0.5);
+        }
+
+        .waivers-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .dashboard-container {
+            padding: 2rem;
+            padding-top: 5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .waiver-card {
+            background-color: #b2dfdb;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .waiver-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .waiver-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .waiver-card p {
+            margin: 0.25rem 0;
+        }
+
+        .waiver-card img {
+            margin: 0.5rem 0;
+        }
+
+        .waiver-card .btn {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .waiver-card .btn:hover {
+            background-color: #004d40;
+        }
+
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            gap: 0.5rem;
+        }
+
+        .pagination .btn {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .pagination .btn:hover {
+            background-color: #004d40;
+        }
+
+        /* Second Navbar Styles */
+        .second-navbar {
+            background-color: #00796b;
+            color: white;
+            padding: 1rem;
+            text-align: right;
+            position: fixed;
+            width: 30%;
+            top: 77px;
+            z-index: 999;
+            padding-right: 10rem;
+            margin-left: 70%;
+        }
+
+        .second-navbar a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        .second-navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal h2 {
+            margin-top: 0;
+        }
+
+        .modal p {
+            margin: 0.5rem 0;
+        }
+
+        .waiver-card .btn.delete {
             background-color: #e53935;
         }
 
         .waiver-card .btn.delete:hover {
             background-color: #b71c1c;
         }
-            </style>
+    </style>
 </head>
 
 <body>
@@ -242,7 +243,8 @@
                 <!-- Waiver content will be inserted here -->
             </div>
             <div id="waiver-info">
-                <p><strong>Name:</strong> <span id="waiver-name"></span></p>
+                <p><strong>First Name:</strong> <span id="waiver-first-name"></span></p>
+                <p><strong>Last Name:</strong> <span id="waiver-last-name"></span></p>
                 <p><strong>Email:</strong> <span id="waiver-email"></span></p>
                 <p><strong>Phone:</strong> <span id="waiver-phone"></span></p>
                 <p><strong>Date Signed:</strong> <span id="waiver-date"></span></p>
@@ -266,7 +268,7 @@
         let filteredWaivers = []; // Store filtered waivers
         let currentPage = 1;
         const itemsPerPage = 9;
-
+    
         // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBR9BxUQ4Z8XY-ojlAaWJbhyLQUNc957kA",
@@ -277,34 +279,34 @@
             appId: "1:241744416515:web:a35fc232551049b2f0e336",
             measurementId: "G-WGMEQS2B4Y"
         };
-
+    
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
-
+    
         // Redirect to login if not authenticated
         auth.onAuthStateChanged(user => {
             if (!user) {
                 window.location.href = 'admin.html';
             }
         });
-
+    
         // Function to format date in English
         function formatDate(dateString) {
             const date = new Date(dateString);
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return date.toLocaleDateString('en-US', options);
         }
-
+    
         // Function to render waivers
         function renderWaivers(waivers) {
             const waiversGrid = document.getElementById('waivers-grid');
             waiversGrid.innerHTML = '';
-
+    
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = Math.min(startIndex + itemsPerPage, waivers.length);
-
+    
             for (let i = startIndex; i < endIndex; i++) {
                 const waiver = waivers[i];
                 const formattedDate = formatDate(waiver.dateSigned);
@@ -312,7 +314,7 @@
                 waiverCard.classList.add('waiver-card');
                 waiverCard.dataset.id = waiver.id;
                 waiverCard.innerHTML = `
-                    <h3>${waiver.name}</h3>
+                    <h3>${waiver.firstName} ${waiver.lastName}</h3>
                     <p><strong>Date Signed:</strong> ${formattedDate}</p>
                     <p><strong>Email:</strong> ${waiver.email}</p>
                     <p><strong>Phone:</strong> ${waiver.phone}</p>
@@ -323,17 +325,17 @@
                         <button class="btn delete" onclick="deleteWaiver('${waiver.id}')">Delete</button>
                     </div>
                 `;
-
+    
                 waiversGrid.appendChild(waiverCard);
             }
-
+    
             const pageInfo = document.getElementById('page-info');
             pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(waivers.length / itemsPerPage)}`;
-
+    
             document.getElementById('prev-page').disabled = currentPage === 1;
             document.getElementById('next-page').disabled = endIndex >= waivers.length;
         }
-
+    
         // Function to fetch waivers from Firestore
         function fetchWaivers() {
             return db.collection('waivers').get().then((querySnapshot) => {
@@ -350,7 +352,7 @@
                 console.error('Error fetching waivers: ', error);
             });
         }
-
+    
         // Pagination control functions
         function prevPage() {
             if (currentPage > 1) {
@@ -358,24 +360,25 @@
                 renderWaivers(filteredWaivers);
             }
         }
-
+    
         function nextPage() {
             if ((currentPage * itemsPerPage) < filteredWaivers.length) {
                 currentPage++;
                 renderWaivers(filteredWaivers);
             }
         }
-
+    
         // Function to open the modal with waiver details
         function openModal(waiverId) {
             const waiver = filteredWaivers.find(w => w.id === waiverId);
             if (waiver) {
-                document.getElementById('waiver-name').textContent = waiver.name;
+                document.getElementById('waiver-first-name').textContent = waiver.firstName;
+                document.getElementById('waiver-last-name').textContent = waiver.lastName;
                 document.getElementById('waiver-email').textContent = waiver.email;
                 document.getElementById('waiver-phone').textContent = waiver.phone;
                 document.getElementById('waiver-date').textContent = formatDate(waiver.dateSigned);
                 document.getElementById('waiver-signature').src = waiver.signatureData;
-
+    
                 const waiverContent = `
                 <p>Please read and accept the following waiver:</p>
                 <p>
@@ -453,45 +456,45 @@
                 </p>
                 `;
                 document.getElementById('waiver-content').innerHTML = waiverContent;
-
+    
                 document.getElementById('waiverModal').style.display = "block";
             }
         }
-
+    
         // Function to close the modal
         function closeModal() {
             document.getElementById('waiverModal').style.display = "none";
         }
-
+    
         async function downloadPDF(waiverId) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const waiver = filteredWaivers.find(w => w.id === waiverId);
-
+    
             if (waiver) {
                 const waiverContent = `
                 This form must be completed & signed before using our sauna and steam room facilities.
-
+    
                 General & Medical Information
                 Check with a doctor before using our facility if pregnant, diabetic, have health issues / concerns or are under medical care. This includes history of dizziness or fainting, and any metal pins, rods, artificial joints, or surgical implants including silicon. By signing this waiver, you understand the risks and have consulted with a medical professional. You take full responsibility for your own health and well-being.
                 Aquarius Spa requires any guest who has any health, mobility, or any other condition which requires assistance from another person, regardless of age, to be accompanied by another adult guest at all times.
                 Anyone entering the sauna and steam rooms assumes full responsibility for their medical/health condition, including any medications that could result in a medical emergency or unsafe condition. All guests must know their own limitations and assume all risks associated with any activities at Aquarius Spa.
                 It is advised to drink plenty of water before and after your sauna and steam sessions. Avoid eating at least one to two hours prior to your sessions to prevent any ill feelings.
-
+    
                 Reduce the Risk of Overheating and Scalding
                 Our saunas range in temperature: our cedar sauna & Himalayan salt sauna are 80°C. Our infrared sauna is 60°C. Our steam room is 60°C with 100% humidity.
                 Prolonged exposure to the sauna and steam room may cause overheating. Limit yourself to a maximum of ten (10) minutes. Know your body's limits. Overexposure to high temperatures and humidity can be dangerous. Exit immediately if nauseous, uncomfortable, dizzy, or sleepy.
                 Do not use the facility if you have recently consumed alcohol, drugs, or medications. Use at your own risk.
                 Direct contact with steam head/unit in our steam room, sauna rocks, or sauna heaters may cause serious injury. Avoid bringing any metal items into the heated rooms.
-
+    
                 Reduce the Risk of Slipping and Falling
                 Use care when entering or exiting the sauna, steam room, showers, locker, or hallway areas. Floors may be slippery and dangerous due to moisture. Use proper footwear at all times. No running in our facility. Watch where you are going.
                 Benches are provided for your convenience. Use caution when climbing or walking on the benches. Do so at your own risk.
-
+    
                 Allergies
                 The steam room and saunas use various essential oils and salts. Use at your own risk. Leave immediately if you experience any adverse or allergic reactions, including difficulty breathing or eye, nasal, or throat irritation.
                 Aquarius Spa offers complimentary infusions that may contain essential oils, food, or drink. Use and consume at your own risk.
-
+    
                 Understanding the Risks
                 The sauna and steam rooms are provided for relaxation and relief of muscular tension. If you experience any pain or discomfort during a session, exit immediately.
                 You acknowledge and accept the risks inherent in the use of the saunas and steam room. You voluntarily assume the risk of injury, accident, or death that may arise from using our facility. You hereby waive and release Aquarius Spa from any and all liability, past, present, and future, relating to sauna and steam sessions.
@@ -507,13 +510,13 @@
                 I freely accept and fully assume all risks, damages, and hazards, including the possibility of personal injury, death, property damage, and loss.
                 I acknowledge this waiver of liability form. I fully understand its terms and conditions. I understand that I am waiving and giving up my right to sue Aquarius Spa, its therapists, relaxation specialists, contractors, and employees. I sign this agreement voluntarily and intend for this to be a complete and unconditional release of liability to the greatest extent allowed by law.
                 This waiver of liability and any rights, duties, and obligations hereunder shall be governed by the laws of the province of Alberta, Canada. Any litigation involving the parties shall be brought solely in the courts of the province of Alberta.
-
+    
                 Information & Suggestions
                 We suggest removing any jewelry containing metals as metal will retain heat. Remove prior to your sauna and steam sessions.
                 Feel free to ask our staff, your relaxation specialists, any questions before, during, or after the sessions.
                 We suggest complementing your sauna and steam experience with a massage. See your relaxation specialist for more information.
                 `;
-
+    
                 const lines = waiverContent.split('\n');
                 let y = 10;
                 lines.forEach(line => {
@@ -538,15 +541,15 @@
                     }
                     y += 4; // Add extra space between paragraphs
                 });
-
+    
                 if (y > 240) {
                     doc.addPage();
                     y = 10;
                 }
-
+    
                 doc.setFontSize(8);
                 doc.setFont("helvetica", "normal");
-                doc.text(`Waiver for ${waiver.name}`, 10, y);
+                doc.text(`Waiver for ${waiver.firstName} ${waiver.lastName}`, 10, y);
                 doc.text(`Date Signed: ${formatDate(waiver.dateSigned)}`, 10, y + 4);
                 doc.text(`Email: ${waiver.email}`, 10, y + 8);
                 doc.text(`Phone: ${waiver.phone}`, 10, y + 12);
@@ -554,13 +557,13 @@
                 if (waiver.signatureData) {
                     doc.addImage(waiver.signatureData, 'PNG', 10, y + 20, 180, 60); // Adjust the dimensions as needed
                 }
-
-                doc.save(`Waiver_${waiver.name}.pdf`);
+    
+                doc.save(`Waiver_${waiver.firstName}_${waiver.lastName}.pdf`);
             } else {
                 console.error('Waiver not found:', waiverId);
             }
         }
-
+    
         // Function to delete a waiver
         function deleteWaiver(waiverId) {
             if (confirm('Are you sure you want to delete this waiver?')) {
@@ -573,21 +576,25 @@
                 });
             }
         }
-
+    
         // Function to filter waivers based on search input
         function filterWaivers() {
             const searchInput = document.getElementById('search-input').value.toLowerCase();
-            filteredWaivers = waivers.filter(waiver => waiver.name.toLowerCase().includes(searchInput));
+            filteredWaivers = waivers.filter(waiver => {
+                return waiver.firstName.toLowerCase().includes(searchInput) || waiver.lastName.toLowerCase().includes(searchInput);
+            });
             currentPage = 1;
             renderWaivers(filteredWaivers);
         }
-
+    
         // Fetch waivers on page load
         document.addEventListener('DOMContentLoaded', fetchWaivers);
-
+    
         document.getElementById('prev-page').addEventListener('click', prevPage);
         document.getElementById('next-page').addEventListener('click', nextPage);
+        document.getElementById('search-input').addEventListener('input', filterWaivers);
     </script>
+    
 </body>
 
 </html>
