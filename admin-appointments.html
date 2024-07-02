@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Aquarius Spa</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <style>
+        .dashboard-container {
+            padding: 2rem;
+            padding-top: 5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .bookings-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .booking-card {
+            background-color: #b2dfdb;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .booking-card:hover {
+            transform: scale(1.05);
+        }
+
+        .booking-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .booking-card p {
+            margin: 0.5rem 0;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 1rem;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: var(--main-color);
+        }
+
+        .modal-content .input-box {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content .input-box label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .modal-content .input-box input,
+        .modal-content .input-box select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            background-color: #26c6da;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #b2dfdb;
+        }
+
+        .calendar-container {
+            flex: 2;
+            height: 70vh;
+            max-width: 60%;
+            overflow: hidden;
+        }
+
+        #admin-calendar {
+            max-width: 100%;
+            height: 100%;
+            margin: 2rem 0;
+        }
+
+        .filter-sort-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .popup-content h3 {
+            margin-top: 0;
+        }
+
+        .filters label,
+        .sorting label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .filters select,
+        .filters input,
+        .sorting select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .popup-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #26c6da;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #b2dfdb;
+        }
+
+        /* Second Navbar Styles */
+        .second-navbar {
+            background-color: #00796b;
+            color: white;
+            padding: 1rem;
+            text-align: right;
+            position: fixed;
+            width: 30%;
+            top: 77px;
+            z-index: 999;
+            padding-right: 10rem;
+            margin-left: 70%;
+        }
+
+        .second-navbar a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        .second-navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            gap: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Aquarius Spa</a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html#home">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="booking.html">Book Now</a>
+        </nav>
+    </header>
+
+    <div class="second-navbar">
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-appointments.html">Appointments</a>
+        <a href="waivers.html">Waivers</a>
+    </div>
+
+    <div></div>
+
+    <section>
+        <h2 class="heading">Admin <span>Dashboard</span></h2>
+
+        <div class="dashboard-container">
+            <div class="calendar-container">
+                <div id="admin-calendar"></div>
+            </div>
+        </div>
+
+        <button id="filter-sort-button" class="btn" style="margin-bottom: 2rem;">Filter & Sort</button>
+
+        <div class="filter-sort-popup" id="filter-sort-popup">
+            <div class="popup-content">
+                <h3>Filter & Sort Bookings</h3>
+                <div class="filters">
+                    <label for="popup-filter-status">Status:</label>
+                    <select id="popup-filter-status">
+                        <option value="pending" selected>Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="all">All</option>
+                    </select>
+
+                    <label for="popup-filter-service">Service:</label>
+                    <select id="popup-filter-service">
+                        <option value="">All</option>
+                        <option value="dry-sauna">Dry Sauna</option>
+                        <option value="steam-room">Steam Room</option>
+                        <option value="busy-bees">Busy Bees</option>
+                    </select>
+
+                    <label for="popup-filter-date-start">From:</label>
+                    <input type="date" id="popup-filter-date-start">
+
+                    <label for="popup-filter-date-end">To:</label>
+                    <input type="date" id="popup-filter-date-end">
+
+                    <label for="popup-filter-name">Customer Name:</label>
+                    <input type="text" id="popup-filter-name">
+
+                    <label for="popup-filter-addons">Add-ons:</label>
+                    <select id="popup-filter-addons">
+                        <option value="">All</option>
+                        <option value="basic-facial">Basic Facial</option>
+                        <option value="body-scrub">Body Scrub</option>
+                        <option value="oak-leaf-steam">Oak Leaf Whisk Steam</option>
+                        <option value="disposable-underwear-flip-flops">Disposable Underwear + Flip Flops</option>
+                    </select>
+                </div>
+
+                <div class="sorting">
+                    <label for="popup-sort-by">Sort By:</label>
+                    <select id="popup-sort-by">
+                        <option value="date-asc">Date (Ascending)</option>
+                        <option value="date-desc">Date (Descending)</option>
+                        <option value="service-asc">Service (A-Z)</option>
+                        <option value="service-desc">Service (Z-A)</option>
+                        <option value="name-asc">Customer Name (A-Z)</option>
+                        <option value="name-desc">Customer Name (Z-A)</option>
+                        <option value="duration-asc">Duration (Shortest-Longest)</option>
+                        <option value="duration-desc">Duration (Longest-Shortest)</option>
+                    </select>
+                </div>
+
+                <div class="popup-buttons">
+                    <button id="apply-filters-sort" class="btn">Apply</button>
+                    <button id="close-popup" class="btn">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bookings-grid" id="bookings-grid">
+        </div>
+
+        <div class="pagination">
+            <button id="prev-page" class="btn">Previous</button>
+            <span id="page-info"></span>
+            <button id="next-page" class="btn">Next</button>
+        </div>
+
+        <div class="modal" id="booking-modal" style="z-index: 1; padding-top: 8rem; padding-bottom: 2rem;">
+            <div class="modal-content">
+                <h3>Booking Details</h3>
+                <form id="booking-form">
+                    <input type="hidden" id="booking-id">
+                    <div class="input-box">
+                        <label for="modal-service">Service:</label>
+                        <input type="text" id="modal-service" name="service" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="modal-date">Date:</label>
+                        <input type="date" id="modal-date" name="date" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="modal-time">Time:</label>
+                        <input type="time" id="modal-time" name="time" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="modal-duration">Duration:</label>
+                        <input type="text" id="modal-duration" name="durationString" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="modal-first-name">First Name:</label>
+                        <input type="text" id="modal-first-name" name="firstName" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="modal-last-name">Last Name:</label>
+                        <input type="text" id="modal-last-name" name="lastName" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="modal-phone">Phone:</label>
+                        <input type="tel" id="modal-phone" name="phone" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="modal-email">Email:</label>
+                        <input type="email" id="modal-email" name="email" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="modal-addons">Add-ons:</label>
+                        <select id="modal-addons" name="addons" multiple>
+                            <option value="basic-facial">Basic Facial</option>
+                            <option value="body-scrub">Body Scrub</option>
+                            <option value="oak-leaf-steam">Oak Leaf Whisk Steam</option>
+                            <option value="disposable-underwear-flip-flops">Disposable Underwear + Flip Flops</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <label for="modal-additional-notes">Additional Notes:</label>
+                        <textarea id="modal-additional-notes" name="additionalNotes" rows="4"></textarea>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn" id="save-button">Save</button>
+                        <button type="button" class="btn" id="approve-button">Approve</button>
+                        <button type="button" class="btn" id="reject-button">Reject</button>
+                        <button type="button" class="btn" id="close-button">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal" id="appointment-modal" style="z-index: 1; padding-top: 8rem;">
+            <div class="modal-content">
+                <h3>Appointment Details</h3>
+                <form id="appointment-form">
+                    <input type="hidden" id="appointment-id">
+                    <div class="input-box">
+                        <label for="appointment-service">Service:</label>
+                        <input type="text" id="appointment-service" name="service" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="appointment-date">Date:</label>
+                        <input type="date" id="appointment-date" name="date" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="appointment-time">Time:</label>
+                        <input type="time" id="appointment-time" name="time" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="appointment-duration">Duration:</label>
+                        <input type="text" id="appointment-duration" name="durationString" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="appointment-first-name">First Name:</label>
+                        <input type="text" id="appointment-first-name" name="firstName" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="appointment-last-name">Last Name:</label>
+                        <input type="text" id="appointment-last-name" name="lastName" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="appointment-phone">Phone:</label>
+                        <input type="tel" id="appointment-phone" name="phone" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="appointment-email">Email:</label>
+                        <input type="email" id="appointment-email" name="email" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="appointment-addons">Add-ons:</label>
+                        <select id="appointment-addons" name="addons" multiple>
+                            <option value="basic-facial">Basic Facial</option>
+                            <option value="body-scrub">Body Scrub</option>
+                            <option value="oak-leaf-steam">Oak Leaf Whisk Steam</option>
+                            <option value="disposable-underwear-flip-flops">Disposable Underwear + Flip Flops</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <label for="appointment-additional-notes">Additional Notes:</label>
+                        <textarea id="appointment-additional-notes" name="additionalNotes" rows="4"></textarea>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn" id="update-appointment-button">Update</button>
+                        <button type="button" class="btn" id="delete-appointment-button">Delete</button>
+                        <button type="button" class="btn" id="close-appointment-button">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2023 by Shahdeen Rahman | All Rights Reserved. | <a href="admin.html">Admin</a> | <a href="waiver.html">Waiver</a></p>
+        </div>
+
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <script>
+        let bookings = []; // Store all booking requests
+        let appointments = []; // Store all confirmed appointments
+        let currentPage = 1;
+        const itemsPerPage = 9;
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBR9BxUQ4Z8XY-ojlAaWJbhyLQUNc957kA",
+            authDomain: "aquariusspa-54d5a.firebaseapp.com",
+            projectId: "aquariusspa-54d5a",
+            storageBucket: "aquariusspa-54d5a.appspot.com",
+            messagingSenderId: "241744416515",
+            appId: "1:241744416515:web:a35fc232551049b2f0e336",
+            measurementId: "G-WGMEQS2B4Y"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Redirect to login if not authenticated
+        auth.onAuthStateChanged(user => {
+            if (!user) {
+                window.location.href = 'admin.html';
+            }
+        });
+
+        // Function to format date in English
+        function formatDate(dateString) {
+            const date = new Date(dateString + 'T00:00:00');
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Function to render booking requests and appointments
+        function renderBookingRequests(bookings) {
+            const bookingsGrid = document.getElementById('bookings-grid');
+            bookingsGrid.innerHTML = '';
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, bookings.length);
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const booking = bookings[i];
+                const formattedDate = formatDate(booking.date);
+                const bookingCard = document.createElement('div');
+                bookingCard.classList.add('booking-card');
+                bookingCard.dataset.id = booking.id;
+                bookingCard.dataset.type = booking.type;
+                bookingCard.innerHTML = `
+                    <h3>${booking.firstName} ${booking.lastName} - ${booking.service} - ${formattedDate}</h3>
+                    <p><strong>Service:</strong> ${booking.service}</p>
+                    <p><strong>Date:</strong> ${formattedDate}</p>
+                    <p><strong>Time:</strong> ${booking.time}</p>
+                    <p><strong>Duration:</strong> ${booking.durationString}</p>
+                    <p><strong>Customer:</strong> ${booking.firstName} ${booking.lastName}</p>
+                    <p><strong>Phone:</strong> ${booking.phone}</p>
+                    <p><strong>Email:</strong> ${booking.email}</p>
+                    <p><strong>Add-ons:</strong> ${booking.addons.join(', ')}</p>
+                    <p><strong>Additional Notes:</strong> ${booking.additionalNotes}</p>
+                `;
+                if (booking.type === 'pending') {
+                    bookingCard.addEventListener('click', () => openBookingModal(booking));
+                } else if (booking.type === 'approved') {
+                    bookingCard.addEventListener('click', () => openAppointmentModal(booking));
+                }
+                bookingsGrid.appendChild(bookingCard);
+            }
+
+            const pageInfo = document.getElementById('page-info');
+            pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(bookings.length / itemsPerPage)}`;
+
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = endIndex >= bookings.length;
+        }
+
+        // Function to fetch booking requests from Firestore and initialize pagination
+        function fetchBookingRequests() {
+            return db.collection('appointmentRequests').get().then((querySnapshot) => {
+                bookings = [];
+                querySnapshot.forEach((doc) => {
+                    const booking = doc.data();
+                    booking.id = doc.id;
+                    booking.additionalNotes = doc.data().additionalNotes;
+                    bookings.push(booking);
+                });
+                currentPage = 1;
+                renderBookingRequests(bookings);
+                renderCalendar();
+            }).catch((error) => {
+                console.error('Error fetching booking requests: ', error);
+            });
+        }
+
+        // Function to fetch confirmed appointments from Firestore and initialize pagination
+        function fetchAppointments() {
+            return db.collection('appointments').get().then((querySnapshot) => {
+                appointments = [];
+                querySnapshot.forEach((doc) => {
+                    const appointment = doc.data();
+                    appointment.id = doc.id;
+                    appointment.additionalNotes = doc.data().additionalNotes;
+                    appointments.push(appointment);
+                });
+                currentPage = 1;
+                renderBookingRequests(appointments);
+            }).catch((error) => {
+                console.error('Error fetching appointments: ', error);
+            });
+        }
+
+        // Pagination control functions
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderBookingRequests(bookings);
+            }
+        }
+
+        function nextPage() {
+            if ((currentPage * itemsPerPage) < bookings.length) {
+                currentPage++;
+                renderBookingRequests(bookings);
+            }
+        }
+
+        // Open modal with booking details
+        function openBookingModal(booking) {
+            document.getElementById('booking-id').value = booking.id;
+            document.getElementById('modal-service').value = booking.service;
+            document.getElementById('modal-date').value = booking.date;
+            document.getElementById('modal-time').value = booking.time;
+            document.getElementById('modal-duration').value = booking.durationString;
+            document.getElementById('modal-first-name').value = booking.firstName;
+            document.getElementById('modal-last-name').value = booking.lastName;
+            document.getElementById('modal-phone').value = booking.phone;
+            document.getElementById('modal-email').value = booking.email;
+            document.getElementById('modal-addons').value = booking.addons;
+            document.getElementById('modal-additional-notes').value = booking.additionalNotes;
+
+            document.getElementById('booking-modal').style.display = 'flex';
+
+            document.getElementById('save-button').style.display = 'inline-block';
+            document.getElementById('approve-button').style.display = 'inline-block';
+            document.getElementById('reject-button').style.display = 'inline-block';
+            document.getElementById('update-appointment-button').style.display = 'none';
+            document.getElementById('delete-appointment-button').style.display = 'none';
+        }
+
+        // Open modal with appointment details
+        function openAppointmentModal(appointment) {
+            document.getElementById('appointment-id').value = appointment.id;
+            document.getElementById('appointment-service').value = appointment.service;
+            document.getElementById('appointment-date').value = appointment.date;
+            document.getElementById('appointment-time').value = appointment.time;
+            document.getElementById('appointment-duration').value = appointment.durationString;
+            document.getElementById('appointment-first-name').value = appointment.firstName;
+            document.getElementById('appointment-last-name').value = appointment.lastName;
+            document.getElementById('appointment-phone').value = appointment.phone;
+            document.getElementById('appointment-email').value = appointment.email;
+            document.getElementById('appointment-addons').value = appointment.addons;
+            document.getElementById('appointment-additional-notes').value = appointment.additionalNotes;
+
+            document.getElementById('appointment-modal').style.display = 'flex';
+
+            document.getElementById('save-button').style.display = 'none';
+            document.getElementById('approve-button').style.display = 'none';
+            document.getElementById('reject-button').style.display = 'none';
+            document.getElementById('update-appointment-button').style.display = 'inline-block';
+            document.getElementById('delete-appointment-button').style.display = 'inline-block';
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Approve booking
+        function approveBooking(bookingId) {
+            const bookingData = {
+                service: document.getElementById('modal-service').value,
+                date: document.getElementById('modal-date').value,
+                time: document.getElementById('modal-time').value,
+                durationString: document.getElementById('modal-duration').value,
+                firstName: document.getElementById('modal-first-name').value,
+                lastName: document.getElementById('modal-last-name').value,
+                phone: document.getElementById('modal-phone').value,
+                email: document.getElementById('modal-email').value,
+                addons: Array.from(document.getElementById('modal-addons').selectedOptions).map(option => option.value),
+                additionalNotes: document.getElementById('modal-additional-notes').value
+            };
+
+            db.collection('appointments').add(bookingData)
+                .then(() => {
+                    db.collection('appointmentRequests').doc(bookingId).delete()
+                        .then(() => {
+                            alert('Booking approved successfully!');
+                            window.location.reload();
+                        })
+                        .catch(error => {
+                            console.error('Error deleting booking request: ', error);
+                            alert('Error approving booking. Please try again.');
+                        });
+                })
+                .catch(error => {
+                    console.error('Error adding booking to appointments: ', error);
+                    alert('Error approving booking. Please try again.');
+                });
+        }
+
+        // Reject booking
+        function rejectBooking(bookingId) {
+            db.collection('appointmentRequests').doc(bookingId).delete()
+                .then(() => {
+                    alert('Booking rejected successfully!');
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error rejecting booking: ', error);
+                    alert('Error rejecting booking. Please try again.');
+                });
+        }
+
+        // Update appointment
+        function updateAppointment(appointmentId) {
+            const appointmentData = {
+                service: document.getElementById('appointment-service').value,
+                date: document.getElementById('appointment-date').value,
+                time: document.getElementById('appointment-time').value,
+                durationString: document.getElementById('appointment-duration').value,
+                firstName: document.getElementById('appointment-first-name').value,
+                lastName: document.getElementById('appointment-last-name').value,
+                phone: document.getElementById('appointment-phone').value,
+                email: document.getElementById('appointment-email').value,
+                addons: Array.from(document.getElementById('appointment-addons').selectedOptions).map(option => option.value),
+                additionalNotes: document.getElementById('appointment-additional-notes').value
+            };
+
+            db.collection('appointments').doc(appointmentId).update(appointmentData)
+                .then(() => {
+                    alert('Appointment updated successfully!');
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error updating appointment: ', error);
+                    alert('Error updating appointment. Please try again.');
+                });
+        }
+
+        // Delete appointment
+        function deleteAppointment(appointmentId) {
+            db.collection('appointments').doc(appointmentId).delete()
+                .then(() => {
+                    alert('Appointment deleted successfully!');
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error deleting appointment: ', error);
+                    alert('Error deleting appointment. Please try again.');
+                });
+        }
+
+        document.getElementById('save-button').addEventListener('click', () => {
+            const bookingId = document.getElementById('booking-id').value;
+            const bookingData = {
+                service: document.getElementById('modal-service').value,
+                date: document.getElementById('modal-date').value,
+                time: document.getElementById('modal-time').value,
+                durationString: document.getElementById('modal-duration').value,
+                firstName: document.getElementById('modal-first-name').value,
+                lastName: document.getElementById('modal-last-name').value,
+                phone: document.getElementById('modal-phone').value,
+                email: document.getElementById('modal-email').value,
+                addons: Array.from(document.getElementById('modal-addons').selectedOptions).map(option => option.value),
+                additionalNotes: document.getElementById('modal-additional-notes').value
+            };
+
+            db.collection('appointmentRequests').doc(bookingId).update(bookingData)
+                .then(() => {
+                    alert('Booking updated successfully!');
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error updating booking: ', error);
+                    alert('Error updating booking. Please try again.');
+                });
+        });
+
+        document.getElementById('close-button').addEventListener('click', () => closeModal('booking-modal'));
+        document.getElementById('close-appointment-button').addEventListener('click', () => closeModal('appointment-modal'));
+
+        document.getElementById('approve-button').addEventListener('click', () => {
+            const bookingId = document.getElementById('booking-id').value;
+            approveBooking(bookingId);
+        });
+
+        document.getElementById('reject-button').addEventListener('click', () => {
+            const bookingId = document.getElementById('booking-id').value;
+            rejectBooking(bookingId);
+        });
+
+        document.getElementById('update-appointment-button').addEventListener('click', () => {
+            const appointmentId = document.getElementById('appointment-id').value;
+            updateAppointment(appointmentId);
+        });
+
+        document.getElementById('delete-appointment-button').addEventListener('click', () => {
+            const appointmentId = document.getElementById('appointment-id').value;
+            deleteAppointment(appointmentId);
+        });
+
+        document.getElementById('prev-page').addEventListener('click', prevPage);
+        document.getElementById('next-page').addEventListener('click', nextPage);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('popup-filter-status').value = 'pending';
+            applyFiltersAndSort();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendarEl = document.getElementById('admin-calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                selectable: true,
+                selectMirror: true,
+                editable: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                contentHeight: 'auto',
+                slotMinTime: '09:00:00',
+                slotMaxTime: '21:00:00',
+                events: [],
+                eventSources: [{
+                    events: function(fetchInfo, successCallback, failureCallback) {
+                        db.collection('appointments').get().then((querySnapshot) => {
+                            let events = [];
+                            querySnapshot.forEach((doc) => {
+                                const appointment = doc.data();
+                                const event = {
+                                    title: `${appointment.service}\n${appointment.firstName} ${appointment.lastName}\nPhone: ${appointment.phone}\nEmail: ${appointment.email}`,
+                                    start: new Date(`${appointment.date}T${appointment.time}`),
+                                    end: new Date(new Date(`${appointment.date}T${appointment.time}`).getTime() + (parseFloat(appointment.durationString) * 60 * 60 * 1000)),
+                                    allDay: false
+                                };
+                                events.push(event);
+                            });
+                            successCallback(events);
+                        }).catch((error) => {
+                            console.error('Error fetching events: ', error);
+                            failureCallback(error);
+                        });
+                    }
+                }]
+            });
+            calendar.render();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let menuIcon = document.querySelector('#menu-icon');
+            let navbar = document.querySelector('.navbar');
+
+            if (menuIcon && navbar) {
+                menuIcon.onclick = () => {
+                    menuIcon.classList.toggle('bx-x');
+                    navbar.classList.toggle('active');
+                };
+            }
+        });
+
+        function applyFiltersAndSort() {
+            const statusFilter = document.getElementById('popup-filter-status').value;
+            const serviceFilter = document.getElementById('popup-filter-service').value;
+            const dateStartFilter = document.getElementById('popup-filter-date-start').value;
+            const dateEndFilter = document.getElementById('popup-filter-date-end').value;
+            const nameFilter = document.getElementById('popup-filter-name').value.toLowerCase();
+            const addonsFilter = document.getElementById('popup-filter-addons').value;
+            const sortBy = document.getElementById('popup-sort-by').value;
+
+            let combinedBookings = [];
+
+            const fetchData = async () => {
+                if (statusFilter === 'pending' || statusFilter === 'all') {
+                    const appointmentRequestsSnapshot = await db.collection('appointmentRequests').get();
+                    appointmentRequestsSnapshot.forEach(doc => {
+                        const booking = doc.data();
+                        booking.id = doc.id;
+                        booking.type = 'pending';
+                        combinedBookings.push(booking);
+                    });
+                }
+                if (statusFilter === 'approved' || statusFilter === 'all') {
+                    const appointmentsSnapshot = await db.collection('appointments').get();
+                    appointmentsSnapshot.forEach(doc => {
+                        const appointment = doc.data();
+                        appointment.id = doc.id;
+                        appointment.type = 'approved';
+                        combinedBookings.push(appointment);
+                    });
+                }
+
+                let filteredBookings = combinedBookings;
+
+                if (serviceFilter) {
+                    filteredBookings = filteredBookings.filter(booking => booking.service === serviceFilter);
+                }
+                if (dateStartFilter) {
+                    filteredBookings = filteredBookings.filter(booking => new Date(booking.date) >= new Date(dateStartFilter));
+                }
+                if (dateEndFilter) {
+                    filteredBookings = filteredBookings.filter(booking => new Date(booking.date) <= new Date(dateEndFilter));
+                }
+                if (nameFilter) {
+                    filteredBookings = filteredBookings.filter(booking =>
+                        booking.firstName.toLowerCase().includes(nameFilter) ||
+                        booking.lastName.toLowerCase().includes(nameFilter)
+                    );
+                }
+                if (addonsFilter) {
+                    filteredBookings = filteredBookings.filter(booking => booking.addons.includes(addonsFilter));
+                }
+
+                switch (sortBy) {
+                    case 'date-asc':
+                        filteredBookings.sort((a, b) => new Date(a.date) - new Date(b.date));
+                        break;
+                    case 'date-desc':
+                        filteredBookings.sort((a, b) => new Date(b.date) - new Date(a.date));
+                        break;
+                    case 'service-asc':
+                        filteredBookings.sort((a, b) => a.service.localeCompare(b.service));
+                        break;
+                    case 'service-desc':
+                        filteredBookings.sort((a, b) => b.service.localeCompare(a.service));
+                        break;
+                    case 'name-asc':
+                        filteredBookings.sort((a, b) => a.firstName.localeCompare(b.firstName));
+                        break;
+                    case 'name-desc':
+                        filteredBookings.sort((a, b) => b.firstName.localeCompare(a.firstName));
+                        break;
+                    case 'duration-asc':
+                        filteredBookings.sort((a, b) => parseFloat(a.durationString) - parseFloat(b.durationString));
+                        break;
+                    case 'duration-desc':
+                        filteredBookings.sort((a, b) => parseFloat(b.durationString) - parseFloat(a.durationString));
+                        break;
+                    default:
+                        break;
+                }
+
+                bookings = filteredBookings;
+                currentPage = 1;
+                renderBookingRequests(filteredBookings);
+                document.getElementById('filter-sort-popup').style.display = 'none';
+            };
+
+            fetchData().catch(error => {
+                console.error('Error fetching data: ', error);
+                alert('Error applying filters and sorting. Please try again.');
+            });
+        }
+
+        document.getElementById('apply-filters-sort').addEventListener('click', applyFiltersAndSort);
+
+        document.getElementById('filter-sort-button').addEventListener('click', () => {
+            document.getElementById('filter-sort-popup').style.display = 'flex';
+        });
+
+        document.getElementById('close-popup').addEventListener('click', () => {
+            document.getElementById('filter-sort-popup').style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>

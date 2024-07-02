@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Aquarius Spa</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard-container {
+            padding: 2rem;
+            padding-top: 5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .stats-card {
+            background-color: #b2dfdb;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+            --bg-color: #e0f7fa;
+            --second-bg-color: #b2dfdb;
+            --text-color: #004d40;
+            --main-color: #00796b;
+        }
+
+        .stats-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stats-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .stats-card p {
+            margin: 0.5rem 0;
+        }
+
+        body {
+            margin-top: 120px;
+        }
+        
+        /* Second Navbar Styles */
+        .second-navbar {
+            background-color: #00796b;
+            color: white;
+            padding: 1rem;
+            text-align: right;
+            position: fixed;
+            width: 30%;
+            top: 77px; /* Adjust this value based on the height of the original navbar */
+            z-index: 999; /* Ensure it's above other content */
+            padding-right: 10rem;
+            margin-left: 70%;
+        }
+
+        .second-navbar a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        .second-navbar a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Aquarius Spa</a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html#home">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="booking.html">Book Now</a>
+        </nav>
+    </header>
+
+    <!-- Second Navbar -->
+    <div class="second-navbar">
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-appointments.html">Appointments</a>
+        <a href="waivers.html">Waivers</a>
+    </div>
+
+    <section>
+        <h2 class="heading">Admin <span>Dashboard</span></h2>
+
+        <div class="dashboard-container">
+            <!-- Quick Stats Section -->
+            <div class="stats-grid">
+                <div class="stats-card" onclick="location.href='admin-appointments.html'">
+                    <h3>Pending Appointments</h3>
+                    <p id="pending-appointments">0</p>
+                </div>
+                <div class="stats-card" onclick="location.href='admin-appointments.html'">
+                    <h3>Total Bookings</h3>
+                    <p id="total-bookings">0</p>
+                </div>
+                <div class="stats-card" onclick="location.href='waivers.html'">
+                    <h3>Waivers</h3>
+                    <p id="waivers">0</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2023 by Shahdeen Rahman | All Rights Reserved. | <a href="admin.html">Admin</a> | <a href="waiver.html">Waiver</a></p>
+        </div>
+
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBR9BxUQ4Z8XY-ojlAaWJbhyLQUNc957kA",
+            authDomain: "aquariusspa-54d5a.firebaseapp.com",
+            projectId: "aquariusspa-54d5a",
+            storageBucket: "aquariusspa-54d5a.appspot.com",
+            messagingSenderId: "241744416515",
+            appId: "1:241744416515:web:a35fc232551049b2f0e336",
+            measurementId: "G-WGMEQS2B4Y"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Redirect to login if not authenticated
+        auth.onAuthStateChanged(user => {
+            if (!user) {
+                window.location.href = 'admin.html';
+            }
+        });
+
+        // Function to update stats
+        function updateStats() {
+            db.collection('appointmentRequests').onSnapshot((snapshot) => {
+                document.getElementById('pending-appointments').innerText = snapshot.size;
+            });
+
+            db.collection('appointments').onSnapshot((snapshot) => {
+                document.getElementById('total-bookings').innerText = snapshot.size;
+            });
+
+            db.collection('waivers').onSnapshot((snapshot) => {
+                document.getElementById('waivers').innerText = snapshot.size;
+            });
+        }
+
+        // Fetch data on load
+        window.addEventListener('load', () => {
+            updateStats();
+        });
+    </script>
+</body>
+
+</html>
