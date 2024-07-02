@@ -16,31 +16,44 @@
     <style>
         @media (max-width: 768px) {
             #menu-icon {
-            display: block;
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem 3%;
+                background: rgba(255, 255, 255, 0.9);
+                border-top: .1rem solid rgba(0, 0, 0, .2);
+                box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+                display: none;
+            }
+
+            .navbar.active {
+                display: block;
+            }
+
+            .navbar a {
+                display: block;
+                font-size: 2rem;
+                margin: 3rem 0;
+            }
         }
 
-        .navbar {
-            position: absolute;
-            top: 100%;
-            left: 0;
+        .input-box {
+            margin-bottom: 1rem;
+        }
+
+        .input-box input,
+        .input-box select,
+        .input-box textarea {
             width: 100%;
-            padding: 1rem 3%;
-            background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
-            border-top: .1rem solid rgba(0, 0, 0, .2);
-            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
-            display: none;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-
-        .navbar.active {
-            display: block;
-        }
-
-        .navbar a {
-            display: block;
-            font-size: 2rem;
-            margin: 3rem 0;
-        }
-    }
     </style>
 </head>
 
@@ -83,7 +96,7 @@
                         <label for="duration">Select Duration:</label>
                         <select id="duration" name="duration" required></select>
                     </div>
-                    <div class="input-box" id="addons-box">
+                    <div class="input-box" id="addons-box" style="display: none;">
                         <label for="addons">Additional Services:</label>
                         <select id="addons" name="addons" multiple>
                             <option value="basic-facial">Basic Facial</option>
@@ -115,10 +128,13 @@
                     <div class="input-box">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
-                    </div>                    
-                    <input type="submit" value="Confirm Appointment" class="btn">
+                    </div>
+                    <div class="input-box">
+                        <label for="additional-notes">Additional Notes:</label>
+                        <textarea id="additional-notes" name="additional-notes" rows="4" placeholder="Enter any additional notes here..."></textarea>
+                    </div>
+                    <input type="button" value="Request Appointment" class="btn" onclick="validateForm()">
                 </form>
-                
             </div>
             <div class="calendar-container">
                 <div id='calendar'></div>
@@ -128,10 +144,11 @@
 
     <footer class="footer">
         <div class="footer-text">
-            <p>Copyright &copy; 2023 by Aquarius Spa | All Rights Reserved.</p>
+            <p>Copyright &copy; 2023 by Shahdeen Rahman | All Rights Reserved. | <a href="admin.html">Admin</a> | <a href="waiver.html">Waiver</a></p>
         </div>
+
         <div class="footer-iconTop">
-            <a href="#booking"><i class='bx bx-up-arrow-alt'></i></a>
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
         </div>
     </footer>
 
@@ -205,7 +222,17 @@
                     peopleSelect.innerHTML += `<option value="${i}">${i}</option>`;
                 }
                 durationSelect.innerHTML += `<option value="4 hrs">4 hrs</option>`;
-            }   
+            }
+        }
+
+        // Validate Form Fields
+        function validateForm() {
+            const bookingForm = document.getElementById('booking-form');
+            if (!bookingForm.checkValidity()) {
+                bookingForm.reportValidity();
+                return;
+            }
+            submitAppointment();
         }
 
         // Initialize the calendar and fetch events from Firestore
@@ -258,42 +285,47 @@
 
                 bookingForm.addEventListener('submit', (event) => {
                     event.preventDefault();
+                    submitAppointment();
+                });
+            }
+        });
 
-                    const service = bookingForm.services.value;
-                    const date = bookingForm.date.value;
-                    const time = bookingForm.time.value;
-                    const firstName = bookingForm['first-name'].value;
-                    const lastName = bookingForm['last-name'].value;
-                    const phone = bookingForm.phone.value;
-                    const email = bookingForm.email.value;
-                    const durationString = bookingForm.duration.value;
-                    const addons = Array.from(bookingForm.addons.selectedOptions).map(option => option.value);
+        function submitAppointment() {
+            const bookingForm = document.getElementById('booking-form');
 
-                    const appointment = {
-                        service,
-                        date,
-                        time,
-                        firstName,
-                        lastName,
-                        phone,
-                        email,
-                        durationString,
-                        addons
-                    };
+            const service = bookingForm.services.value;
+            const date = bookingForm.date.value;
+            const time = bookingForm.time.value;
+            const firstName = bookingForm['first-name'].value;
+            const lastName = bookingForm['last-name'].value;
+            const phone = bookingForm.phone.value;
+            const email = bookingForm.email.value;
+            const durationString = bookingForm.duration.value;
+            const addons = Array.from(bookingForm.addons.selectedOptions).map(option => option.value);
+            const additionalNotes = bookingForm['additional-notes'].value;
 
-                    console.log("Appointment data to save:", appointment);
+            const appointment = {
+                service,
+                date,
+                time,
+                firstName,
+                lastName,
+                phone,
+                email,
+                durationString,
+                addons,
+                additionalNotes
+            };
 
-                    // Save the appointment to Firestore
-                    db.collection('appointments').add(appointment)
-                    .then((docRef) => {
-                        console.log("Document written with ID: ", docRef.id);
-                        //alert('Appointment booked successfully!');
-                        bookingForm.reset();
-                        // Optionally, you can refresh the calendar or fetch the appointments again
-                        calendar.refetchEvents();
+            console.log("Appointment data to save:", appointment);
 
+            // Save the appointment to Firestore
+            db.collection('appointmentRequests').add(appointment)
+                .then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id);
+                    bookingForm.reset();
 
-                        emailjs.send('service_81lfhxu', 'template_et5scnp', {
+                    emailjs.send('service_81lfhxu', 'template_et5scnp', {
                         service: service,
                         date: date,
                         time: time,
@@ -305,43 +337,42 @@
                         addons: addons
                     }).then((response) => {
                         console.log('Email sent successfully:', response.status, response.text);
-                        alert('Appointment booked successfully and email sent!');
+                        alert('Appointment request successful and email sent!');
                     }, (error) => {
                         console.error('Failed to send email:', error);
-                        alert('Appointment booked successfully, but failed to send email.');
+                        alert('Appointment request successful, but failed to send email.');
                     });
-                    })
 
-                    .catch((error) => {
-                        console.error('Error adding document: ', error);
-                        alert('Error booking appointment. Please try again.');
-                    });
+                })
+                .catch((error) => {
+                    console.error('Error adding document: ', error);
+                    alert('Error requesting appointment. Please try again.');
                 });
-            }
-        });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-    let menuIcon = document.querySelector('#menu-icon');
-    let navbar = document.querySelector('.navbar');
+            let menuIcon = document.querySelector('#menu-icon');
+            let navbar = document.querySelector('.navbar');
 
-    if (menuIcon && navbar) {
-        menuIcon.onclick = () => {
-            menuIcon.classList.toggle('bx-x');
-            navbar.classList.toggle('active');
-        };
-    }
+            if (menuIcon && navbar) {
+                menuIcon.onclick = () => {
+                    menuIcon.classList.toggle('bx-x');
+                    navbar.classList.toggle('active');
+                };
+            }
 
-    // Other scripts...
-});
+            // Other scripts...
+        });
     </script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="js/script.js"></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-    (function(){
-        emailjs.init("5AsumHpeUfNEPWBFp");
-    })();
-</script>
+    <script>
+        (function() {
+            emailjs.init("5AsumHpeUfNEPWBFp");
+        })();
+    </script>
 
 </body>
 
