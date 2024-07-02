@@ -40,6 +40,20 @@
             color: #333;
         }
 
+        #accept {
+            display: inline-block;
+            margin-left: 1rem;
+    padding: 1rem 2.8rem;
+    background: var(--main-color);
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem var(--main-color);
+    font-size: 1rem;
+    color: var(--second-bg-color);
+    letter-spacing: .1rem;
+    font-weight: 600;
+    transition: .5s ease;
+        }
+
         .input-box input,
         .input-box textarea {
             width: 100%;
@@ -49,22 +63,22 @@
         }
 
         .input-box button {
-            display: inline-block;
-            margin-top: 10px;
-            background-color: #00796b;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            display: block;
+            margin-bottom: 2rem;
+    padding: 1rem 2.8rem;
+    background: var(--main-color);
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem var(--main-color);
+    font-size: 1rem;
+    color: var(--second-bg-color);
+    letter-spacing: .1rem;
+    font-weight: 600;
+    transition: .5s ease;
         }
 
         .input-box button:hover {
             background-color: #004d40;
         }
-
-
 
         .waiver-content {
             max-height: 100px;
@@ -84,14 +98,16 @@
 
         .expand-btn {
             display: block;
-            margin: 10px 0;
-            background-color: #00796b;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            margin-bottom: 2rem;
+    padding: 1rem 2.8rem;
+    background: var(--main-color);
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem var(--main-color);
+    font-size: 1rem;
+    color: var(--second-bg-color);
+    letter-spacing: .1rem;
+    font-weight: 600;
+    transition: .5s ease;
         }
 
         .expand-btn:hover {
@@ -129,8 +145,8 @@
             <h2 class="heading">Waiver <span>and Terms</span></h2>
             <p>Please read and accept the following waiver:</p>
             <div class="waiver-content" id="waiver-content">
+                <p>Please read and accept the following waiver:</p>
                 <p>
-                    <!-- Waiver content here -->
                     THIS FORM MUST BE COMPLETED & SIGNED BEFORE USING OUR SAUNA AND STEAM ROOM FACILITIES.<br><br>
                     
                     <strong>GENERAL & MEDICAL INFORMATION</strong><br>
@@ -201,14 +217,18 @@
                     
                     FEEL FREE TO ASK OUR STAFF, YOUR RELAXATION SPECIALISTS, ANY QUESTIONS BEFORE, DURING, OR AFTER THE SESSIONS.<br><br>
                     
-                    WE SUGGEST COMPLEMENTING YOUR SAUNA AND STEAM EXPERIENCE WITH A MASSAGE. SEE YOUR RELAXATION SPECIALIST FOR MORE INFORMATION.        
+                    WE SUGGEST COMPLEMENTING YOUR SAUNA AND STEAM EXPERIENCE WITH A MASSAGE. SEE YOUR RELAXATION SPECIALIST FOR MORE INFORMATION.
                 </p>
             </div>
             <button class="expand-btn" id="expand-btn" onclick="toggleWaiverContent()">Read More</button>
             <form id="waiver-form">
                 <div class="input-box">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="first-name">First Name:</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div class="input-box">
+                    <label for="last-name">Last Name:</label>
+                    <input type="text" id="last-name" name="last-name" required>
                 </div>
                 <div class="input-box">
                     <label for="email">Email:</label>
@@ -227,7 +247,7 @@
                     <input type="checkbox" id="accept-waiver" required>
                     I have read and accept the waiver and terms.
                 </label>
-                <button type="button" onclick="submitWaiver()">Accept</button>
+                <button type="button" class="input-box" id="accept" onclick="submitWaiver()">Accept</button>
             </form>
         </div>
     </section>
@@ -267,7 +287,8 @@
         }
 
         function submitWaiver() {
-            const name = document.getElementById('name').value;
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const acceptWaiverCheckbox = document.getElementById('accept-waiver').checked;
@@ -279,8 +300,14 @@
                 return;
             }
 
+            if (!firstName || !lastName || !email || !phone || signaturePad.isEmpty()) {
+                alert("All fields are required.");
+                return;
+            }
+
             const waiverData = {
-                name,
+                firstName,
+                lastName,
                 email,
                 phone,
                 signatureData,
@@ -326,6 +353,3 @@
 </body>
 
 </html>
-
-
-
