@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bookingForm = document.getElementById('booking-form');
     const serviceColors = {
         "dry-sauna": "#ff7f50", // Coral
-        "steam-room": "#6a5acd", // SlateBlue
+        "sauna-rental": "#6a5acd", // SlateBlue
         "busy-bees": "#ff69b4", // HotPink
         "ritual-rejuvenation": "#20b2aa", // LightSeaGreen
         "bachelorettes-birthdays": "#ffa07a" // LightSalmon
@@ -257,7 +257,7 @@ function updateServiceOptions() {
         peopleSelect.innerHTML = "";
         durationSelect.innerHTML = "";
 
-        if (service === "dry-sauna" || service === "steam-room") {
+        if (service === "dry-sauna" || service === "sauna-rental") {
             peopleBox.style.display = "block";
             durationBox.style.display = "block";
             addonsBox.style.display = "block"; // New line to show the add-ons box for these services
