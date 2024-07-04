@@ -114,29 +114,67 @@
             background-color: #004d40;
         }
 
-        /* Second Navbar Styles */
-        .second-navbar {
-            background-color: #00796b;
-            color: white;
-            padding: 1rem;
-            text-align: right;
-            position: fixed;
-            width: 30%;
-            top: 77px;
-            z-index: 999;
-            padding-right: 10rem;
-            margin-left: 70%;
-        }
+/* Second Navbar Styles */
+.second-navbar {
+    background-color: #00796b;
+    color: white;
+    padding: 1rem;
+    text-align: right;
+    position: fixed;
+    width: 30%;
+    top: 77px; /* Adjust this value based on the height of the original navbar */
+    z-index: 999; /* Ensure it's above other content */
+    padding-right: 10rem;
+    margin-left: 70%;
+}
 
-        .second-navbar a {
-            color: white;
-            margin: 0 1rem;
-            text-decoration: none;
-        }
+.second-navbar a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+}
 
-        .second-navbar a:hover {
-            text-decoration: underline;
-        }
+.second-navbar a:hover {
+    text-decoration: underline;
+}
+
+#second-menu-icon {
+    display: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .second-navbar {
+        width: 30%;
+        padding: 1rem;
+        text-align: left;
+        margin-left: 0;
+        top: 67px;
+        text-align: right;
+        background-color: #00796b;
+    color: white;
+    position: fixed;
+    z-index: 999; /* Ensure it's above other content */
+    padding-right: 9rem;
+    margin-left: 82%;
+    }
+
+    .second-navbar-links {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: left;
+    }
+
+    .second-navbar.active .second-navbar-links {
+        display: flex;
+    }
+
+    #second-menu-icon {
+        display: inline-block;
+        font-size: 3rem; /* Increase the icon size */
+    }
+}
 
         /* Modal styles */
         .modal {
@@ -237,11 +275,15 @@
         </nav>
     </header>
 
-    <div class="second-navbar">
+<!-- Second Navbar -->
+<div class="second-navbar">
+    <i class='bx bx-menu' id="second-menu-icon"></i>
+    <div class="second-navbar-links">
         <a href="admin-dashboard.html">Dashboard</a>
         <a href="admin-appointments.html">Appointments</a>
         <a href="waivers.html">Waivers</a>
     </div>
+</div>
 
     <section>
         <h2 class="heading">Signed <span>Waivers</span></h2>
@@ -284,7 +326,7 @@
 
     <footer class="footer">
         <div class="footer-text">
-            <p>Copyright &copy; 2023 by Shahdeen Rahman | All Rights Reserved. | <a href="admin.html">Admin</a> | <a href="waiver.html">Waiver</a></p>
+            <p>Copyright &copy; 2023 by Shahdeen Rahman | All Rights Reserved. | <a href="admin-dashboard.html">Admin</a> | <a href="waiver.html">Waiver</a></p>
         </div>
 
         <div class="footer-iconTop">
@@ -425,7 +467,7 @@
                     
                     <strong>REDUCE THE RISK OF OVERHEATING AND SCALDING</strong><br>
                     
-                    OUR SAUNAS RANGE IN TEMPERATURE: OUR CEDAR SAUNA & HIMALAYAN SALT SAUNA ARE 80°C. OUR INFRARED SAUNA IS 60°C. OUR STEAM ROOM IS 60°C WITH 100% HUMIDITY.<br><br>
+                    OUR SAUNAS RANGE IN TEMPERATURE: OUR CEDAR SAUNA IS 80°C. OUR STEAM ROOM IS 60°C WITH 100% HUMIDITY.<br><br>
                     
                     PROLONGED EXPOSURE TO THE SAUNA AND STEAM ROOM MAY CAUSE OVERHEATING. LIMIT YOURSELF TO A MAXIMUM OF TEN (10) MINUTES. KNOW YOUR BODY'S LIMITS. OVEREXPOSURE TO HIGH TEMPERATURES AND HUMIDITY CAN BE DANGEROUS. EXIT IMMEDIATELY IF NAUSEOUS, UNCOMFORTABLE, DIZZY, OR SLEEPY.<br><br>
                     
@@ -464,9 +506,7 @@
                     AQUARIUS SPA PROVIDES AN AREA FOR PERSONAL BELONGINGS TO BE STORED BETWEEN SESSIONS. HOWEVER, AQUARIUS SPA IS NOT RESPONSIBLE FOR LOSS OR DAMAGE OF BELONGINGS WHILE YOU PARTAKE IN SAUNA, STEAM, OR MASSAGE.<br><br>
                     
                     SMOKING AND E-CIGARETTES ARE NOT PERMITTED IN OUR FACILITY. NO GLASS CONTAINERS OR BOTTLES ARE ALLOWED IN THE SAUNAS OR STEAM ROOM.<br><br>
-                    
-                    OUR FACILITY IS UNISEX. CLOTHING MUST BE WORN AT ALL TIMES. NUDITY IS NOT PERMITTED. WE RECOMMEND A BATHING SUIT. YOU SHOULD BE AS COMFORTABLE AS POSSIBLE. WE RECOMMEND WEARING A T-SHIRT, WRAP, OR ROBE IF PREFERRED.<br><br>
-                    
+                                        
                     TOWELS ARE REQUIRED IN THE SAUNAS AND STEAM ROOM. USE THEM DURING YOUR SESSIONS FOR CLEANLINESS. PLACE A TOWEL ON THE BENCHES BEFORE SITTING DOWN. SIT ON THE TOWEL TO ABSORB SWEAT DURING YOUR SESSION.<br><br>
                     
                     I FREELY ACCEPT AND FULLY ASSUME ALL RISKS, DAMAGES, AND HAZARDS, INCLUDING THE POSSIBILITY OF PERSONAL INJURY, DEATH, PROPERTY DAMAGE, AND LOSS.<br><br>
@@ -511,7 +551,7 @@
                 It is advised to drink plenty of water before and after your sauna and steam sessions. Avoid eating at least one to two hours prior to your sessions to prevent any ill feelings.
     
                 Reduce the Risk of Overheating and Scalding
-                Our saunas range in temperature: our cedar sauna & Himalayan salt sauna are 80°C. Our infrared sauna is 60°C. Our steam room is 60°C with 100% humidity.
+                Our saunas range in temperature: our cedar sauna is 80°C. Our steam room is 60°C with 100% humidity.
                 Prolonged exposure to the sauna and steam room may cause overheating. Limit yourself to a maximum of ten (10) minutes. Know your body's limits. Overexposure to high temperatures and humidity can be dangerous. Exit immediately if nauseous, uncomfortable, dizzy, or sleepy.
                 Do not use the facility if you have recently consumed alcohol, drugs, or medications. Use at your own risk.
                 Direct contact with steam head/unit in our steam room, sauna rocks, or sauna heaters may cause serious injury. Avoid bringing any metal items into the heated rooms.
@@ -534,7 +574,6 @@
                 I grant Aquarius Spa, its representatives, and employees the right to take photographs of me and my property. I authorize Aquarius Spa, its assigns, and transferees to copyright, use, and publish the same in print and/or electronically for purposes such as publicity, illustration, advertising, and web content.
                 Aquarius Spa provides an area for personal belongings to be stored between sessions. However, Aquarius Spa is not responsible for loss or damage of belongings while you partake in sauna, steam, or massage.
                 Smoking and e-cigarettes are not permitted in our facility. No glass containers or bottles are allowed in the saunas or steam room.
-                Our facility is unisex. Clothing must be worn at all times. Nudity is not permitted. We recommend a bathing suit. You should be as comfortable as possible. We recommend wearing a t-shirt, wrap, or robe if preferred.
                 Towels are required in the saunas and steam room. Use them during your sessions for cleanliness. Place a towel on the benches before sitting down. Sit on the towel to absorb sweat during your session.
                 I freely accept and fully assume all risks, damages, and hazards, including the possibility of personal injury, death, property damage, and loss.
                 I acknowledge this waiver of liability form. I fully understand its terms and conditions. I understand that I am waiving and giving up my right to sue Aquarius Spa, its therapists, relaxation specialists, contractors, and employees. I sign this agreement voluntarily and intend for this to be a complete and unconditional release of liability to the greatest extent allowed by law.
@@ -624,18 +663,27 @@
         document.getElementById('search-input').addEventListener('input', filterWaivers);
     </script>
         <script>
-            // Toggle Navbar
-document.addEventListener('DOMContentLoaded', () => {
-let menuIcon = document.querySelector('#menu-icon');
-let navbar = document.querySelector('.navbar');
+        // Toggle Navbar
+        document.addEventListener('DOMContentLoaded', () => {
+    let menuIcon = document.querySelector('#menu-icon');
+    let navbar = document.querySelector('.navbar');
 
-if (menuIcon && navbar) {
-    menuIcon.onclick = () => {
-        menuIcon.classList.toggle('bx-x');
-        navbar.classList.toggle('active');
-    };
-}
+    if (menuIcon && navbar) {
+        menuIcon.onclick = () => {
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+        };
+    }
 
+    let secondMenuIcon = document.querySelector('#second-menu-icon');
+    let secondNavbar = document.querySelector('.second-navbar');
+
+    if (secondMenuIcon && secondNavbar) {
+        secondMenuIcon.onclick = () => {
+            secondMenuIcon.classList.toggle('bx-x');
+            secondNavbar.classList.toggle('active');
+        };
+    }
 });
 </script>
     
