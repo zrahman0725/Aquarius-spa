@@ -4,97 +4,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login | Aquarius Spa</title>
+    <title>Admin Dashboard | Aquarius Spa</title>
     <link rel="stylesheet" href="css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <style>
-        .admin-container {
+        .dashboard-container {
+            padding: 2rem;
+            padding-top: 5rem;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            flex-wrap: wrap;
+            gap: 2rem;
         }
 
-        .login-form {
-            background-color: white;
-            padding: 2rem;
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .stats-card {
+            background-color: #b2dfdb;
+            padding: 1rem;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .login-form h2 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .login-form .input-box {
-            margin-bottom: 1rem;
-        }
-
-        .login-form .input-box label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .login-form .input-box input {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .login-form .btn {
-            width: 100%;
-            padding: 0.5rem;
-            border: none;
-            border-radius: 4px;
-            background-color: #26c6da;
-            color: white;
-            font-size: 1rem;
             cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+            --bg-color: #e0f7fa;
+            --second-bg-color: #b2dfdb;
+            --text-color: #004d40;
+            --main-color: #00796b;
         }
 
-        .login-form .btn:hover {
-            background-color: var(--second-bg-color);
+        .stats-card:hover {
+            transform: scale(1.05);
         }
 
-        .error-message {
-            color: red;
-            margin-top: 1rem;
-            text-align: center;
+        .stats-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
+
+        .stats-card p {
+            margin: 0.5rem 0;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 600px; /* Increased height for better visibility */
+            margin-top: 2rem;
+        }
+
+        body {
+            margin-top: 120px;
+        }
+
+/* Second Navbar Styles */
+.second-navbar {
+    background-color: #00796b;
+    color: white;
+    padding: 1rem;
+    text-align: right;
+    position: fixed;
+    width: 30%;
+    top: 77px; /* Adjust this value based on the height of the original navbar */
+    z-index: 999; /* Ensure it's above other content */
+    padding-right: 10rem;
+    margin-left: 70%;
+}
+
+.second-navbar a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
+.second-navbar a:hover {
+    text-decoration: underline;
+}
+
+#second-menu-icon {
+    display: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .second-navbar {
+        width: 30%;
+        padding: 1rem;
+        text-align: left;
+        margin-left: 0;
+        top: 67px;
+        text-align: right;
+        background-color: #00796b;
+    color: white;
+    position: fixed;
+    z-index: 999; /* Ensure it's above other content */
+    padding-right: 9rem;
+    margin-left: 82%;
+    }
+
+    .second-navbar-links {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: left;
+    }
+
+    .second-navbar.active .second-navbar-links {
+        display: flex;
+    }
+
+    #second-menu-icon {
+        display: inline-block;
+        font-size: 3rem; /* Increase the icon size */
+    }
+}
+
 
         @media (max-width: 768px) {
             #menu-icon {
-            display: block;
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem 3%;
+                background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
+                border-top: .1rem solid rgba(0, 0, 0, .2);
+                box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+                display: none;
+            }
+
+            .navbar.active {
+                display: block;
+            }
+
+            .navbar a {
+                display: block;
+                font-size: 2rem;
+                margin: 3rem 0;
+            }
         }
 
-        .navbar {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            padding: 1rem 3%;
-            background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
-            border-top: .1rem solid rgba(0, 0, 0, .2);
-            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
-            display: none;
+        .chart-view-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        .navbar.active {
-            display: block;
+        .chart-view-controls button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            background-color: #00796b; /* Darker teal color */
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .navbar a {
-            display: block;
-            font-size: 2rem;
-            margin: 3rem 0;
+        .chart-view-controls button:hover {
+            background-color: #004d40; /* Even darker teal on hover */
         }
-    }
     </style>
 </head>
 
@@ -112,21 +195,51 @@
         </nav>
     </header>
 
-    <div class="admin-container">
-        <form class="login-form" id="admin-login-form">
-            <h2>Admin Login</h2>
-            <div class="input-box">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="input-box">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn">Login</button>
-            <div id="error-message" class="error-message"></div>
-        </form>
+<!-- Second Navbar -->
+<div class="second-navbar">
+    <i class='bx bx-menu' id="second-menu-icon"></i>
+    <div class="second-navbar-links">
+        <a href="admin-dashboard.html">Dashboard</a>
+        <a href="admin-appointments.html">Appointments</a>
+        <a href="waivers.html">Waivers</a>
     </div>
+</div>
+
+
+    <section>
+        <h2 class="heading">Admin <span>Dashboard</span></h2>
+
+        <div class="dashboard-container">
+            <!-- Quick Stats Section -->
+            <div class="stats-grid">
+                <div class="stats-card" onclick="location.href='admin-appointments.html#bookings-grid'">
+                    <h3>Pending Bookings</h3>
+                    <p id="pending-bookings">0</p>
+                </div>
+                <div class="stats-card" onclick="location.href='admin-appointments.html?filter=approved#bookings-grid'">
+                    <h3>Total Bookings</h3>
+                    <p id="total-bookings">0</p>
+                </div>
+                <div class="stats-card" onclick="location.href='waivers.html'">
+                    <h3>Waivers</h3>
+                    <p id="waivers">0</p>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="chart-container">
+                <canvas id="statsChart"></canvas>
+            </div>
+
+            <!-- Chart View Controls -->
+            <div class="chart-view-controls">
+                <button onclick="changeChartView('hours')">Hours</button>
+                <button onclick="changeChartView('days')">Days</button>
+                <button onclick="changeChartView('weeks')">Weeks</button>
+                <button onclick="changeChartView('months')">Months</button>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="footer-text">
@@ -138,6 +251,9 @@
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <script>
         // Firebase configuration
         const firebaseConfig = {
@@ -153,27 +269,257 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
+        const db = firebase.firestore();
 
-        document.getElementById('admin-login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
-            
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Redirect to admin dashboard
-                    window.location.href = 'admin-dashboard.html';
-                })
-                .catch((error) => {
-                    errorMessage.textContent = 'Invalid credentials. Please try again.';
-                });
+        // Redirect to login if not authenticated
+        auth.onAuthStateChanged(user => {
+            if (!user) {
+                window.location.href = 'admin.html';
+            }
         });
-    </script>
-    <script>
-                // Toggle Navbar
-document.addEventListener('DOMContentLoaded', () => {
+
+        // Function to update stats in real-time
+        function updateStats() {
+            db.collection('appointmentRequests').onSnapshot((snapshot) => {
+                document.getElementById('pending-bookings').innerText = snapshot.size;
+            });
+
+            db.collection('appointments').onSnapshot((snapshot) => {
+                document.getElementById('total-bookings').innerText = snapshot.size;
+            });
+
+            db.collection('waivers').onSnapshot((snapshot) => {
+                document.getElementById('waivers').innerText = snapshot.size;
+            });
+        }
+
+        // Initialize Chart.js chart
+        let statsChart;
+        function initializeChart() {
+            const ctx = document.getElementById('statsChart').getContext('2d');
+            statsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [], // Dynamic labels based on view
+                    datasets: [{
+                        label: 'Approved Bookings',
+                        data: [], // Dynamic data based on view
+                        borderColor: 'rgba(75, 192, 192, 1)', // Color for Approved Bookings
+                        fill: false
+                    }, {
+                        label: 'Cancelled Bookings',
+                        data: [], // Dynamic data based on view
+                        borderColor: 'rgba(255, 99, 132, 1)', // Red color for Cancelled Bookings
+                        fill: false
+                    }, {
+                        label: 'Waivers',
+                        data: [], // Dynamic data based on view
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'category', // Changed to category for custom labels
+                            labels: [] // Dynamic labels
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+            console.log("Chart initialized.");
+        }
+
+        // Function to fetch and aggregate data for the chart based on the selected view
+        async function fetchChartData(view) {
+            console.log(`Fetching data for view: ${view}`);
+            const now = new Date();
+            let startTime, endTime, labels = [];
+
+            if (view === 'hours') {
+                startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0); // Start of the current day
+                endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59); // End of the current day
+                labels = Array.from({ length: 24 }, (_, i) => `${i}:00`);
+            } else if (view === 'days') {
+                const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay() + 1)); // Start of the current week (Monday)
+                startTime = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate(), 0, 0, 0);
+                endTime = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + 6, 23, 59, 59); // End of the current week (Sunday)
+                labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            } else if (view === 'weeks') {
+                const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1); // Start of the current month
+                startTime = new Date(startOfMonth.getFullYear(), startOfMonth.getMonth(), startOfMonth.getDate(), 0, 0, 0);
+                endTime = new Date(startOfMonth.getFullYear(), startOfMonth.getMonth() + 1, 0, 23, 59, 59); // End of the current month
+                labels = Array.from({ length: 5 }, (_, i) => {
+                    const weekStart = new Date(startOfMonth.getFullYear(), startOfMonth.getMonth(), 1 + i * 7);
+                    return `${weekStart.getDate()} ${weekStart.toLocaleString('default', { month: 'short' })}`;
+                });
+            } else if (view === 'months') {
+                startTime = new Date(now.getFullYear(), 0, 1, 0, 0, 0); // Start of the current year
+                endTime = new Date(now.getFullYear(), 11, 31, 23, 59, 59); // End of the current year
+                labels = Array.from({ length: 12 }, (_, i) => new Date(now.getFullYear(), i, 1).toLocaleString('default', { month: 'long' }));
+            }
+
+            try {
+                const cancelledBookings = await db.collection('appointmentsCancelled')
+                    .where('timestamp', '>=', startTime)
+                    .where('timestamp', '<=', endTime)
+                    .get();
+                const approvedBookings = await db.collection('appointments')
+                    .where('timestamp', '>=', startTime)
+                    .where('timestamp', '<=', endTime)
+                    .get();
+                const waivers = await db.collection('waivers')
+                    .where('timestamp', '>=', startTime)
+                    .where('timestamp', '<=', endTime)
+                    .get();
+
+                console.log("Fetched data:", {
+                    cancelledBookings: cancelledBookings.docs.map(doc => doc.data()),
+                    approvedBookings: approvedBookings.docs.map(doc => doc.data()),
+                    waivers: waivers.docs.map(doc => doc.data())
+                });
+
+                const cancelledBookingsData = aggregateData(cancelledBookings, view, labels);
+                const approvedBookingsData = aggregateData(approvedBookings, view, labels);
+                const waiversData = aggregateData(waivers, view, labels);
+
+                return {
+                    labels,
+                    cancelledBookings: cancelledBookingsData,
+                    approvedBookings: approvedBookingsData,
+                    waivers: waiversData
+                };
+            } catch (error) {
+                console.error("Error fetching chart data: ", error);
+            }
+        }
+
+        // Function to aggregate data based on the selected view
+        function aggregateData(snapshot, view, labels) {
+            const data = {};
+            snapshot.forEach(doc => {
+                const timestamp = doc.data().timestamp.toDate();
+                const key = generateKey(timestamp, view);
+                if (!data[key]) {
+                    data[key] = 0;
+                }
+                data[key]++;
+            });
+
+            const values = labels.map(label => data[label] || 0);
+
+            console.log("Aggregated data:", { values });
+            return values;
+        }
+
+        // Generate key based on the view
+        function generateKey(timestamp, view) {
+            if (view === 'hours') {
+                return `${timestamp.getHours()}:00`;
+            } else if (view === 'days') {
+                const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                return days[timestamp.getDay() - 1]; // Adjust for Monday start
+            } else if (view === 'weeks') {
+                const startOfWeek = new Date(timestamp);
+                startOfWeek.setDate(timestamp.getDate() - timestamp.getDay() + 1); // Start of the week (Monday)
+                return `${startOfWeek.getDate()} ${startOfWeek.toLocaleString('default', { month: 'short' })}`;
+            } else if (view === 'months') {
+                return new Date(timestamp.getFullYear(), timestamp.getMonth(), 1).toLocaleString('default', { month: 'long' });
+            }
+        }
+
+        // Function to change the chart view
+        async function changeChartView(view) {
+            console.log(`Changing chart view to: ${view}`);
+            const chartData = await fetchChartData(view);
+
+            let timeUnit;
+            if (view === 'hours') {
+                timeUnit = 'hour';
+            } else if (view === 'days') {
+                timeUnit = 'day';
+            } else if (view === 'weeks') {
+                timeUnit = 'week';
+            } else if (view === 'months') {
+                timeUnit = 'month';
+            }
+
+            console.log("Chart data:", chartData);
+
+            // Update the chart data
+            statsChart.data.labels = chartData.labels;
+            statsChart.data.datasets[0].data = chartData.approvedBookings;
+            statsChart.data.datasets[1].data = chartData.cancelledBookings;
+            statsChart.data.datasets[2].data = chartData.waivers;
+
+            statsChart.options.scales.x.labels = chartData.labels;
+            statsChart.update();
+            console.log("Chart updated.");
+        }
+
+        // Listen for real-time updates and adjust data
+        function listenForRealtimeUpdates() {
+            db.collection('appointmentsCancelled').onSnapshot(snapshot => {
+                snapshot.docChanges().forEach(change => {
+                    if (change.type === 'added') {
+                        // Add new data point
+                    } else if (change.type === 'modified') {
+                        // Modify existing data point
+                    } else if (change.type === 'removed') {
+                        // Remove data point and adjust downward
+                    }
+                });
+                updateStats();
+                changeChartView('hours'); // Update view to reflect changes
+            });
+
+            db.collection('appointments').onSnapshot(snapshot => {
+                snapshot.docChanges().forEach(change => {
+                    if (change.type === 'added') {
+                        // Add new data point
+                    } else if (change.type === 'modified') {
+                        // Modify existing data point
+                    } else if (change.type === 'removed') {
+                        // Remove data point and adjust downward
+                    }
+                });
+                updateStats();
+                changeChartView('hours'); // Update view to reflect changes
+            });
+
+            db.collection('waivers').onSnapshot(snapshot => {
+                snapshot.docChanges().forEach(change => {
+                    if (change.type === 'added') {
+                        // Add new data point
+                    } else if (change.type === 'modified') {
+                        // Modify existing data point
+                    } else if (change.type === 'removed') {
+                        // Remove data point and adjust downward
+                    }
+                });
+                updateStats();
+                changeChartView('hours'); // Update view to reflect changes
+            });
+        }
+
+        // Initialize chart and update stats on load
+        window.addEventListener('load', () => {
+            initializeChart();
+            updateStats();
+            changeChartView('hours'); // Default view
+            listenForRealtimeUpdates(); // Start listening for real-time updates
+        });
+
+        // Toggle Navbar
+        document.addEventListener('DOMContentLoaded', () => {
     let menuIcon = document.querySelector('#menu-icon');
     let navbar = document.querySelector('.navbar');
 
@@ -184,9 +530,18 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    let secondMenuIcon = document.querySelector('#second-menu-icon');
+    let secondNavbar = document.querySelector('.second-navbar');
+
+    if (secondMenuIcon && secondNavbar) {
+        secondMenuIcon.onclick = () => {
+            secondMenuIcon.classList.toggle('bx-x');
+            secondNavbar.classList.toggle('active');
+        };
+    }
 });
+
     </script>
-    
 </body>
 
 </html>
