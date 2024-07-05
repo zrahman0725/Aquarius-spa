@@ -169,6 +169,7 @@
     <section class="booking" id="booking">
         <div class="booking-container">
             <div class="form-container">
+                <div id="google_translate_element"></div>
                 <h2 class="heading">Book <span>Your Appointment</span></h2>
                 <form id="booking-form">
                     <div class="input-box">
@@ -516,6 +517,12 @@
             emailjs.init("5AsumHpeUfNEPWBFp");
         })();
     </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: "en,ru,uk" }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 
