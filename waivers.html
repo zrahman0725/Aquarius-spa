@@ -286,6 +286,8 @@
 </div>
 
     <section>
+        <div id="google_translate_element"></div>
+
         <h2 class="heading">Signed <span>Waivers</span></h2>
 
         <div class="dashboard-container">
@@ -686,6 +688,12 @@
     }
 });
 </script>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: "en,ru,uk" }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     
 </body>
 
