@@ -197,6 +197,8 @@
     <section class="about" id="about">
         <div class="about-container">
             <div class="about-content" style="justify-content: center;">
+                <div id="google_translate_element"></div>
+
                 <h2 class="heading">About <span>Us</span></h2>
             </div>
 
@@ -355,6 +357,12 @@ document.addEventListener('DOMContentLoaded', () => {
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="js/script.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: "en,ru,uk" }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 </html>
