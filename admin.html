@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Aquarius Spa</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+
+    <style>
+        .admin-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-form .input-box {
+            margin-bottom: 1rem;
+        }
+
+        .login-form .input-box label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-form .input-box input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-form .btn {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #26c6da;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .login-form .btn:hover {
+            background-color: var(--second-bg-color);
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            #menu-icon {
+            display: block;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            padding: 1rem 3%;
+            background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
+            border-top: .1rem solid rgba(0, 0, 0, .2);
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+            display: none;
+        }
+
+        .navbar.active {
+            display: block;
+        }
+
+        .navbar a {
+            display: block;
+            font-size: 2rem;
+            margin: 3rem 0;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Aquarius Spa</a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html#home">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="booking.html">Book Now</a>
+        </nav>
+    </header>
+
+    <div class="admin-container">
+        <form class="login-form" id="admin-login-form">
+            <h2>Admin Login</h2>
+            <div class="input-box">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-box">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div id="error-message" class="error-message"></div>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2023 by Shahdeen Rahman | All Rights Reserved. | <a href="admin-dashboard.html">Admin</a> | <a href="waiver.html">Waiver</a></p>
+        </div>
+
+        <div class="footer-iconTop">
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBR9BxUQ4Z8XY-ojlAaWJbhyLQUNc957kA",
+            authDomain: "aquariusspa-54d5a.firebaseapp.com",
+            projectId: "aquariusspa-54d5a",
+            storageBucket: "aquariusspa-54d5a.appspot.com",
+            messagingSenderId: "241744416515",
+            appId: "1:241744416515:web:a35fc232551049b2f0e336",
+            measurementId: "G-WGMEQS2B4Y"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        document.getElementById('admin-login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Redirect to admin dashboard
+                    window.location.href = 'admin-dashboard.html';
+                })
+                .catch((error) => {
+                    errorMessage.textContent = 'Invalid credentials. Please try again.';
+                });
+        });
+    </script>
+    <script>
+                // Toggle Navbar
+document.addEventListener('DOMContentLoaded', () => {
+    let menuIcon = document.querySelector('#menu-icon');
+    let navbar = document.querySelector('.navbar');
+
+    if (menuIcon && navbar) {
+        menuIcon.onclick = () => {
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+        };
+    }
+
+});
+    </script>
+    
+</body>
+
+</html>
