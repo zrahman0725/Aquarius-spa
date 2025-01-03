@@ -3,298 +3,160 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Aquarius Spa</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
-    <style>
-        .about-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4rem;
-            padding: 5rem 0;
-        }
+    <title>About - Shift Happens Auto Sales</title>
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            max-width: 1200px;
-            width: 100%;
-        }
 
-        .about-img {
-            width: 50%;
-            height: auto;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-
-        .about-text {
-            width: 50%;
-        }
-
-        .about-text h3 {
-            font-size: 2.4rem;
-            margin-bottom: 1rem;
-        }
-
-        .about-text p {
-            font-size: 1.6rem;
-            line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-            .about-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .about-img,
-            .about-text {
-                width: 100%;
-            }
-
-            .about-text {
-                padding: 0 2rem;
-            }
-        }
-
-        .benefits-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .benefits-list li {
-            width: 8rem;
-            height: 8rem;
-            border-radius: 50%;
-            background: var(--second-bg-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.3s;
-            position: relative;
-        }
-
-        .benefits-list li img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .benefits-list .content {
-            display: none;
-            padding: 1rem;
-            background: var(--bg-color);
-            border-radius: 0.5rem;
-            position: absolute;
-            top: 10rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20rem;
-            text-align: center;
-            z-index: 1000;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .popup-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .popup-content {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 90%;
-            max-height: 80%;
-            overflow-y: auto;
-            text-align: center;
-            position: relative;
-        }
-
-        .popup-content .close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        .popup-content #popup-title {
-            margin-top: 2rem;
-        }
-
-        .popup-content #popup-text {
-            margin-top: 1rem;
-        }
-        
-        .popup-content p {
-            font-size: 3rem; /* Adjust this value as needed */
-        }
-
-        @media (max-width: 768px) {
-            #menu-icon {
-            display: block;
-        }
-
-        .navbar {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            padding: 1rem 3%;
-            background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
-            border-top: .1rem solid rgba(0, 0, 0, .2);
-            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
-            display: none;
-        }
-
-        .navbar.active {
-            display: block;
-        }
-
-        .navbar a {
-            display: block;
-            font-size: 2rem;
-            margin: 3rem 0;
-        }
-    }
-
-    </style>
 </head>
 
 <body>
+
     <header class="header">
-        <a href="index.html" class="logo">Aquarius Spa</a>
+        <a href="index.html" class="logo"><img src="images/IMG-20241122-WA0003_1468205583269761 (1).png" alt="">Shift Happens Auto Sales</a>
+
         <i class='bx bx-menu' id="menu-icon"></i>
+
         <nav class="navbar">
-            <a href="index.html#home">Home</a>
-            <a href="about.html" class="active">About</a>
-            <a href="services.html">Services</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="index.html#contact">Contact</a>
-            <a href="booking.html">Book Now</a>
+            <a href="index.html#home" data-alt-link="home.html">Home</a>
+            <div class="dropdown">
+                <a href="inventory.html" data-alt-link="inventory.html">Inventory</a>
+                <div class="dropdown-menu">
+                    <a href="inventory.html">View Inventory</a>
+                    <a href="car-finder.html">Car Finder</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="finance.html" data-alt-link="finance.html">Finance</a>
+                <div class="dropdown-menu">
+                    <a href="finance-application.html">Finance Application</a>
+                    <a href="finance.html">Finance Department</a>
+                    <a href="finance.html#credit">Credit Tips</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="services.html" data-alt-link="services.html">Services</a>
+                <div class="dropdown-menu">
+                    <a href="detailing.html">Detailing</a>
+                    <a href="trade-in.html">Trade-ins</a>
+                    <a href="test-drive.html">Test Drives</a>
+                    <a href="car-loan.html">Loan Calculator</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="about.html" data-alt-link="about.html" class="active">Dealership</a>
+                <div class="dropdown-menu">
+                    <a href="about.html">About Us</a>
+                    <a href="index.html#contact-form">Contact</a>
+                </div>
+            </div>
         </nav>
+        
+        
     </header>
 
     <section class="about" id="about">
         <div class="about-container">
             <div class="about-content" style="justify-content: center;">
-                <div id="google_translate_element"></div>
-
                 <h2 class="heading">About <span>Us</span></h2>
             </div>
-
+    
             <div class="about-content">
-                <h3>Sauna Benefits</h3>
+                <h3>Our Benefits</h3>
                 <ul class="benefits-list">
                     <li>
-                        <img src="images/lotus.jpeg" alt="Stress Relief">
+                        <i class="fas fa-car"></i>
                         <div class="content">
-                            <h3>Stress Relief</h3>
-                            <p>A visit to the spa can significantly reduce stress levels through relaxation techniques such as massages and aromatherapy. These treatments promote the release of endorphins, the body's natural stress relievers, and help in lowering cortisol levels. This combination not only alleviates stress but also improves mood and overall emotional well-being. Spa environments are designed to be serene and tranquil, enhancing the stress-relief benefits.</p>
+                            <h3>Wide Vehicle Selection</h3>
+                            <p>We offer a diverse inventory of new and pre-owned vehicles to suit every need, budget, and lifestyle.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="images/river.jpeg" alt="Improved Circulation">
+                        <i class="fas fa-hand-holding-usd"></i>
                         <div class="content">
-                            <h3>Improved Circulation</h3>
-                            <p>Treatments like hydrotherapy, massages, and steam rooms can enhance blood circulation, promoting oxygen and nutrient delivery to tissues and organs. Improved circulation supports cardiovascular health, aids in detoxification, and helps in the faster healing of injuries. Regular spa treatments can lead to long-term cardiovascular benefits and increased vitality.</p>
+                            <h3>Flexible Financing</h3>
+                            <p>Get competitive financing options tailored to your budget and needs, making car ownership a reality.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="images/leaf1.png" alt="Detoxification">
+                        <i class="fas fa-shield-alt"></i>
                         <div class="content">
-                            <h3>Detoxification</h3>
-                            <p>Saunas and steam rooms induce sweating, which helps flush out toxins from the body. This detoxification process can lead to clearer skin and improved bodily functions. Enhanced detoxification also supports liver and kidney functions and contributes to overall health. The use of natural ingredients in spa treatments can further assist in detoxification by providing antioxidant and anti-inflammatory benefits.</p>
+                            <h3>Certified Pre-Owned</h3>
+                            <p>Our certified pre-owned vehicles are inspected and reconditioned to meet the highest standards for quality and reliability.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="images/plus1.jpeg" alt="Pain Relief">
+                        <i class="fas fa-clipboard-list"></i>
                         <div class="content">
-                            <h3>Pain Relief</h3> 
-                            <p>Therapies such as hot stone massages, hydrotherapy, and targeted therapeutic massages can relieve muscle and joint pain by reducing inflammation and promoting relaxation in the affected areas. These treatments are beneficial for chronic pain conditions like arthritis, fibromyalgia, and sports injuries, providing both immediate relief and long-term benefits.</p>
+                            <h3>Warranty Options</h3>
+                            <p>Enjoy peace of mind with our extended warranty packages for both new and pre-owned vehicles.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="images/sun.png" alt="Skin Health">
+                        <i class="fas fa-road"></i>
                         <div class="content">
-                            <h3>Health</h3>
-                            <p>Spa treatments often include facials, body scrubs, and clay masks, which can help exfoliate dead skin cells, unclog pores, and rejuvenate the skin. These treatments promote collagen production, improve skin texture, and reduce the appearance of fine lines and wrinkles. Regular spa treatments can help maintain a youthful and radiant complexion.</p>
+                            <h3>Test Drive Opportunities</h3>
+                            <p>Take your dream car for a spin and experience its performance and comfort firsthand.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="images/moon.jpeg" alt="Improved Sleep">
+                        <i class="fas fa-sync"></i>
                         <div class="content">
-                            <h3>Improved Sleep</h3>
-                            <p>Regular spa visits can improve sleep quality by promoting relaxation and reducing anxiety. Treatments such as aromatherapy, massages, and soothing baths help the body achieve a state of calm, making it easier to fall asleep and stay asleep. Better sleep contributes to overall health, enhancing mood, cognitive function, and physical well-being.</p>
+                            <h3>Trade-In Assistance</h3>
+                            <p>We make it easy to trade in your old vehicle for top dollar, reducing the cost of your new car.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="images/shield.jpeg" alt="Enhanced Immunity">
+                        <i class="fas fa-user-tie"></i>
                         <div class="content">
-                            <h3>Enhanced Immunity</h3>
-                            <p>Certain spa treatments, such as hydrotherapy, saunas, and hot and cold treatments, can boost the immune system by stimulating lymphatic drainage and enhancing the body's natural defenses. Improved immunity can lead to fewer illnesses and a stronger resistance to infections, supporting overall health and wellness.</p>
+                            <h3>Exceptional Customer Service</h3>
+                            <p>Our friendly and knowledgeable staff is here to help you every step of the way, from browsing to purchase.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="images/mind.jpeg" alt="Mental Clarity">
+                        <i class="fas fa-tools"></i>
                         <div class="content">
-                            <h3>Mental Clarity</h3>
-                            <p>A spa environment promotes a break from the daily routine and offers a peaceful atmosphere. This can lead to improved mental clarity and focus, as the mind is given time to rest and rejuvenate. Practices such as meditation, yoga, and mindfulness sessions offered at spas further enhance cognitive functions and mental health.</p>
+                            <h3>Maintenance & Support</h3>
+                            <p>Our dealership offers ongoing maintenance and support to keep your vehicle running like new.</p>
                         </div>
                     </li>
                 </ul>
             </div>
-
-
-            <div class="about-content" style="text-align: center;">
-                <img src="images/sauna.jpg" alt="Services Image" class="about-img">
-                <div class="about-text">
-                    <h3>Special Sauna</h3>
-                    <p>Saunas have been cherished for their numerous health benefits, making them a perfect addition to any spa experience. Regular sauna use promotes deep relaxation, reduces stress, and enhances mental clarity. The high heat induces sweating, detoxifying the body and improving skin health. Saunas also boost circulation, relieve muscle tension, ease joint pain, and support faster recovery after physical activity. Additionally, they stimulate endorphin release, naturally enhancing mood and well-being. At Aquarius Spa, our state-of-the-art saunas provide a tranquil retreat where you can unwind, rejuvenate, and enjoy these health benefits.</p>
+                <div class="expandable-sections">
+                    <details>
+                        <summary>Our Mission</summary>
+                        <div class="details-content">
+                            <p>At Shift Happens Auto Sales, we’re more than just a dealership — we’re your partner in the journey to finding the perfect vehicle. From the moment you step onto our lot or visit our website, you’ll feel the difference. Our team is dedicated to creating an exceptional, hassle-free experience tailored to your unique needs. Whether you’re searching for a spacious SUV for your growing family, a sleek and fuel-efficient sedan for your daily commute, or a rugged truck ready to tackle any challenge, we’ll be with you every step of the way. Your satisfaction is our top priority, and we go the extra mile to make car buying seamless, enjoyable, and memorable.</p>
+                            <img src="images/mission.png" alt="Our Mission" />
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Our Team</summary>
+                        <div class="details-content">
+                            <img src="images/team.png" alt="Our Team" />
+                            <p>The heart of our company is embedded in our dedicated team of automotive professionals. With years of industry experience and a genuine passion for helping people, our team is committed to making your car-buying journey as smooth as possible. Whether it’s matching you with the perfect vehicle, explaining financing options, or answering your questions, we’re here to support you every step of the way. At Shift Happens Auto Sales, we don’t just sell cars; we build relationships based on trust, expertise, and a shared love for the open road. Let us help you shift into a brighter future with the perfect car for your needs.</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Our History</summary>
+                        <div class="details-content">
+                            <p>Though Shift Happens Auto Sales opened its doors in 2024, our story is just beginning. Founded with a vision to redefine the car-buying experience, we are driven by a passion for helping our customers succeed on the road and in life. We’re proud to be part of a vibrant community and look forward to growing alongside it. Each vehicle we sell and every connection we make adds a new chapter to our story. We invite you to become a part of our history as we pave the way for a brighter, more inclusive future in automotive sales.</p>
+                            <img src="images/history.jpeg" alt="Our History" />
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Message from the CEO</summary>
+                        <div class="details-content">
+                            <img src="images/ceo.jpg" alt="Message from the CEO" />
+                            <p>Welcome to Shift Happens Auto Sales. As the CEO, I am honored to lead a dealership built on the foundation of trust, integrity, and community support. Buying a car is one of life’s significant milestones, and we’re here to ensure that every customer, regardless of their financial history, has access to reliable transportation and exceptional service. Our goal isn’t just to sell vehicles; it’s to empower lives by providing second chances and new beginnings. I invite you to experience the Shift Happens difference — where you’re not just a customer but a valued member of our family. Thank you for allowing us to be part of your journey. Together, let’s drive toward a brighter future. <br><br>— Luke Phui</p>
+                        </div>
+                    </details>
                 </div>
-            </div>
-
-
-            <div class="about-content" style="text-align: center;">
-                <div class="about-text">
-                    <h3>Our Philosophy</h3>
-                    <p>At Aquarius Spa, we believe that a rejuvenating spa experience is more than just a service; it's a way to nurture your well-being. Whether you're seeking a relaxing massage or a revitalizing facial, we take the time to get to know our clients and understand their needs. We work with you to create a personalized experience that enhances your relaxation and rejuvenation.</p>
-                </div>
-                <img src="images/what-is-spa-serapool.jpeg" alt="Philosophy Image" class="about-img">
-            </div>
-            <div class="about-content" style="text-align: center;">
-                <img src="images/spa-6-1920x898.webp" alt="Services Image" class="about-img">
-                <div class="about-text">
-                    <h3>Our Services</h3>
-                    <p>We offer a wide range of services, including relaxing massages, rejuvenating facials, body scrubs, and soothing steam and sauna sessions. Our therapists are skilled in the latest wellness techniques and use only the highest quality products. We believe that spa treatments are an essential part of self-care, and we are here to help you look and feel your best.</p>
-                </div>
-            </div>
-            <div class="about-content" style="text-align: center;">
-                <div class="about-text">
-                    <h3>Our Team</h3>
-                    <p>Our team of therapists is passionate about the art of wellness and relaxation, with years of experience in the spa industry. As the best spa professionals in Calgary, we are committed to ongoing education and staying up-to-date with the latest trends and techniques. We are here to help you achieve ultimate relaxation and feel rejuvenated.</p>
-                </div>
-                <img src="images/PHOTO-2024-05-22-20-22-51 2.jpg" alt="Team Image" class="about-img">
-            </div>
+            
         </div>
     </section>
 
@@ -305,10 +167,11 @@
             <div id="popup-text"></div>
         </div>
     </div>
+    
 
     <footer class="footer">
         <div class="footer-text">
-            <p>Copyright &copy; 2023 by Shahdeen Rahman | All Rights Reserved. | <a href="admin-dashboard.html">Admin</a> | <a href="waiver.html">Waiver</a></p>
+            <p>Copyright &copy; 2024 by Shift Happens Auto Sales | All Rights Reserved. | <a href="admin-login.html">Admin</a> </p>
         </div>
 
         <div class="footer-iconTop">
@@ -316,53 +179,43 @@
         </div>
     </footer>
 
-    <script>
-        document.querySelectorAll('.benefits-list li').forEach(item => {
-            item.addEventListener('click', () => {
-                const title = item.querySelector('.content h3').innerHTML;
-                const content = item.querySelector('.content p').innerHTML;
-                document.getElementById('popup-title').innerHTML = title;
-                document.getElementById('popup-text').innerHTML = content;
-                document.getElementById('popup-container').style.display = 'flex';
-            });
+    <!-- Navbar Toggle for Mobile -->
+<script>
+    document.querySelectorAll('.benefits-list li').forEach(item => {
+        item.addEventListener('click', () => {
+            const title = item.querySelector('.content h3').innerHTML;
+            const content = item.querySelector('.content p').innerHTML;
+            document.getElementById('popup-title').innerHTML = title;
+            document.getElementById('popup-text').innerHTML = content;
+            document.getElementById('popup-container').style.display = 'flex';
         });
+    });
 
-        document.querySelector('.close-button').addEventListener('click', () => {
+    document.querySelector('.close-button').addEventListener('click', () => {
+        document.getElementById('popup-container').style.display = 'none';
+    });
+
+    document.getElementById('popup-container').addEventListener('click', (event) => {
+        if (event.target === document.getElementById('popup-container')) {
             document.getElementById('popup-container').style.display = 'none';
-        });
-
-        document.getElementById('popup-container').addEventListener('click', (event) => {
-            if (event.target === document.getElementById('popup-container')) {
-                document.getElementById('popup-container').style.display = 'none';
-            }
-        });
-
-        // Toggle Navbar
-document.addEventListener('DOMContentLoaded', () => {
-    let menuIcon = document.querySelector('#menu-icon');
-    let navbar = document.querySelector('.navbar');
-
-    if (menuIcon && navbar) {
-        menuIcon.onclick = () => {
-            menuIcon.classList.toggle('bx-x');
-            navbar.classList.toggle('active');
-        };
-    }
-
-    // Other scripts...
-});
-
-        
-    </script>
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="js/script.js"></script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: "en,ru,uk" }, 'google_translate_element');
         }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    });
+        
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuIcon = document.getElementById('menu-icon');
+        const navbar = document.querySelector('.navbar');
+
+        if (menuIcon && navbar) {
+            menuIcon.addEventListener('click', () => {
+                navbar.classList.toggle('active');
+            });
+        }
+    });
+
+
+</script>
+
+
 </body>
 
 </html>

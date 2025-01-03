@@ -1,0 +1,437 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --bg-color: #000000; /* Black */
+    --second-bg-color: #1a1a1a; /* Dark Gray */
+    --text-color: #ffffff; /* White */
+    --main-color: #ff0000; /* Red */
+}
+
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+section {
+    min-height: 100vh;
+    padding: 10rem 9% 2rem;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, var(--bg-color), var(--main-color));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+
+    }
+    
+
+.header.sticky {
+    border-bottom: .1rem solid rgba(0, 0, 0, .2);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    font-weight: 600;
+    cursor: default;
+
+    }
+    .logo img {
+        width: 40px; /* Adjust the size of the image as needed */
+        height: auto; /* Maintain aspect ratio */
+        vertical-align: middle; /* Align the image with the text */
+        margin-right: 10px; /* Add spacing between the image and the title */
+    }
+      
+
+    .navbar a {
+        font-size: 1.5rem;
+        color: var(--text-color);
+        margin-left: 3.5rem;
+        }
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+}
+
+
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown menu - hidden by default */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align dropdown right below the parent link */
+    left: 0; /* Align dropdown with the parent link */
+    background-color: var(--second-bg-color); /* Match the theme color */
+    min-width: 250px; /* Uniform width for all dropdowns */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    z-index: 100; /* Ensure it appears above other content */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    padding: 0; /* Remove extra padding around the menu */
+    align-content: start;
+}
+
+/* Dropdown menu links */
+.dropdown-menu a {
+    color: var(--text-color); /* White text */
+    padding: 1rem; /* Add padding for a better appearance */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Make the full box clickable */
+    justify-content: center;
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    width: 100%; /* Ensure the full width of the dropdown menu */
+    box-sizing: border-box; /* Include padding in width */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for dropdown menu links */
+.dropdown-menu a:hover {
+    color: var(--main-color); /* Make the text red for better readability */
+    border-radius: 0.3rem; /* Optional: rounded corners */
+}
+
+/* Adjust the dropdown container to prevent issues */
+.dropdown-menu {
+    padding: 0.5rem 0; /* Add slight vertical spacing for the dropdown */
+    background-color: var(--bg-color); /* Match dropdown background with site theme */
+    border-radius: 0.5rem; /* Optional: rounded edges for the dropdown */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0); /* Final position */
+}
+
+.heading {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+}
+
+span {
+    color: var(--main-color);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, var(--bg-color), var(--main-color));
+}
+
+.footer-text p {
+    font-size: 1.6rem;
+}
+
+.footer-iconTop a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: .8rem;
+    background: var(--main-color);
+    border-radius: .8rem;
+    transition: .5s ease;
+}
+
+.footer-iconTop a:hover {
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.footer-iconTop a i {
+    font-size: 2.4rem;
+    color: var (--second-bg-color);
+}
+
+/* admin dashboard */
+.dashboard {
+    padding: 10rem 9%;
+    background: var(--second-bg-color);
+    text-align: center;
+}
+
+.dashboard h2 {
+    font-size: 4.5rem;
+    margin-bottom: 3rem;
+}
+
+.dashboard-cards {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: var(--bg-color);
+    border: 1px solid var(--main-color);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    width: 30rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1 1 calc(25% - 2rem); /* Flexible basis of 25% minus gap for 4 cards per row */
+    max-width: calc(25% - 2rem); /* Prevents cards from stretching too wide */
+    box-sizing: border-box; /* Includes padding and borders in width calculation */
+
+    
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--main-color);
+}
+
+.card p {
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+
+.chart-container {
+    background: var(--second-bg-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+
+/* Secondary Navbar */
+.secondary-navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: var(--second-bg-color);
+    padding: 1rem 2rem;
+    position: relative; /* Ensure it doesn't get hidden */
+    top: 8rem; /* Adjust this based on your header height */
+    z-index: 10; /* Higher than the header's z-index to make it visible */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-navbar a {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin: 0 1.5rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.secondary-navbar a:hover,
+.secondary-navbar a.active {
+    color: var(--main-color);
+    font-weight: 700;
+}
+
+
+/* screen size controls */
+@media (max-width: 1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 3%;
+    }
+
+    section {
+        padding: 10rem 3% 2rem;
+    }
+
+    .footer {
+        padding: 2rem 3%;
+    }
+    .card {
+        flex: 1 1 calc(50% - 2rem); /* Adjust to 2 cards per row */
+        max-width: calc(50% - 2rem);
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--second-bg-color); /* Match the theme */
+        border-top: .1rem solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+        display: none; /* Hidden by default */
+        flex-direction: column; /* Stack links vertically */
+        padding: 1rem 0;
+    }
+
+    .navbar.active {
+        display: flex; /* Show the navbar when active */
+    }
+
+    .navbar a {
+        font-size: 2rem;
+        margin: 1rem 0; /* Space between links */
+        text-align: center;
+    }
+
+    .dropdown {
+        width: 100%; /* Ensure dropdown spans full width */
+        text-align: center;
+    }
+
+    .dropdown a {
+        display: block; /* Ensure links stack properly */
+        padding: 1rem; /* Add spacing for better touch interaction */
+    }
+
+    .dropdown-menu {
+        position: static; /* Remove absolute positioning */
+        display: none; /* Hidden by default */
+        background: transparent; /* Match the background for smooth appearance */
+        box-shadow: none; /* Remove shadow */
+    }
+
+    .dropdown-menu a {
+        padding: 1rem; /* Consistent padding */
+        font-size: 1.3rem; /* Adjust size for readability */
+        color: gray;
+
+    }
+
+    .dropdown.active .dropdown-menu {
+        display: block; /* Show dropdown menu when active */
+    }
+    .card {
+        flex: 1 1 100%; /* Stacks cards on top of each other for small screens */
+        max-width: 100%;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+
+}
+
+@media (max-width: 365px) {
+
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .footer p {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+
+.charts-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    justify-content: space-between; /* Adds spacing between charts */
+    gap: 20px; /* Adds spacing between the charts */
+}
+
+.chart-container {
+    flex: 1; /* Distribute space evenly */
+    min-width: 300px; /* Ensure charts don't shrink too much */
+    max-width: 45%; /* Limit width to fit two charts side by side */
+    height: 400px; /* Set consistent height */
+    background: bisque; /* or #2e2e2e*/
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .chart-container {
+        height: 300px; /* Set consistent height for mobile */
+        flex: 1 1 100%; /* Full width for small screens */
+        max-width: 100%; /* Prevent overflowing */
+        min-height: 300px; /* Minimum height to ensure visibility */
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 1rem 0; /* Add spacing between charts */
+        background: bisque; /* Consistent background */
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .charts-container {
+        flex-direction: column; /* Stack charts vertically */
+        display: flex;
+        flex-wrap: wrap; /* Wrap charts on smaller screens */
+        justify-content: center; /* Center align charts */
+        gap: 1rem; /* Add spacing between charts */
+        margin: 1rem 0; /* Add some vertical margin */
+        
+    }
+}

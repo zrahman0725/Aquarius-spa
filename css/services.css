@@ -1,0 +1,437 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --bg-color: #000000; /* Black */
+    --second-bg-color: #1a1a1a; /* Dark Gray */
+    --text-color: #ffffff; /* White */
+    --main-color: #ff0000; /* Red */
+}
+
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+section {
+    min-height: 100vh;
+    padding: 10rem 9% 2rem;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, var(--bg-color), var(--main-color));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+
+    }
+    
+
+.header.sticky {
+    border-bottom: .1rem solid rgba(0, 0, 0, .2);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    font-weight: 600;
+    cursor: default;
+
+    }
+    .logo img {
+        width: 40px; /* Adjust the size of the image as needed */
+        height: auto; /* Maintain aspect ratio */
+        vertical-align: middle; /* Align the image with the text */
+        margin-right: 10px; /* Add spacing between the image and the title */
+    }
+      
+
+    .navbar a {
+        font-size: 1.5rem;
+        color: var(--text-color);
+        margin-left: 3.5rem;
+    }
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+}
+
+
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown menu - hidden by default */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align dropdown right below the parent link */
+    left: 0; /* Align dropdown with the parent link */
+    background-color: var(--second-bg-color); /* Match the theme color */
+    min-width: 250px; /* Uniform width for all dropdowns */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    z-index: 100; /* Ensure it appears above other content */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    padding: 0; /* Remove extra padding around the menu */
+    align-content: start;
+}
+
+/* Dropdown menu links */
+.dropdown-menu a {
+    color: var(--text-color); /* White text */
+    padding: 1rem; /* Add padding for a better appearance */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Make the full box clickable */
+    justify-content: center;
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    width: 100%; /* Ensure the full width of the dropdown menu */
+    box-sizing: border-box; /* Include padding in width */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for dropdown menu links */
+.dropdown-menu a:hover {
+    color: var(--main-color); /* Make the text red for better readability */
+    border-radius: 0.3rem; /* Optional: rounded corners */
+}
+
+/* Adjust the dropdown container to prevent issues */
+.dropdown-menu {
+    padding: 0.5rem 0; /* Add slight vertical spacing for the dropdown */
+    background-color: var(--bg-color); /* Match dropdown background with site theme */
+    border-radius: 0.5rem; /* Optional: rounded edges for the dropdown */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0); /* Final position */
+}
+
+.heading {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+}
+
+span {
+    color: var(--main-color);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, var(--bg-color), var(--main-color));
+}
+
+.footer-text p {
+    font-size: 1.6rem;
+}
+
+.footer-iconTop a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: .8rem;
+    background: var(--main-color);
+    border-radius: .8rem;
+    transition: .5s ease;
+}
+
+.footer-iconTop a:hover {
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.footer-iconTop a i {
+    font-size: 2.4rem;
+    color: var (--second-bg-color);
+}
+
+
+.services h2 {
+    margin-bottom: 5rem;
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.services-container .services-box {
+    flex-direction: 1 1 30rem;
+    background: var(--second-bg-color);
+    padding: 3rem 2rem 4rem;
+    border-radius: 2rem;
+    text-align: center;
+    border: .2rem solid var(--bg-color);
+    transition: .5s ease;
+}
+
+.services-container .services-box:hover {
+    border-color: var(--main-color);
+    transform: scale(1.02);
+}
+
+.services-box i {
+    font-size: 7rem;
+    color: var(--main-color);
+}
+
+.services-box h3 {
+    font-size: 2.6rem;
+}
+
+.services-box p {
+    font-size: 1.6rem;
+    margin: 1rem 0 3rem;
+}
+
+
+.services-container .services-box {
+    border-color: var (--main-color); 
+}
+
+.home,
+.about,
+.services,
+.gallery,
+.contact,
+.footer {
+    background: var (--bg-color); 
+}
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 2rem;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background: var(--main-color);
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem var(--main-color);
+    font-size: 1.6rem;
+    color: var(--second-bg-color);
+    letter-spacing: .1rem;
+    font-weight: 600;
+    transition: .5s ease;
+}
+
+.btn:hover {
+    box-shadow: none;
+    background: var(--text-color);
+    color: var(--main-color);
+}
+
+
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 3%;
+    }
+
+    section {
+        padding: 10rem 3% 2rem;
+    }
+
+    .services {
+        padding-bottom: 7rem;
+    }
+
+}
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem 3%;
+        background: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
+        border-top: .1rem solid rgba(0, 0, 0, .2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+        display: none;
+    }
+
+    .navbar.active {
+        display: block;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
+    }
+
+
+    .services h2 {
+        margin-bottom: 3rem;
+    }
+
+    .services-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .services-container {
+        grid-template-columns: 1fr; /* 1 column */
+    }
+}
+
+/* screen size controls */
+@media (max-width: 1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 3%;
+    }
+
+    section {
+        padding: 10rem 3% 2rem;
+    }
+
+    .footer {
+        padding: 2rem 3%;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--second-bg-color); /* Match the theme */
+        border-top: .1rem solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+        display: none; /* Hidden by default */
+        flex-direction: column; /* Stack links vertically */
+        padding: 1rem 0;
+    }
+
+    .navbar.active {
+        display: flex; /* Show the navbar when active */
+    }
+
+    .navbar a {
+        font-size: 2rem;
+        margin: 1rem 0; /* Space between links */
+        text-align: center;
+    }
+
+    .dropdown {
+        width: 100%; /* Ensure dropdown spans full width */
+        text-align: center;
+    }
+
+    .dropdown a {
+        display: block; /* Ensure links stack properly */
+        padding: 1rem; /* Add spacing for better touch interaction */
+    }
+
+    .dropdown-menu {
+        position: static; /* Remove absolute positioning */
+        display: none; /* Hidden by default */
+        background: transparent; /* Match the background for smooth appearance */
+        box-shadow: none; /* Remove shadow */
+    }
+
+    .dropdown-menu a {
+        padding: 1rem; /* Consistent padding */
+        font-size: 1.3rem; /* Adjust size for readability */
+        color: gray;
+
+    }
+
+    .dropdown.active .dropdown-menu {
+        display: block; /* Show dropdown menu when active */
+    }
+
+}
+
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+
+}
+
+@media (max-width: 365px) {
+
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .footer p {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - Shift Happens Auto Sales</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
+
+    <link rel="stylesheet" href="css/inventory.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo"><img src="images/IMG-20241122-WA0003_1468205583269761 (1).png" alt="">Shift Happens Auto Sales</a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="index.html#home" data-alt-link="home.html">Home</a>
+            <div class="dropdown">
+                <a href="inventory.html" data-alt-link="inventory.html" class="active">Inventory</a>
+                <div class="dropdown-menu">
+                    <a href="inventory.html">View Inventory</a>
+                    <a href="car-finder.html">Car Finder</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="finance.html" data-alt-link="finance.html">Finance</a>
+                <div class="dropdown-menu">
+                    <a href="finance-application.html">Finance Application</a>
+                    <a href="finance.html">Finance Department</a>
+                    <a href="finance.html#credit">Credit Tips</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="services.html" data-alt-link="services.html">Services</a>
+                <div class="dropdown-menu">
+                    <a href="detailing.html">Detailing</a>
+                    <a href="trade-in.html">Trade-ins</a>
+                    <a href="test-drive.html">Test Drives</a>
+                    <a href="car-loan.html">Loan Calculator</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="about.html" data-alt-link="about.html">Dealership</a>
+                <div class="dropdown-menu">
+                    <a href="about.html">About Us</a>
+                    <a href="index.html#contact-form">Contact</a>
+                </div>
+            </div>
+        </nav>
+        
+        
+    </header>
+
+    <!-- Main Content -->
+    <section class="inventory-section" id="inventory">
+        <h2 class="heading"><span>Browse Our</span> Inventory</h2>
+        <div class="controls">
+            <div class="sort-icon-container">
+                <button id="sort-icon" class="btn">
+                    <i class='bx bx-sort'></i> Sort
+                </button>
+            </div>
+            <div class="filter-icon-container">
+                <button id="filter-icon" class="btn">
+                    <i class='bx bx-filter'></i> Filter
+                </button>
+            </div>
+
+            <!-- Filter Modal -->
+<div id="filter-modal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-btn" id="close-filter-modal">&times;</span>
+        <h3>Filter Options</h3>
+        <form id="filter-form">
+            <div class="filter-option row">
+                <div class="column">
+                    <label for="filter-make">Make:</label>
+                    <select id="filter-make" name="make">
+                        <!-- Dynamic options will be populated -->
+                    </select>
+                </div>
+                <div class="column">
+                    <label for="filter-model">Model:</label>
+                    <select id="filter-model" name="model">
+                        <!-- Dynamic options will be populated -->
+                    </select>
+                </div>
+            </div>
+            <div class="filter-option row">
+                <div class="column">
+                    <label for="filter-year-min">Min Year:</label>
+                    <input type="number" id="filter-year-min" name="year_min" placeholder="Min Year">
+                </div>
+                <div class="column">
+                    <label for="filter-year-max">Max Year:</label>
+                    <input type="number" id="filter-year-max" name="year_max" placeholder="Max Year">
+                </div>
+            </div>
+            <div class="filter-option">
+                <label for="filter-price">Price Range:</label>
+                <div class="slider-container">
+                    <input type="range" id="price-min-slider" min="0" max="100000" step="1000" value="0">
+                    <input type="range" id="price-max-slider" min="0" max="100000" step="1000" value="100000">
+                    <p>Selected Range: <span id="price-range-display">$0 - $100,000</span></p>
+                </div>
+            </div>
+            
+            <div class="filter-option row">
+                <div class="column">
+                    <label for="filter-mileage-min">Min Mileage:</label>
+                    <input type="number" id="filter-mileage-min" name="mileage_min" placeholder="Min Mileage">
+                </div>
+                <div class="column">
+                    <label for="filter-mileage-max">Max Mileage:</label>
+                    <input type="number" id="filter-mileage-max" name="mileage_max" placeholder="Max Mileage">
+                </div>
+            </div>
+            <div class="filter-option row">
+                <div class="column">
+                    <label for="filter-bodystyle">Bodystyle:</label>
+                    <select id="filter-bodystyle" name="bodystyle">
+                        <!-- Dynamic options will be populated -->
+                    </select>
+                </div>
+                <div class="column">
+                    <label for="filter-exterior-color">Exterior Color:</label>
+                    <select id="filter-exterior-color" name="exterior_color">
+                        <!-- Dynamic options will be populated -->
+                    </select>
+                </div>
+            </div>
+            <div class="filter-option row">
+                <div class="column">
+                    <label for="filter-engine">Engine:</label>
+                    <select id="filter-engine" name="engine">
+                        <!-- Dynamic options will be populated -->
+                    </select>
+                </div>
+                <div class="column">
+                    <label for="filter-fuel">Fuel:</label>
+                    <select id="filter-fuel" name="fuel">
+                        <!-- Dynamic options will be populated -->
+                    </select>
+                </div>
+            </div>
+            <div class="filter-option">
+                <label for="filter-transmission">Transmission:</label>
+                <select id="filter-transmission" name="transmission">
+                    <!-- Dynamic options will be populated -->
+                </select>
+            </div>
+            
+            <button type="button" id="apply-filter" class="btn">Apply Filters</button>
+        </form>
+    </div>
+
+</div>
+<button type="button" id="clear-filter" class="btn btn-clear">Clear Filters</button>
+
+            
+
+            
+            <!-- Sort Popup -->
+            <div id="sort-popup" class="sort-popup hidden">
+                <div class="sort-popup-content">
+                    <span class="close-sort-popup" id="close-sort-popup">&times;</span>
+                    <h3>Sort Options</h3>
+                    <div class="sort-options">
+                        <label for="sort-select">Sort by:</label>
+                        <select id="sort-select">
+                            <option value="" disabled selected>Sort By</option>
+                            <option value="year-desc">Year (Newest First)</option>
+                            <option value="year-asc">Year (Oldest First)</option>
+                            <option value="price-asc">Price (Low to High)</option>
+                            <option value="price-desc">Price (High to Low)</option>
+                            <option value="mileage-asc">Mileage (Lowest First)</option>
+                            <option value="mileage-desc">Mileage (Highest First)</option>
+                            <option value="make-asc">Make (A-Z)</option>
+                            <option value="make-desc">Make (Z-A)</option>
+                            <option value="model-asc">Model (A-Z)</option>
+                            <option value="model-desc">Model (Z-A)</option>
+                        </select>
+                        
+                        <button id="apply-sort" class="btn">Apply Sort</button>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="inventory-grid">
+            <!-- Dynamic vehicle cards and promotional card will populate here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2024 by Shift Happens Auto Sales | All Rights Reserved. | <a href="admin-login.html">Admin</a></p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDv6Jkk-7XqeCMTy14Fjs_upMAjVM7uNVg",
+            authDomain: "shift-happens-auto-sales.firebaseapp.com",
+            projectId: "shift-happens-auto-sales",
+            storageBucket: "shift-happens-auto-sales.appspot.com",
+            messagingSenderId: "224158026936",
+            appId: "1:224158026936:web:690dd13405f6b1bfc4b84d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            const inventoryGrid = document.querySelector('.inventory-grid');
+            const sortSelect = document.getElementById('sort-select');
+            const applySortButton = document.getElementById('apply-sort');
+            const sortPopup = document.getElementById('sort-popup');
+            const closeSortPopup = document.getElementById('close-sort-popup');
+            const sortIcon = document.getElementById('sort-icon');
+            const filterModal = document.getElementById("filter-modal");
+            const closeFilterModal = document.getElementById("close-filter-modal");
+            const applyFilterButton = document.getElementById("apply-filter");
+            const clearFilterButton = document.getElementById("clear-filter");
+            const filterForm = document.getElementById("filter-form");
+            const filterIcon = document.getElementById('filter-icon');
+            const priceMinSlider = document.getElementById("price-min-slider");
+            const priceMaxSlider = document.getElementById("price-max-slider");
+            const priceRangeDisplay = document.getElementById("price-range-display");
+            const filterMake = document.getElementById("filter-make");
+            const filterModel = document.getElementById("filter-model");
+            const backdrop = document.createElement("div");
+    backdrop.id = "sort-backdrop";
+    backdrop.classList.add("hidden"); // Ensure it's hidden on page load
+    document.body.appendChild(backdrop);
+
+    function closePopups() {
+        sortPopup.classList.add("hidden");
+        backdrop.classList.add("hidden");
+    }
+
+    // Show sort popup with backdrop
+    document.getElementById("sort-icon").addEventListener("click", () => {
+        sortPopup.classList.remove("hidden");
+        backdrop.classList.remove("hidden");
+    });
+
+    // Close sort popup when clicking outside
+    backdrop.addEventListener("click", closePopups);
+
+    // Close filter modal when clicking outside its content
+    document.addEventListener("click", (event) => {
+        if (
+            !filterModal.classList.contains("hidden") &&
+            !filterModal.querySelector(".modal-content").contains(event.target) &&
+            event.target !== document.getElementById("filter-icon")
+        ) {
+            filterModal.classList.add("hidden");
+        }
+    });
+
+    // Close with ESC key
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closePopups();
+            filterModal.classList.add("hidden");
+        }
+    });
+
+
+        
+            let inventoryData = []; // Store fetched data for filtering and sorting
+            let filteredData = []; // Data after applying filters
+
+
+            // Fetch inventory from Firestore
+            async function fetchInventory() {
+            const inventoryRef = collection(db, 'inventory');
+            const inventorySnapshot = await getDocs(inventoryRef);
+
+            // Fetch all inventory data
+            inventoryData = inventorySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+            // Get URL parameters for filtering
+            const urlParams = new URLSearchParams(window.location.search);
+            const filters = {
+                make: urlParams.get("make"),
+                model: urlParams.get("model"),
+                year_min: urlParams.get("year_min") ? parseInt(urlParams.get("year_min")) : null,
+                year_max: urlParams.get("year_max") ? parseInt(urlParams.get("year_max")) : null,
+                price_min: urlParams.get("price_min") ? parseInt(urlParams.get("price_min")) : null,
+                price_max: urlParams.get("price_max") ? parseInt(urlParams.get("price_max")) : null,
+            };
+
+            // Apply filters from URL parameters
+            filteredData = inventoryData.filter(item => {
+                return (
+                    (!filters.make || item.make === filters.make) &&
+                    (!filters.model || item.model === filters.model) &&
+                    (!filters.year_min || item.year >= filters.year_min) &&
+                    (!filters.year_max || item.year <= filters.year_max) &&
+                    (!filters.price_min || item.price >= filters.price_min) &&
+                    (!filters.price_max || item.price <= filters.price_max)
+                );
+            });
+
+            // Display the filtered inventory
+            displayInventory(filteredData);
+            fetchFilterOptions(); // Populate filter options dynamically
+        }
+        
+            // Display inventory
+            function displayInventory(data) {
+    inventoryGrid.innerHTML = ''; // Clear existing content
+
+    if (data.length === 0) {
+        inventoryGrid.innerHTML = '<p>No results found for the selected filters.</p>';
+        return;
+    }
+
+    data.forEach((item, index) => {
+        // Create and append a vehicle card
+        const card = document.createElement('div');
+        card.classList.add('vehicle-card');
+        card.innerHTML = `
+            <a href="vehicle-details.html?id=${item.id}" class="vehicle-link">
+                <div class="vehicle-image">
+                    <img src="${item.mainPictureUrl}" alt="${item.make} ${item.model}">
+                </div>
+                <div class="vehicle-details">
+                    <h3>${item.year} ${item.make} ${item.model}</h3>
+                    <p>
+                        <span class="label">Mileage:</span>
+                        <span class="value">${parseInt(item.mileage)} km</span>
+                    </p>
+                    <p>
+                        <span class="label">Transmission:</span>
+                        <span class="value">${item.transmission}</span>
+                    </p>
+                    <p class="price">
+                        <span class="dealer-price">Premium Price: <span class="crossed-out">$${parseFloat(item.premiumPrice).toLocaleString('en-US')}</span></span>
+                        <span class="discounted-price">$${parseInt(item.price).toLocaleString('en-US')}</span>
+                    </p>
+                    <p class="fine-print">+ Tax & Licensing</p>
+                    <button class="btn view-details-btn">View Details</button>
+                </div>
+            </a>
+        `;
+        inventoryGrid.appendChild(card);
+
+        // Insert a promo card after every 6th vehicle card
+        if ((index + 1) % 6 === 0) {
+            const promoCard = document.createElement('div');
+            promoCard.classList.add('promo-card');
+            promoCard.innerHTML = `
+                <div class="vehicle-image">
+                    <img src="images/promo.jpg" alt="Financing Promotion">
+                </div>
+                <div class="promo-details">
+                    <h3>Special Financing Rates</h3>
+                    <p>Low payments available. Get pre-approved today!</p>
+                    <a href="finance.html"><button class="btn">Financing Details</button></a>
+                </div>
+            `;
+            inventoryGrid.appendChild(promoCard);
+        }
+    });
+
+    // If the total number of items is not a multiple of 6, add one final promo card at the end
+    if (data.length % 6 !== 0) {
+        const finalPromoCard = document.createElement('div');
+        finalPromoCard.classList.add('promo-card');
+        finalPromoCard.innerHTML = `
+            <div class="vehicle-image">
+                <img src="images/promo2.jpg" alt="Financing Promotion">
+            </div>
+            <div class="promo-details">
+                <h3>Special Financing Rates</h3>
+                <p>Low payments available. Get pre-approved today!</p>
+                <a href="finance.html"><button class="btn">Financing Details</button></a>
+            </div>
+        `;
+        inventoryGrid.appendChild(finalPromoCard);
+    }
+}
+
+        
+
+        
+            // Sort functionality
+            applySortButton.addEventListener('click', () => {
+                const sortOption = sortSelect.value;
+        
+                switch (sortOption) {
+                    case 'year-asc':
+                        filteredData.sort((a, b) => a.year - b.year);
+                        break;
+                    case 'year-desc':
+                        filteredData.sort((a, b) => b.year - a.year);
+                        break;
+                    case 'price-asc':
+                        filteredData.sort((a, b) => a.price - b.price);
+                        break;
+                    case 'price-desc':
+                        filteredData.sort((a, b) => b.price - a.price);
+                        break;
+                    case 'mileage-asc':
+                        filteredData.sort((a, b) => a.mileage - b.mileage);
+                        break;
+                    case 'mileage-desc':
+                        filteredData.sort((a, b) => b.mileage - a.mileage);
+                        break;
+                    case 'make-asc':
+                        filteredData.sort((a, b) => a.make.localeCompare(b.make));
+                        break;
+                    case 'make-desc':
+                        filteredData.sort((a, b) => b.make.localeCompare(a.make));
+                        break;
+                    case 'model-asc':
+                        filteredData.sort((a, b) => a.model.localeCompare(b.model));
+                        break;
+                    case 'model-desc':
+                        filteredData.sort((a, b) => b.model.localeCompare(a.model));
+                        break;
+                    default:
+                        break;
+                }
+        
+                displayInventory(filteredData);
+                sortPopup.classList.add('hidden'); // Close the popup
+                closePopups();
+
+            });
+        
+            // Open and close sort popup
+            sortIcon.addEventListener('click', () => {
+                sortPopup.classList.remove('hidden');
+            });
+        
+            
+            closeSortPopup.addEventListener('click', () => {
+                sortPopup.classList.add('hidden');
+                closePopups();
+            });
+        
+            // Show filter modal
+            filterIcon?.addEventListener('click', () => {
+                event.stopPropagation(); // Prevent bubbling
+                filterModal.classList.remove("hidden");
+            });
+        
+            // Close filter modal
+            closeFilterModal.addEventListener("click", () => {
+                filterModal.classList.add("hidden");
+            });
+
+            
+
+        
+            // Fetch unique filter options
+// Fetch unique filter options with counts
+async function fetchFilterOptions() {
+    const makes = inventoryData.reduce((acc, item) => {
+        acc[item.make] = (acc[item.make] || 0) + 1;
+        return acc;
+    }, {});
+    populateSelect("filter-make", Object.entries(makes));
+
+    const models = inventoryData.reduce((acc, item) => {
+        acc[item.model] = (acc[item.model] || 0) + 1;
+        return acc;
+    }, {});
+    populateSelect("filter-model", Object.entries(models));
+
+    const bodystyles = inventoryData.reduce((acc, item) => {
+        acc[item.bodyStyle] = (acc[item.bodyStyle] || 0) + 1;
+        return acc;
+    }, {});
+    populateSelect("filter-bodystyle", Object.entries(bodystyles));
+
+    const colors = inventoryData.reduce((acc, item) => {
+        acc[item.color] = (acc[item.color] || 0) + 1;
+        return acc;
+    }, {});
+    populateSelect("filter-exterior-color", Object.entries(colors));
+
+    const engines = inventoryData.reduce((acc, item) => {
+        acc[item.engine] = (acc[item.engine] || 0) + 1;
+        return acc;
+    }, {});
+    populateSelect("filter-engine", Object.entries(engines));
+
+    const fuels = inventoryData.reduce((acc, item) => {
+        acc[item.fuelType] = (acc[item.fuelType] || 0) + 1;
+        return acc;
+    }, {});
+    populateSelect("filter-fuel", Object.entries(fuels));
+
+    const transmissions = inventoryData.reduce((acc, item) => {
+        acc[item.transmission] = (acc[item.transmission] || 0) + 1;
+        return acc;
+    }, {});
+    populateSelect("filter-transmission", Object.entries(transmissions));
+}
+
+
+// Populate a dropdown with options alphabetically and include counts
+function populateSelect(selectId, options, reset = true) {
+    const select = document.getElementById(selectId);
+    if (reset) select.innerHTML = `<option value="">All</option>`;
+
+    options
+        .sort((a, b) => a[0].localeCompare(b[0])) // Sort alphabetically by the key (make or model)
+        .forEach(([option, count]) => {
+            select.innerHTML += `<option value="${option}">${option} (${count})</option>`;
+        });
+}
+
+
+        
+            // Update models based on selected make
+// Update models based on selected make with counts
+filterMake.addEventListener("change", (event) => {
+    const selectedMake = event.target.value;
+
+    // Calculate the model counts for the selected make
+    const modelCounts = inventoryData
+        .filter(item => !selectedMake || item.make === selectedMake)
+        .reduce((acc, item) => {
+            acc[item.model] = (acc[item.model] || 0) + 1;
+            return acc;
+        }, {});
+
+    // Populate the Model dropdown
+    populateSelect("filter-model", Object.entries(modelCounts));
+});
+
+        
+            // Update price range dynamically
+            function updatePriceRange() {
+                const minPrice = parseInt(priceMinSlider.value);
+                const maxPrice = parseInt(priceMaxSlider.value);
+        
+                if (minPrice >= maxPrice) {
+                    priceMinSlider.value = maxPrice - 1000;
+                }
+                if (maxPrice <= minPrice) {
+                    priceMaxSlider.value = minPrice + 1000;
+                }
+        
+                priceRangeDisplay.textContent = `$${parseInt(priceMinSlider.value).toLocaleString()} - $${parseInt(priceMaxSlider.value).toLocaleString()}`;
+            }
+        
+            priceMinSlider.addEventListener("input", updatePriceRange);
+            priceMaxSlider.addEventListener("input", updatePriceRange);
+        
+            // Apply filters
+            applyFilterButton.addEventListener("click", () => {
+                const formData = new FormData(filterForm);
+                const filters = Object.fromEntries(formData.entries());
+        
+                const minPrice = parseInt(priceMinSlider.value);
+                const maxPrice = parseInt(priceMaxSlider.value);
+                const minMileage = filters.mileage_min ? parseInt(filters.mileage_min) : 0;
+                const maxMileage = filters.mileage_max ? parseInt(filters.mileage_max) : Infinity;
+        
+                filteredData = inventoryData.filter(item => {
+        return (!filters.make || item.make === filters.make) &&
+               (!filters.model || item.model === filters.model) &&
+               (!filters.year_min || item.year >= parseInt(filters.year_min)) &&
+               (!filters.year_max || item.year <= parseInt(filters.year_max)) &&
+               (!filters.bodystyle || item.bodyStyle === filters.bodystyle) &&
+               (!filters.exterior_color || item.color === filters.exterior_color) &&
+               (!filters.engine || item.engine === filters.engine) &&
+               (!filters.fuel || item.fuelType === filters.fuel) &&
+               (!filters.transmission || item.transmission === filters.transmission) &&
+               item.price >= minPrice && item.price <= maxPrice &&
+               item.mileage >= minMileage && item.mileage <= maxMileage;
+    });
+
+        
+                displayInventory(filteredData);
+                filterModal.classList.add("hidden");
+            });
+        
+
+            clearFilterButton.addEventListener("click", () => {
+        // Reset all form fields
+        filterForm.reset();
+
+        // Reset sliders to default range
+        priceMinSlider.value = priceMinSlider.min;
+        priceMaxSlider.value = priceMaxSlider.max;
+
+        // Update displayed price range
+        priceRangeDisplay.textContent = `$${parseInt(priceMinSlider.min).toLocaleString()} - $${parseInt(priceMaxSlider.max).toLocaleString()}`;
+
+        // Clear inventory grid to display all items
+        filteredData = inventoryData
+        displayInventory(inventoryData);
+    });
+  
+
+    // Navbar toggle for mobile
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+
+    if (menuIcon && navbar) {
+        menuIcon.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+        });
+    }
+
+    fetchInventory(); // Fetch and display inventory on page load
+
+
+    
+});
+document.addEventListener("DOMContentLoaded", async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const filters = {
+        make: urlParams.get("make"),
+        model: urlParams.get("model"),
+        year_min: urlParams.get("year_min") ? parseInt(urlParams.get("year_min")) : null,
+        year_max: urlParams.get("year_max") ? parseInt(urlParams.get("year_max")) : null,
+        price_min: urlParams.get("price_min") ? parseInt(urlParams.get("price_min")) : null,
+        price_max: urlParams.get("price_max") ? parseInt(urlParams.get("price_max")) : null,
+    };
+    
+
+    const inventoryGrid = document.querySelector('.inventory-grid');
+    const db = getFirestore(app); // Firebase should already be initialized
+
+    async function fetchInventory() {
+        const inventoryRef = collection(db, 'inventory');
+        const inventorySnapshot = await getDocs(inventoryRef);
+
+        const inventoryData = inventorySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+
+        return inventoryData;
+    }
+
+    async function applyFilters(inventoryData) {
+        const filteredData = inventoryData.filter(item => {
+            return (
+                (!filters.make || item.make === filters.make) &&
+                (!filters.model || item.model === filters.model) &&
+                (!filters.year_min || item.year >= filters.year_min) &&
+                (!filters.year_max || item.year <= filters.year_max) &&
+                (!filters.price_min || item.price >= filters.price_min) &&
+                (!filters.price_max || item.price <= filters.price_max)
+            );
+        });
+
+        displayInventory(filteredData);
+    }
+
+    function displayInventory(data) {
+    const inventoryGrid = document.querySelector('.inventory-grid');
+    inventoryGrid.innerHTML = ''; // Clear previous results
+
+    if (data.length === 0) {
+        inventoryGrid.innerHTML = '<p>No results found for the selected filters.</p>';
+        return;
+    }
+
+    data.forEach((item, index) => {
+        // Create and append a vehicle card
+        const card = document.createElement('div');
+        card.classList.add('vehicle-card');
+                    card.innerHTML = `
+                        <a href="vehicle-details.html?id=${item.id}" class="vehicle-link">
+                            <div class="vehicle-image">
+                                <img src="${item.mainPictureUrl}" alt="${item.make} ${item.model}">
+                            </div>
+                            <div class="vehicle-details">
+                                <h3>${item.year} ${item.make} ${item.model}</h3>
+                                <p>
+                                    <span class="label">Mileage:</span>
+                                    <span class="value">${parseInt(item.mileage)} km</span>
+                                </p>
+                                <p>
+                                    <span class="label">Transmission:</span>
+                                    <span class="value">${item.transmission}</span>
+                                </p>
+                                <p class="price">
+                                    <span class="dealer-price">Premium Price: <span class="crossed-out">$${parseFloat(item.premiumPrice).toLocaleString('en-US')}</span></span>
+                                    <span class="discounted-price">$${parseInt(item.price).toLocaleString('en-US')}</span>
+                                </p>
+                                <p class="fine-print">+ Tax & Licensing</p>
+                                <button class="btn view-details-btn">View Details</button>
+                            </div>
+                        </a>
+                    `;
+                    inventoryGrid.appendChild(card);
+                
+        // Insert a promotional card after every 6th vehicle card
+        if ((index + 1) % 6 === 0) {
+            const promoCard = document.createElement('div');
+            promoCard.classList.add('promo-card');
+            promoCard.innerHTML = `
+                <div class="vehicle-image">
+                    <img src="images/promo2.jpg" alt="Financing Promotion">
+                </div>
+                <div class="promo-details">
+                    <h3>Special Financing Rates</h3>
+                    <p>Low payments available. Get pre-approved today!</p>
+                    <a href="finance.html"><button class="btn">Financing Details</button></a>
+                </div>
+            `;
+            inventoryGrid.appendChild(promoCard);
+        }
+    });
+
+    // If the total number of items is not a multiple of 6, add one final promo card at the end
+    if (data.length % 6 !== 0) {
+        const finalPromoCard = document.createElement('div');
+        finalPromoCard.classList.add('promo-card');
+        finalPromoCard.innerHTML = `
+            <div class="vehicle-image">
+                <img src="images/promo.jpg" alt="Financing Promotion">
+            </div>
+            <div class="promo-details">
+                <h3>Special Financing Rates</h3>
+                <p>Low payments available. Get pre-approved today!</p>
+                <a href="finance.html"><button class="btn">Financing Details</button></a>
+            </div>
+        `;
+        inventoryGrid.appendChild(finalPromoCard);
+    }
+}
+
+
+    const inventoryData = await fetchInventory();
+    await applyFilters(inventoryData);
+});
+
+
+
+
+</script>
+
+</body>
+
+</html>

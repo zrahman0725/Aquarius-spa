@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Shift Happens Auto Sales</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+    <link rel="stylesheet" href="css/admin-users.css">
+</head>
+<body>
+        <!-- Header -->
+        <header class="header">
+            <a href="index.html" class="logo"><img src="images/IMG-20241122-WA0003_1468205583269761 (1).png" alt="">Shift Happens Auto Sales</a>
+    
+            <i class='bx bx-menu' id="menu-icon"></i>
+    
+            <nav class="navbar">
+                <a href="index.html#home" data-alt-link="home.html">Home</a>
+                <div class="dropdown">
+                    <a href="inventory.html" data-alt-link="inventory.html">Inventory</a>
+                    <div class="dropdown-menu">
+                        <a href="inventory.html">View Inventory</a>
+                        <a href="car-finder.html">Car Finder</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="finance.html" data-alt-link="finance.html">Finance</a>
+                    <div class="dropdown-menu">
+                        <a href="finance-application.html">Finance Application</a>
+                        <a href="finance.html">Finance Department</a>
+                        <a href="finance.html#credit">Credit Tips</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="services.html" data-alt-link="services.html">Services</a>
+                    <div class="dropdown-menu">
+                        <a href="detailing.html">Detailing</a>
+                        <a href="trade-in.html">Trade-ins</a>
+                        <a href="test-drive.html">Test Drives</a>
+                        <a href="car-loan.html">Loan Calculator</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="about.html" data-alt-link="about.html">Dealership</a>
+                    <div class="dropdown-menu">
+                        <a href="about.html">About Us</a>
+                        <a href="index.html#contact-form">Contact</a>
+                    </div>
+                </div>
+            </nav>
+            
+            
+        </header>
+    
+        <!-- Secondary Navbar -->
+        <nav class="secondary-navbar">
+            <a href="admin-dashboard.html">Dashboard</a>
+            <a href="admin-inventory.html">Inventory</a>
+            <a href="admin-forms.html">Forms</a>
+            <a href="admin-users.html" class="active">Users</a>
+    
+        </nav>
+
+        
+        <section id="app">
+            <h1>User Management</h1>
+
+
+    
+            <!-- User Info -->
+            <div id="user-info">
+                <p><strong>Display Name:</strong> <span id="user-display-name">N/A</span></p>
+                <p><strong>Email:</strong> <span id="user-email">N/A</span></p>
+                <button id="update-name-btn">Update Display Name</button>
+                <button id="reset-password-btn">Reset Password</button>
+            </div>
+    
+            <!-- PIN Pad -->
+            <div id="pin-pad">
+                <h2>Admin Controls</h2>
+                <!-- Screen for entered PIN -->
+                <div id="pin-screen">
+                    <span id="pin-display">••••</span>
+                </div>
+                <!-- Keypad container -->
+                <div id="keypad">
+                    <div class="key-row">
+                        <button class="key">1</button>
+                        <button class="key">2</button>
+                        <button class="key">3</button>
+                    </div>
+                    <div class="key-row">
+                        <button class="key">4</button>
+                        <button class="key">5</button>
+                        <button class="key">6</button>
+                    </div>
+                    <div class="key-row">
+                        <button class="key">7</button>
+                        <button class="key">8</button>
+                        <button class="key">9</button>
+                    </div>
+                    <div class="key-row">
+                        <button class="key action-key">Clear</button>
+                        <button class="key">0</button>
+                        <button class="key action-key">Enter</button>
+                    </div>
+                </div>
+                <p id="pin-status" style="color: red; margin-top: 1rem;"></p>
+            </div>
+
+
+
+    
+            <div id="user-management" style="display: none;">
+                <h2>Admin Controls</h2>
+
+                <div>
+                    <h3>Add New User</h3>
+                    <form id="add-user-form">
+                        <label for="new-user-email">Email:</label>
+                        <input type="email" id="new-user-email" required>
+                        <label for="new-user-password">Password:</label>
+                        <input type="password" id="new-user-password" required>
+                        <button type="submit">Create User</button>
+                    </form>
+                    <p id="add-user-status"></p>
+                </div>
+                <h3>Users:</h3>
+                <div id="user-list">
+                </div>
+            </div>
+            
+        </section>
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2024 by Shift Happens Auto Sales | All Rights Reserved. | <a href="admin-login.html">Admin</a></p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const correctPin = "1234"; // Replace with your desired PIN
+    const userManagement = document.getElementById("user-management");
+    const pinPad = document.getElementById("pin-pad");
+    const pinStatus = document.getElementById("pin-status");
+    const pinDisplay = document.getElementById("pin-display");
+    let enteredPin = "";
+
+    // Function to update the screen display
+    function updatePinDisplay() {
+        pinDisplay.textContent = enteredPin.padEnd(4, "•");
+    }
+
+    // Function to handle PIN validation
+    function validatePin() {
+        if (enteredPin === correctPin) {
+            userManagement.style.display = "block";
+            pinPad.style.display = "none";
+        } else {
+            pinStatus.textContent = "Incorrect PIN. Please try again.";
+        }
+        enteredPin = ""; // Reset the entered PIN
+        updatePinDisplay(); // Reset the screen display
+    }
+
+    // Handle button clicks
+    document.querySelectorAll(".key").forEach((key) => {
+        key.addEventListener("click", () => {
+            const value = key.textContent;
+
+            if (value === "Clear") {
+                enteredPin = "";
+                pinStatus.textContent = ""; // Clear the status message
+            } else if (value === "Enter") {
+                validatePin();
+            } else {
+                if (enteredPin.length < 4) {
+                    enteredPin += value;
+                }
+            }
+            updatePinDisplay();
+        });
+    });
+
+    // Handle keyboard input
+    document.addEventListener("keydown", (event) => {
+        const key = event.key;
+
+        if (!isNaN(key) && key.length === 1) {
+            // If a number key is pressed
+            if (enteredPin.length < 4) {
+                enteredPin += key;
+            }
+        } else if (key === "Backspace" || key === "Delete") {
+            // If Backspace or Delete is pressed, remove the last digit
+            enteredPin = enteredPin.slice(0, -1);
+        } else if (key === "Enter") {
+            // If Enter is pressed, validate the PIN
+            validatePin();
+        } else if (key === "Escape") {
+            // If Escape is pressed, clear the input
+            enteredPin = "";
+            pinStatus.textContent = ""; // Clear the status message
+        }
+        updatePinDisplay();
+    });
+});
+
+    </script>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, updateProfile, deleteUser, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, deleteDoc, getDocs, collection, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDv6Jkk-7XqeCMTy14Fjs_upMAjVM7uNVg",
+            authDomain: "shift-happens-auto-sales.firebaseapp.com",
+            projectId: "shift-happens-auto-sales",
+            storageBucket: "shift-happens-auto-sales.appspot.com",
+            messagingSenderId: "224158026936",
+            appId: "1:224158026936:web:690dd13405f6b1bfc4b84d",
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+    
+        // DOM Elements
+        const userEmail = document.getElementById("user-email");
+        const userDisplayName = document.getElementById("user-display-name");
+        const updateNameBtn = document.getElementById("update-name-btn");
+        const addUserForm = document.getElementById("add-user-form");
+        const addUserStatus = document.getElementById("add-user-status");
+        const resetPasswordBtn = document.getElementById("reset-password-btn");
+            // DOM Elements
+    const userList = document.getElementById("user-list");
+
+    
+        // Display current user info
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                userEmail.textContent = user.email || "N/A";
+                userDisplayName.textContent = user.displayName || "N/A";
+            } else {
+                alert("No user is logged in.");
+                window.location.href = "/admin-login.html"; // Redirect to login
+            }
+        });
+    
+        // Update display name
+        updateNameBtn.addEventListener("click", async () => {
+            const newName = prompt("Enter your new display name:");
+            if (newName) {
+                try {
+                    await updateProfile(auth.currentUser, { displayName: newName });
+                    userDisplayName.textContent = newName;
+                    alert("Display name updated!");
+                } catch (error) {
+                    console.error("Error updating display name:", error);
+                }
+            }
+        });
+    
+
+    
+        // Add new user
+        addUserForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById("new-user-email").value;
+            const password = document.getElementById("new-user-password").value;
+    
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+    
+                // Save user details to Firestore
+                await setDoc(doc(db, "users", user.uid), {
+                    uid: user.uid,
+                    email: user.email,
+                    password: password, // Store password
+                    createdAt: new Date(),
+                });
+    
+                addUserStatus.textContent = `User created: ${user.email}`;
+                addUserForm.reset();
+            } catch (error) {
+                console.error("Error adding user:", error);
+                addUserStatus.textContent = `Error: ${error.message}`;
+            }
+        });
+    
+        // Reset password
+        resetPasswordBtn.addEventListener("click", async () => {
+            const email = userEmail.textContent;
+            if (email !== "N/A") {
+                try {
+                    await sendPasswordResetEmail(auth, email);
+                    alert("Password reset email sent!");
+                } catch (error) {
+                    console.error("Error sending password reset email:", error);
+                    alert("Error: " + error.message);
+                }
+            } else {
+                alert("No user email available to reset password.");
+            }
+        });
+    
+        // Fetch and display users
+        async function fetchUsers() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "users"));
+                userList.innerHTML = ""; // Clear the user list
+                querySnapshot.forEach((doc) => {
+                    const user = doc.data();
+                    const userItem = document.createElement("div");
+                    userItem.textContent = `${user.email} (UID: ${user.uid})`;
+    
+                    const deleteButton = document.createElement("button");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.addEventListener("click", () => deleteUserFromFirestoreAndAuth(user.uid, user.email, user.password));
+                    userItem.appendChild(deleteButton);
+    
+                    userList.appendChild(userItem);
+                });
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+        }
+    
+        // Delete a user from Firebase Authentication and Firestore
+        async function deleteUserFromFirestoreAndAuth(uid, email, password) {
+            try {
+                // Authenticate as the user
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Delete user document from Firestore
+                await deleteDoc(doc(db, "users", uid));
+
+                // Delete user from Firebase Authentication
+                await deleteUser(user);
+    
+
+                alert("User deleted successfully.");
+                fetchUsers(); // Refresh the list
+            } catch (error) {
+                console.error("Error deleting user:", error);
+            }
+        }
+    
+        // Load users on page load
+        document.addEventListener("DOMContentLoaded", fetchUsers);
+    
+        // Delete an entire Firestore collection recursively
+        async function deleteCollection(collectionPath) {
+            try {
+                const colRef = collection(db, collectionPath);
+                const querySnapshot = await getDocs(colRef);
+    
+                // Iterate through documents and delete them
+                for (const docSnap of querySnapshot.docs) {
+                    await deleteDoc(doc(db, collectionPath, docSnap.id));
+                }
+                console.log(`Collection '${collectionPath}' deleted.`);
+            } catch (error) {
+                console.error(`Error deleting collection '${collectionPath}':`, error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+    let menuIcon = document.querySelector('#menu-icon');
+    let navbar = document.querySelector('.navbar');
+
+    if (menuIcon && navbar) {
+        menuIcon.onclick = () => {
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+        };
+    }
+
+});
+    </script>
+    
+    
+    
+</body>
+</html>

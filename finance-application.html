@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Application - Shift Happens Auto Sales</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
+
+    <link rel="stylesheet" href="css/finance-form.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo"><img src="images/IMG-20241122-WA0003_1468205583269761 (1).png" alt="">Shift Happens Auto Sales</a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="index.html#home" data-alt-link="home.html">Home</a>
+            <div class="dropdown">
+                <a href="inventory.html" data-alt-link="inventory.html">Inventory</a>
+                <div class="dropdown-menu">
+                    <a href="inventory.html">View Inventory</a>
+                    <a href="car-finder.html">Car Finder</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="finance.html" data-alt-link="finance.html" class="active">Finance</a>
+                <div class="dropdown-menu">
+                    <a href="finance-application.html">Finance Application</a>
+                    <a href="finance.html">Finance Department</a>
+                    <a href="finance.html#credit">Credit Tips</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="services.html" data-alt-link="services.html">Services</a>
+                <div class="dropdown-menu">
+                    <a href="detailing.html">Detailing</a>
+                    <a href="trade-in.html">Trade-ins</a>
+                    <a href="test-drive.html">Test Drives</a>
+                    <a href="car-loan.html">Loan Calculator</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="about.html" data-alt-link="about.html">Dealership</a>
+                <div class="dropdown-menu">
+                    <a href="about.html">About Us</a>
+                    <a href="index.html#contact-form">Contact</a>
+                </div>
+            </div>
+        </nav>
+        
+        
+    </header>
+
+    <section class="form" id="form">
+        <h2 class="heading">Finance <span>Application</span></h2>
+        <div class="description-box">
+            <p>
+                Ready to finance your next vehicle? Our secure finance application process ensures a quick and easy way to get pre-approved. 
+                Provide your details below, and let us help you drive away with the car of your dreams.
+            </p>
+        </div>
+        <form id="financeApplicationForm" class="finance-application-form">
+            <h3>Personal Information</h3>
+            <div class="form-group">
+                <div>
+                    <label for="prefix">Prefix</label>
+                    <select id="prefix" name="prefix">
+                        <option value="" disabled selected>Select your prefix</option>
+                        <option value="mr">Mr.</option>
+                        <option value="ms">Ms.</option>
+                        <option value="dr">Dr.</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="first-name">First Name <span class="required">*</span></label>
+                    <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+
+                </div>
+                <div>
+                    <label for="last-name">Last Name <span class="required">*</span></label>
+                    <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+
+                </div>
+                <div>
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+                </div>
+                <div>
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                </div>
+                <div>
+                    <label for="contact-method">Preferred Method of Contact <span class="required">*</span></label>
+                    <select id="contact-method" name="contact-method" required>
+    
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="sms">SMS</option>
+                        <option value="call">Call</option>
+                        <option value="email">Email</option>
+                    </select>
+                </div>
+            </div>
+    
+            <h3>Housing Information</h3>
+            <div class="form-group">
+                <div>
+                    <label for="address">Address <span class="required">*</span></label>
+                    <input type="text" id="address" name="address" placeholder="Enter your address" required>
+
+                </div>
+                <div>
+                    <label for="city">City <span class="required">*</span></label>
+                    <input type="text" id="city" name="city" placeholder="Enter your city" required>
+
+                </div>
+                <div>
+                    <label for="province">Province <span class="required">*</span></label>
+                    <select id="province" name="province" required>
+    
+                        <option value="" disabled selected>Select your province</option>
+                        <option value="AB">Alberta</option>
+                        <option value="BC">British Columbia</option>
+                        <option value="MB">Manitoba</option>
+                        <option value="NB">New Brunswick</option>
+                        <option value="NL">Newfoundland and Labrador</option>
+                        <option value="NS">Nova Scotia</option>
+                        <option value="NT">Northwest Territories</option>
+                        <option value="NU">Nunavut</option>
+                        <option value="ON">Ontario</option>
+                        <option value="PE">Prince Edward Island	</option>
+                        <option value="QC">Quebec</option>
+                        <option value="SK">Saskatchewan</option>
+                        <option value="YT">Yukon</option>
+
+
+                        <!-- Add other provinces -->
+                    </select>
+                </div>
+                <div>
+                    <label for="postal-code">Postal Code <span class="required">*</span></label>
+                    <input type="text" id="postal-code" name="postal-code" placeholder="Enter your postal code" required>
+
+                </div>
+                <div>
+                    <label for="years-lived">Years Lived <span class="required">*</span></label>
+                    <input type="number" id="years-lived" name="years-lived" placeholder="Enter years lived" required>
+
+                </div>
+                <div>
+                    <label for="housing-status">Housing Status <span class="required">*</span></label>
+                    <select id="housing-status" name="housing-status" required>
+    
+                        <option value="" disabled selected>Select your housing status</option>
+                        <option value="rent">Rent</option>
+                        <option value="own">Own</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="monthly-payment">Monthly Payment <span class="required">*</span></label>
+                    <input type="number" id="monthly-payment" name="monthly-payment" placeholder="Enter your monthly payment" required>
+
+                </div>
+            </div>
+
+            <!-- Employment Information Section -->
+<h3>Employment Information</h3>
+<div>
+    <p>Have you been employed over 2 years at your current job?</p>
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="employed-over-2-years" value="yes" id="employed-over-2-years-yes">
+            Yes
+        </label>
+        <label>
+            <input type="radio" name="employed-over-2-years" value="no" id="employed-over-2-years-no">
+            No
+        </label>
+    </div>
+</div>
+
+<div id="employment-info" style="display: none;">
+    <div class="form-group">
+        <div>
+            <label for="employment-type">Type <span class="required">*</span></label>
+            <select id="employment-type" name="employment-type" required>
+                <span class="error-message"></span>
+
+                <option value="" disabled selected>Select type</option>
+                <option value="full-time">Full-Time</option>
+                <option value="part-time">Part-Time</option>
+                <option value="self-employed">Self-Employed</option>
+                <option value="unemployed">Unemployed</option>
+            </select>
+        </div>
+        <div>
+            <label for="occupation">Occupation <span class="required">*</span></label>
+            <input type="text" id="occupation" name="occupation" placeholder="Enter your occupation" required>
+            <span class="error-message"></span>
+
+        </div>
+        <div>
+            <label for="employer">Employer <span class="required">*</span></label>
+            <input type="text" id="employer" name="employer" placeholder="Enter your employer's name" required>
+            <span class="error-message"></span>
+
+        </div>
+        <div>
+            <label for="employment-address">Employment Address <span class="required">*</span></label>
+            <input type="text" id="employment-address" name="employment-address" placeholder="Enter employment address" required>
+            <span class="error-message"></span>
+
+        </div>
+        <div>
+            <label for="duration-year">Duration Year <span class="required">*</span></label>
+            <input type="number" id="duration-year" name="duration-year" placeholder="Enter years" required>
+            <span class="error-message"></span>
+
+        </div>
+        <div>
+            <label for="duration-month">Duration Month <span class="required">*</span></label>
+            <input type="number" id="duration-month" name="duration-month" placeholder="Enter months" required>
+            <span class="error-message"></span>
+
+        </div>
+        <div>
+            <label for="annual-income">Annual Income <span class="required">*</span></label>
+            <input type="number" id="annual-income" name="annual-income" placeholder="Enter annual income" required>
+            <span class="error-message"></span>
+
+        </div>
+        <div>
+            <label for="sin">SIN</label>
+            <input type="text" id="sin" name="sin" placeholder="Enter SIN number" pattern="\d*" maxlength="9">
+        </div>
+    </div>
+</div>
+
+<div id="previous-employment-info" style="display: none;">
+    <h3>Previous Employment</h3>
+    <p><span class="required">*</span> If your current employment duration is less than two years, we kindly request that you provide information about your previous employment as well.</p>
+    <div class="form-group">
+        <div>
+            <label for="previous-employer">Previous Employer <span class="required">*</span></label>
+            <input type="text" id="previous-employer" name="previous-employer" placeholder="Enter previous employer">
+        </div>
+        <div>
+            <label for="previous-phone">Phone <span class="required">*</span></label>
+            <input type="tel" id="previous-phone" name="previous-phone" placeholder="Enter phone number">
+        </div>
+        <div>
+            <label for="previous-duration-year">Duration Year <span class="required">*</span></label>
+            <input type="number" id="previous-duration-year" name="previous-duration-year" placeholder="Enter years">
+        </div>
+        <div>
+            <label for="previous-duration-month">Duration Month <span class="required">*</span></label>
+            <input type="number" id="previous-duration-month" name="previous-duration-month" placeholder="Enter months">
+        </div>
+    </div>
+</div>
+
+                        <!-- Other Information Section -->
+                        <h3>Other Information</h3>
+                        <div class="form-group">
+                            <div>
+                                <label for="bankruptcy">Previous Bankruptcy? <span class="required">*</span></label>
+                                <select id="bankruptcy" name="bankruptcy" required>
+                
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="repossession">Previous Repossession? <span class="required">*</span></label>
+                                <select id="repossession" name="repossession" required>
+                
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="co-signer">Is Co-signer Available? <span class="required">*</span></label>
+                                <select id="co-signer" name="co-signer" required>
+                
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="credit-rating">Please Rate Your Credit <span class="required">*</span></label>
+                                <select id="credit-rating" name="credit-rating" required>
+                
+                                    <option value="" disabled selected>Select a rating</option>
+                                    <option value="excellent">Excellent</option>
+                                    <option value="good">Good</option>
+                                    <option value="fair">Fair</option>
+                                    <option value="poor">Poor</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h3>Choose Your Vehicle</h3>
+                        <div class="form-group">
+                            <div>
+                                <label for="vehicle-search">Search for a Vehicle</label>
+                                <input type="text" id="vehicle-search" placeholder="Search (Year Make Model)" autocomplete="off" />
+                                <ul id="vehicle-options" class="dropdown-options"></ul>
+                            </div>
+                            <div id="selected-vehicle" class="selected-vehicle" style="display: none;">
+                                <p id="selected-vehicle-text"></p>
+                                <button id="clear-selection" type="button">
+                                    <i class="bx bx-trash"></i> <!-- Trash icon -->
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="disclaimer-section">
+                            <div class="disclaimer-checkbox">
+                                <input type="checkbox" id="disclaimer-agreement" name="disclaimer-agreement" required>
+            
+                                <label for="disclaimer-agreement">I agree to the terms outlined below:</label>
+                            </div>
+                            <p class="disclaimer-text">
+                                I understand and agree that by submitting this application, I authorize the dealership and its financing partners to obtain and review my credit report for financing purposes. This authorization allows the dealership to contact credit reporting agencies to assess my eligibility.
+                            </p>
+                        </div>
+                        
+                        <button type="submit">Submit Application</button>
+                    </form>
+                </section>
+    
+    
+    
+    
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2024 by Shift Happens Auto Sales | All Rights Reserved. | <a href="admin-login.html">Admin</a> </p>
+        </div>
+
+        <div class="footer-iconTop">
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedVehicle = urlParams.get("vehicle");
+
+            if (selectedVehicle) {
+                const vehicleSearchInput = document.getElementById("vehicle-search");
+                const selectedVehicleText = document.getElementById("selected-vehicle-text");
+                const selectedVehicleContainer = document.getElementById("selected-vehicle");
+
+                vehicleSearchInput.value = selectedVehicle;
+                selectedVehicleText.textContent = selectedVehicle;
+                selectedVehicleContainer.style.display = "flex";
+            }
+
+            const clearButton = document.getElementById("clear-selection");
+            clearButton.addEventListener("click", () => {
+                const vehicleSearchInput = document.getElementById("vehicle-search");
+                const selectedVehicleContainer = document.getElementById("selected-vehicle");
+
+                vehicleSearchInput.value = "";
+                selectedVehicleContainer.style.display = "none";
+            });
+        });
+    </script>
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const yesRadio = document.getElementById('employed-over-2-years-yes');
+    const noRadio = document.getElementById('employed-over-2-years-no');
+    const employmentInfo = document.getElementById('employment-info');
+    const previousEmploymentInfo = document.getElementById('previous-employment-info');
+
+
+
+    // Event listeners for radio buttons
+    yesRadio.addEventListener("change", function () {
+        if (this.checked) {
+            employmentInfo.style.display = "block";
+            previousEmploymentInfo.style.display = "none";
+
+        }
+    });
+
+    noRadio.addEventListener("change", function () {
+        if (this.checked) {
+            employmentInfo.style.display = "block";
+            previousEmploymentInfo.style.display = "block";
+
+        }
+    });
+
+    // Initialize fields on page load
+
+})
+
+</script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, addDoc, serverTimestamp} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDv6Jkk-7XqeCMTy14Fjs_upMAjVM7uNVg",
+        authDomain: "shift-happens-auto-sales.firebaseapp.com",
+        projectId: "shift-happens-auto-sales",
+        storageBucket: "shift-happens-auto-sales.appspot.com",
+        messagingSenderId: "224158026936",
+        appId: "1:224158026936:web:690dd13405f6b1bfc4b84d"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let vehicleList = [];
+
+    async function populateVehicleList() {
+        const inventoryRef = collection(db, 'inventory');
+        const inventorySnapshot = await getDocs(inventoryRef);
+
+        vehicleList = []; // Reset the vehicle list
+
+        inventorySnapshot.forEach(doc => {
+            const data = doc.data();
+            vehicleList.push({
+                id: doc.id,
+                displayName: `${data.year} ${data.make} ${data.model} - $${parseFloat(data.price).toLocaleString('en-US')}` // Include price
+            });
+        });
+    }
+
+    function renderFilteredVehicles(filteredVehicles) {
+        const dropdown = document.getElementById('vehicle-options');
+        dropdown.innerHTML = ''; // Clear existing options
+
+        if (filteredVehicles.length === 0) {
+            const noResult = document.createElement('li');
+            noResult.textContent = 'No vehicles found';
+            noResult.style.color = '#999';
+            dropdown.appendChild(noResult);
+        } else {
+            filteredVehicles.forEach(vehicle => {
+                const option = document.createElement('li');
+                option.textContent = vehicle.displayName;
+                option.dataset.value = vehicle.id;
+                dropdown.appendChild(option);
+            });
+        }
+
+        dropdown.style.display = 'block'; // Show dropdown
+    }
+
+    function filterVehicles(searchTerm) {
+        const filteredVehicles = vehicleList.filter(vehicle =>
+            vehicle.displayName.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        renderFilteredVehicles(filteredVehicles);
+    }
+
+    function adjustDropdownWidth() {
+    const inputField = document.getElementById('vehicle-search');
+    const dropdown = document.getElementById('vehicle-options');
+    
+    // Get the computed width of the input field
+    const inputWidth = inputField.offsetWidth;
+    dropdown.style.width = `${inputWidth}px`;
+}
+
+document.getElementById('vehicle-search').addEventListener('focus', adjustDropdownWidth);
+
+
+    function selectVehicle(vehicleId, displayName) {
+        // Show selected vehicle
+        const selectedVehicleContainer = document.getElementById('selected-vehicle');
+        const selectedVehicleText = document.getElementById('selected-vehicle-text');
+
+        selectedVehicleContainer.style.display = 'flex';
+        selectedVehicleText.textContent = displayName;
+
+        // Hide dropdown
+        const dropdown = document.getElementById('vehicle-options');
+        dropdown.style.display = 'none';
+
+        // Save selected vehicle ID (optional: for form submission)
+        const vehicleInput = document.getElementById('vehicle-selection');
+        vehicleInput.value = vehicleId;
+        
+        // Clear the search input field
+        vehicleSearchInput.value = '';
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        const vehicleSearchInput = document.getElementById('vehicle-search');
+        const dropdown = document.getElementById('vehicle-options');
+        const clearButton = document.getElementById('clear-selection');
+
+        // Populate vehicle list
+        await populateVehicleList();
+
+        // Event listener for input
+        vehicleSearchInput.addEventListener('input', () => {
+            const searchTerm = vehicleSearchInput.value;
+            if (searchTerm) {
+                filterVehicles(searchTerm);
+            } else {
+                dropdown.style.display = 'none'; // Hide dropdown if input is empty
+            }
+        });
+
+        // Event listener for dropdown option selection
+        dropdown.addEventListener('click', (event) => {
+            const selectedOption = event.target;
+            if (selectedOption.tagName === 'LI' && selectedOption.dataset.value) {
+                selectVehicle(selectedOption.dataset.value, selectedOption.textContent);
+                vehicleSearchInput.value = ''; // Clear input field
+            }
+        });
+
+        // Event listener to clear selection
+        clearButton.addEventListener('click', () => {
+            const selectedVehicleContainer = document.getElementById('selected-vehicle');
+            const vehicleInput = document.getElementById('vehicle-selection');
+
+            selectedVehicleContainer.style.display = 'none';
+            vehicleInput.value = ''; // Clear selected vehicle
+        });
+    });
+
+
+    // Handle form submission
+    document.getElementById("financeApplicationForm").addEventListener("submit", async (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        // Collect form data
+        const formData = {
+            formType: "finance-application",
+            prefix: document.getElementById("prefix").value,
+            firstName: document.getElementById("first-name").value,
+            lastName: document.getElementById("last-name").value,
+            phone: document.getElementById("phone").value,
+            email: document.getElementById("email").value,
+            contactMethod: document.getElementById("contact-method").value,
+            address: document.getElementById("address").value,
+            city: document.getElementById("city").value,
+            province: document.getElementById("province").value,
+            postalCode: document.getElementById("postal-code").value,
+            yearsLived: document.getElementById("years-lived").value,
+            housingStatus: document.getElementById("housing-status").value,
+            monthlyPayment: document.getElementById("monthly-payment").value,
+            employmentType: document.getElementById("employment-type").value || null,
+            occupation: document.getElementById("occupation").value || null,
+            employer: document.getElementById("employer").value || null,
+            employmentAddress: document.getElementById("employment-address").value || null,
+            durationYear: document.getElementById("duration-year").value || null,
+            durationMonth: document.getElementById("duration-month").value || null,
+            annualIncome: document.getElementById("annual-income").value || null,
+            sin: document.getElementById("sin").value || null,
+            bankruptcy: document.getElementById("bankruptcy").value,
+            repossession: document.getElementById("repossession").value,
+            coSigner: document.getElementById("co-signer").value,
+            creditRating: document.getElementById("credit-rating").value,
+            previousEmployment: {
+                previousEmployer: document.getElementById("previous-employer").value || null,
+                previousPhone: document.getElementById("previous-phone").value || null,
+                previousDurationYear: document.getElementById("previous-duration-year").value || null,
+                previousDurationMonth: document.getElementById("previous-duration-month").value || null
+            },
+            timestamp: serverTimestamp(),
+        };
+
+        try {
+            // Save data to Firestore in the 'new-forms' collection
+            await addDoc(collection(db, "new-forms"), formData);
+            document.getElementById("financeApplicationForm").reset(); // Reset form
+            alert("Form submitted successfully!");
+        } catch (error) {
+            console.error("Error submitting form: ", error);
+            alert("Error submitting form. Please try again.");
+        }
+    });
+</script>
+
+
+<!-- Navbar Toggle for Mobile -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuIcon = document.getElementById('menu-icon');
+        const navbar = document.querySelector('.navbar');
+
+        if (menuIcon && navbar) {
+            menuIcon.addEventListener('click', () => {
+                navbar.classList.toggle('active');
+            });
+        }
+    });
+</script>
+
+
+    
+    
+    
+
+</body>
+
+</html>

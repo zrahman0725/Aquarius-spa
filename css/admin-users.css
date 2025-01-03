@@ -1,0 +1,578 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --bg-color: #000000; /* Black */
+    --second-bg-color: #1a1a1a; /* Dark Gray */
+    --text-color: #ffffff; /* White */
+    --main-color: #ff0000; /* Red */
+}
+
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+section {
+    min-height: 100vh;
+    padding: 10rem 9% 2rem;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, var(--bg-color), var(--main-color));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+
+    }
+    
+
+.header.sticky {
+    border-bottom: .1rem solid rgba(0, 0, 0, .2);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    font-weight: 600;
+    cursor: default;
+
+    }
+    .logo img {
+        width: 40px; /* Adjust the size of the image as needed */
+        height: auto; /* Maintain aspect ratio */
+        vertical-align: middle; /* Align the image with the text */
+        margin-right: 10px; /* Add spacing between the image and the title */
+    }
+      
+
+    .navbar a {
+        font-size: 1.5rem;
+        color: var(--text-color);
+        margin-left: 3.5rem;
+        }
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+}
+
+
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown menu - hidden by default */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align dropdown right below the parent link */
+    left: 0; /* Align dropdown with the parent link */
+    background-color: var(--second-bg-color); /* Match the theme color */
+    min-width: 250px; /* Uniform width for all dropdowns */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    z-index: 100; /* Ensure it appears above other content */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    padding: 0; /* Remove extra padding around the menu */
+    align-content: start;
+}
+
+/* Dropdown menu links */
+.dropdown-menu a {
+    color: var(--text-color); /* White text */
+    padding: 1rem; /* Add padding for a better appearance */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Make the full box clickable */
+    justify-content: center;
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    width: 100%; /* Ensure the full width of the dropdown menu */
+    box-sizing: border-box; /* Include padding in width */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for dropdown menu links */
+.dropdown-menu a:hover {
+    color: var(--main-color); /* Make the text red for better readability */
+    border-radius: 0.3rem; /* Optional: rounded corners */
+}
+
+/* Adjust the dropdown container to prevent issues */
+.dropdown-menu {
+    padding: 0.5rem 0; /* Add slight vertical spacing for the dropdown */
+    background-color: var(--bg-color); /* Match dropdown background with site theme */
+    border-radius: 0.5rem; /* Optional: rounded edges for the dropdown */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0); /* Final position */
+}
+
+.heading {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+}
+
+span {
+    color: var(--main-color);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, var(--bg-color), var(--main-color));
+}
+
+.footer-text p {
+    font-size: 1.6rem;
+}
+
+.footer-iconTop a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: .8rem;
+    background: var(--main-color);
+    border-radius: .8rem;
+    transition: .5s ease;
+}
+
+.footer-iconTop a:hover {
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.footer-iconTop a i {
+    font-size: 2.4rem;
+    color: var (--second-bg-color);
+}
+
+
+/* Secondary Navbar */
+.secondary-navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: var(--second-bg-color);
+    padding: 1rem 2rem;
+    position: relative; /* Ensure it doesn't get hidden */
+    top: 8rem; /* Adjust this based on your header height */
+    z-index: 10; /* Higher than the header's z-index to make it visible */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-navbar a {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin: 0 1.5rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.secondary-navbar a:hover,
+.secondary-navbar a.active {
+    color: var(--main-color);
+    font-weight: 700;
+}
+
+
+/* screen size controls */
+@media (max-width: 1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 3%;
+    }
+
+    section {
+        padding: 10rem 3% 2rem;
+    }
+
+    .footer {
+        padding: 2rem 3%;
+    }
+
+}
+
+
+
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--second-bg-color); /* Match the theme */
+        border-top: .1rem solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+        display: none; /* Hidden by default */
+        flex-direction: column; /* Stack links vertically */
+        padding: 1rem 0;
+    }
+
+    .navbar.active {
+        display: flex; /* Show the navbar when active */
+    }
+
+    .navbar a {
+        font-size: 2rem;
+        margin: 1rem 0; /* Space between links */
+        text-align: center;
+    }
+
+    .dropdown {
+        width: 100%; /* Ensure dropdown spans full width */
+        text-align: center;
+    }
+
+    .dropdown a {
+        display: block; /* Ensure links stack properly */
+        padding: 1rem; /* Add spacing for better touch interaction */
+    }
+
+    .dropdown-menu {
+        position: static; /* Remove absolute positioning */
+        display: none; /* Hidden by default */
+        background: transparent; /* Match the background for smooth appearance */
+        box-shadow: none; /* Remove shadow */
+    }
+
+    .dropdown-menu a {
+        padding: 1rem; /* Consistent padding */
+        font-size: 1.3rem; /* Adjust size for readability */
+        color: gray;
+
+    }
+
+    .dropdown.active .dropdown-menu {
+        display: block; /* Show dropdown menu when active */
+    }
+
+}
+
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+
+}
+
+@media (max-width: 365px) {
+
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .footer p {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+
+
+section {
+    padding: 10rem 5%;
+    text-align: center;
+}
+
+#user-info, #admin-actions {
+    background: var(--second-bg-color);
+    padding: 2rem;
+    margin: 1rem auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+}
+
+button {
+    padding: 1rem 2rem;
+    margin: 1rem;
+    background: var(--button-bg);
+    color: var(--text-color);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: var(--button-hover);
+}
+
+#app {
+    margin-top: 8rem;
+    background: var(--second-bg-color);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    color: var(--text-color);
+}
+
+#app h1 {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+}
+
+#app p {
+    font-size: 1.6rem;
+    margin: 1rem 0;
+}
+
+#app button {
+    background: var(--main-color);
+    color: var(--text-color);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#app button:hover {
+    background: var(--button-hover);
+}
+
+#add-user {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--second-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 600px;
+    justify-self: center;
+}
+
+#add-user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#add-user-form input, #add-user-form button {
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+}
+
+#add-user-form button {
+    background: var(--main-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#add-user-form button:hover {
+    background: var(--button-hover);
+}
+
+#add-user-status {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+/* General styles for user management section */
+#user-management {
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--second-bg-color); /* Dark Gray */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    color: var(--text-color); /* White */
+    max-width: 600px;
+    text-align: center;
+}
+
+#user-management h2, #pin-pad h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    color: var(--main-color); /* Red */
+}
+
+/* User list container */
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+    border-radius: 8px;
+    background: var(--bg-color); /* Black */
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Individual user item */
+.user-list div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background-color: var(--second-bg-color); /* Dark Gray */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.user-list div:hover {
+    background-color: var(--bg-color); /* Black */
+    transform: translateY(-2px); /* Lift effect */
+}
+
+/* Delete button */
+.user-list button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.4rem;
+    color: var(--text-color); /* White */
+    background-color: var(--main-color); /* Red */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.user-list button:hover {
+    background-color: #ff1a1a; /* Brighter red for hover */
+    transform: scale(1.05); /* Slight enlargement on hover */
+}
+
+#pin-pad {
+    text-align: center;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--second-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+}
+
+#pin-screen {
+    width: 100%;
+    height: 60px;
+    margin: 1rem auto;
+    background: var(--bg-color);
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.5rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#keypad {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.key-row {
+    display: flex;
+    justify-content: space-evenly; /* Ensure buttons are evenly spaced */
+    gap: 1rem;
+}
+
+.key {
+    width: 60px;
+    height: 60px;
+    background: var(--main-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.key:hover {
+    background-color: var(--button-hover);
+    transform: scale(1.1);
+}
+
+.key:active {
+    transform: scale(0.9);
+}
+
+/* Ensure "Clear" and "Enter" are centered */
+.key-row:last-child {
+    justify-content: center; /* Center items in the last row */
+}
+
+.key-row:last-child .key {
+    flex: 1; /* Allow buttons to resize to occupy space evenly */
+    max-width: 80px; /* Maintain button size consistency */
+}
+
+.action-key {
+    background: var(--second-bg-color);
+    color: var(--main-color);
+}
+
+.action-key:hover {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}

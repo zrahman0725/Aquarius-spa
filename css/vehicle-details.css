@@ -1,0 +1,831 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --bg-color: #000000; /* Black */
+    --second-bg-color: #1a1a1a; /* Dark Gray */
+    --text-color: #ffffff; /* White */
+    --main-color: #ff0000; /* Red */
+}
+
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+section {
+    min-height: 100vh;
+    padding: 10rem 9% 2rem;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, var(--bg-color), var(--main-color));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+
+    }
+    
+
+.header.sticky {
+    border-bottom: .1rem solid rgba(0, 0, 0, .2);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    font-weight: 600;
+    cursor: default;
+
+    }
+    .logo img {
+        width: 40px; /* Adjust the size of the image as needed */
+        height: auto; /* Maintain aspect ratio */
+        vertical-align: middle; /* Align the image with the text */
+        margin-right: 10px; /* Add spacing between the image and the title */
+    }
+      
+
+    .navbar a {
+        font-size: 1.5rem;
+        color: var(--text-color);
+        margin-left: 3.5rem;
+    }
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+}
+
+
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown menu - hidden by default */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align dropdown right below the parent link */
+    left: 0; /* Align dropdown with the parent link */
+    background-color: var(--second-bg-color); /* Match the theme color */
+    min-width: 250px; /* Uniform width for all dropdowns */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    z-index: 100; /* Ensure it appears above other content */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    padding: 0; /* Remove extra padding around the menu */
+    align-content: start;
+}
+
+/* Dropdown menu links */
+.dropdown-menu a {
+    color: var(--text-color); /* White text */
+    padding: 1rem; /* Add padding for a better appearance */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Make the full box clickable */
+    justify-content: center;
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    width: 100%; /* Ensure the full width of the dropdown menu */
+    box-sizing: border-box; /* Include padding in width */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for dropdown menu links */
+.dropdown-menu a:hover {
+    color: var(--main-color); /* Make the text red for better readability */
+    border-radius: 0.3rem; /* Optional: rounded corners */
+}
+
+/* Adjust the dropdown container to prevent issues */
+.dropdown-menu {
+    padding: 0.5rem 0; /* Add slight vertical spacing for the dropdown */
+    background-color: var(--bg-color); /* Match dropdown background with site theme */
+    border-radius: 0.5rem; /* Optional: rounded edges for the dropdown */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0); /* Final position */
+}
+
+.heading {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+}
+
+span {
+    color: var(--main-color);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem 9%;
+    background: linear-gradient(90deg, var(--bg-color), var(--main-color));
+}
+
+.footer-text p {
+    font-size: 1.6rem;
+}
+
+.footer-iconTop a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: .8rem;
+    background: var(--main-color);
+    border-radius: .8rem;
+    transition: .5s ease;
+}
+
+.footer-iconTop a:hover {
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.footer-iconTop a i {
+    font-size: 2.4rem;
+    color: var (--second-bg-color);
+}
+
+/* Back Link */
+.back-link {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    margin-top: 10vh;
+}
+
+.back-link a {
+    font-size: 1.6rem;
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+    color: var(--text-color);
+}
+
+
+/* Vehicle Details Section */
+.vehicle-details-section {
+    padding: 10rem 9%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.details-container {
+    margin-top: 3vh;
+    display: flex;
+    flex: 3;
+    flex-direction: row;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    background: var(--second-bg-color);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.vdp-sidebar {
+    flex: 1; /* Sidebar width */
+}
+/* Details Left: Carousel */
+.carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.main-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.main-image-container img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Prevents interaction with the overlay */
+}
+
+.main-image-container:hover .hover-overlay {
+    opacity: 1; /* Show overlay on hover */
+    pointer-events: auto; /* Allow clicking the overlay */
+}
+
+
+.carousel .main-image img {
+    width: 600px; /* Fixed width */
+    height: 400px; /* Fixed height */
+    object-fit: cover; /* Maintain aspect ratio and fill the box */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail-strip img.active-thumbnail {
+    border-color: var(--main-color);
+    transform: scale(1.1);
+}
+
+
+/* Carousel Buttons */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    background: var(--main-color);
+    color: var(--text-color);
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-button.prev {
+    left: -20px;
+}
+
+.carousel-button.next {
+    right: -20px;
+}
+
+.carousel-button:hover {
+    background: var(--text-color);
+    color: var(--main-color);
+    transform: scale(1.1);
+}
+
+/* Thumbnail Strip */
+.thumbnail-strip {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    max-width: 600px;
+    overflow-x: auto; /* Enable horizontal scroll */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    padding: 0.5rem;
+}
+
+
+.thumbnail-strip img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.thumbnail-strip img:hover {
+    border-color: var(--main-color);
+    transform: scale(1.1);
+}
+
+/* Details Right */
+.details-right {
+    flex: 1;
+    padding: 1rem;
+}
+
+.details-right h2 {
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.details-right h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.vehicle-info {
+    font-size: 1.2rem; /* Smaller font size */
+    color: #888888; /* Grey font color */
+    display: block; /* Align below price */
+    margin-top: 0.5rem; /* Spacing below the price */
+}
+
+#toggle-description-link{
+    color: #ff0000;
+}
+
+
+.key-details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Set 3 fixed columns */
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.key-details-grid li {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.key-details-grid li span.label {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.key-details-grid li span.value {
+    display: block;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.separator {
+    border: none;
+    border-top: 1px solid #ccc; /* Light grey line */
+    margin: 1.5rem 0; /* Add spacing above and below */
+}
+
+.description h4,
+.features h4 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--main-color);
+}
+
+.description p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+.features .accordion-item {
+    margin-bottom: 1rem;
+    border: 2px solid #ccc;
+}
+
+.features .accordion-header {
+    padding: 1rem;
+    cursor: pointer;
+    background: var(--second-bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.features .accordion-header:hover {
+    background: var(--main-color);
+}
+
+.features .accordion-body {
+    display: none;
+    padding: 1rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.features .accordion-body.active {
+    display: block;
+}
+
+/* Sticky Sidebar */
+.vdp-sidebar {
+    position: sticky;
+    top: 10rem; /* Adjust based on your header height */
+    background: var(--second-bg-color);
+    color: var(--text-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 120px; /* Compact width */
+    margin-left: auto; /* Align to the right */
+    text-align: center; /* Center-align content */
+    
+}
+
+/* Price Section */
+.vdp-sidebar .price-section {
+    margin-bottom: 1rem; /* Smaller margin */
+}
+
+.vdp-sidebar .price-section h3 {
+    font-size: 1.4rem; /* Smaller font size for price */
+    font-weight: bold;
+    color: var(--main-color);
+    line-height: 1.2; /* Tighten spacing */
+}
+
+.vdp-sidebar .price-section p {
+    font-size: 1rem; /* Adjust description font */
+    margin-top: 0.3rem;
+    color: var(--text-color);
+    line-height: 1.1;
+}
+
+/* Call-to-Action Buttons */
+.vdp-sidebar .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Tight spacing between buttons */
+}
+
+.vdp-sidebar .cta-button {
+    padding: 0.5rem; /* Smaller padding */
+    font-size: 1rem; /* Adjust font size */
+    font-weight: bold;
+    color: var(--main-color);
+    background: transparent;
+    border: 1px solid var(--main-color); /* Thinner border */
+    border-radius: 3px; /* Subtle rounding */
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Handle overflow gracefully */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+}
+
+.vdp-sidebar .cta-button:hover {
+    background: var(--main-color);
+    color: var(--text-color);
+}
+
+.accordion {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+}
+h6 {
+    font-size:small;
+}
+.accordion-item {
+    margin-bottom: 1px;
+    background-color: var(--second-bg-color);
+    color: var(--text-color);
+    border: #fff;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: var(--hover-bg-color);
+}
+
+.accordion-icon {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion-body {
+    display: none;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.accordion-body.active {
+    display: block;
+}
+
+.accordion-body ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+.cta-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.cta-button:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+
+
+
+/* Preloader styles */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Make sure it’s above other content */
+  }
+  
+  /* Example spinner */
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Hide the content by default */
+  #main-content {
+    display: none;
+  }
+  
+
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+    .vdp-sidebar {
+        max-width: 90px; /* Further compact width for smaller screens */
+        padding: 0.8rem; /* Reduce padding */
+    }
+
+    .vdp-sidebar .cta-button {
+        font-size: 0.9rem; /* Adjust button font size */
+        padding: 0.4rem;
+    }
+}
+
+
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .details-container {
+        flex-direction: column;
+    }
+
+    .thumbnail-strip img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .details-right {
+        text-align: center;
+    }
+
+    .carousel .main-image img {
+        max-width: 100%; /* Allow the container to shrink with the screen size */
+        max-height: 100%;
+        object-fit: contain; /* Maintain aspect ratio and fill the box */
+
+    }
+    .vdp-sidebar {
+        position: static; /* Remove sticky behavior */
+        max-width: 100%; /* Stretch to fit the screen */
+        width: 100%; /* Ensure full width */
+        margin: 2rem 0 0; /* Add spacing above */
+        text-align: center; /* Center-align content */
+        padding: 1rem; /* Add padding for better spacing */
+        background: var(--second-bg-color); /* Ensure background matches the theme */
+        border-radius: 0; /* Remove rounded corners for a seamless look */
+        box-shadow: none; /* Remove shadow for a flat design */
+    }
+
+    .vdp-sidebar .cta-buttons {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 1rem; /* Add spacing between buttons */
+    }
+
+    .vdp-sidebar .cta-button {
+        width: 100%; /* Ensure buttons stretch to full width */
+        padding: 1.2rem; /* Adjust padding for better touch interaction */
+        font-size: 1.6rem; /* Increase font size for readability */
+        border-radius: 0.5rem; /* Slight rounding for a polished look */
+    }
+    
+    .thumbnail-strip {
+        display: flex;
+        justify-content: flex-start;
+        gap: 0.5rem; /* Reduce spacing for smaller screens */
+        max-width: 100%; /* Ensure it stretches to fit the screen */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        padding: 0.5rem;
+        scroll-behavior: smooth; /* Smooth scrolling */
+    }
+
+    .thumbnail-strip img {
+        width: 50px; /* Smaller thumbnail size */
+        height: 50px; /* Maintain aspect ratio */
+        border-radius: 4px; /* Slight rounding for smaller images */
+        object-fit: cover; /* Ensure image proportions */
+    }
+
+    .carousel-button {
+        font-size: 1.5rem; /* Adjust button size */
+        padding: 0.8rem; /* Reduce padding for smaller buttons */
+    }
+
+
+}
+
+
+
+
+
+/* screen size controls */
+@media (max-width: 1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 3%;
+    }
+
+    section {
+        padding: 10rem 3% 2rem;
+    }
+
+    .footer {
+        padding: 2rem 3%;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--second-bg-color); /* Match the theme */
+        border-top: .1rem solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+        display: none; /* Hidden by default */
+        flex-direction: column; /* Stack links vertically */
+        padding: 1rem 0;
+    }
+
+    .navbar.active {
+        display: flex; /* Show the navbar when active */
+    }
+
+    .navbar a {
+        font-size: 2rem;
+        margin: 1rem 0; /* Space between links */
+        text-align: center;
+    }
+
+    .dropdown {
+        width: 100%; /* Ensure dropdown spans full width */
+        text-align: center;
+    }
+
+    .dropdown a {
+        display: block; /* Ensure links stack properly */
+        padding: 1rem; /* Add spacing for better touch interaction */
+    }
+
+    .dropdown-menu {
+        position: static; /* Remove absolute positioning */
+        display: none; /* Hidden by default */
+        background: transparent; /* Match the background for smooth appearance */
+        box-shadow: none; /* Remove shadow */
+    }
+
+    .dropdown-menu a {
+        padding: 1rem; /* Consistent padding */
+        font-size: 1.3rem; /* Adjust size for readability */
+        color: gray;
+
+    }
+
+    .dropdown.active .dropdown-menu {
+        display: block; /* Show dropdown menu when active */
+    }
+
+}
+
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+
+}
+
+@media (max-width: 365px) {
+
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .footer p {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}

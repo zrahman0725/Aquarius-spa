@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Shift Happens Auto Sales</title>
+    <link rel="stylesheet" href="css/admin-login.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo"><img src="images/IMG-20241122-WA0003_1468205583269761 (1).png" alt="">Shift Happens Auto Sales</a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="index.html#home" data-alt-link="home.html">Home</a>
+            <div class="dropdown">
+                <a href="inventory.html" data-alt-link="inventory.html">Inventory</a>
+                <div class="dropdown-menu">
+                    <a href="inventory.html">View Inventory</a>
+                    <a href="car-finder.html">Car Finder</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="finance.html" data-alt-link="finance.html">Finance</a>
+                <div class="dropdown-menu">
+                    <a href="finance-application.html">Finance Application</a>
+                    <a href="finance.html">Finance Department</a>
+                    <a href="finance.html#credit">Credit Tips</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="services.html" data-alt-link="services.html">Services</a>
+                <div class="dropdown-menu">
+                    <a href="detailing.html">Detailing</a>
+                    <a href="trade-in.html">Trade-ins</a>
+                    <a href="test-drive.html">Test Drives</a>
+                    <a href="car-loan.html">Loan Calculator</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="about.html" data-alt-link="about.html">Dealership</a>
+                <div class="dropdown-menu">
+                    <a href="about.html">About Us</a>
+                    <a href="index.html#contact-form">Contact</a>
+                </div>
+            </div>
+        </nav>
+        
+        
+    </header>
+
+    <!-- Login Section -->
+    <section class="login-page">
+        <div class="login-container">
+            <h2>Admin Login</h2>
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <p id="error-message" style="color: red; display: none; font-size: 0.9rem;"></p>
+                <button type="submit" class="btn">Login</button>
+                <p><a href="forgot-password.html">Forgot Password</a></p>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2024 by Shift Happens Auto Sales | All Rights Reserved. | <a href="admin-login.html">Admin</a></p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <!-- Firebase Authentication -->
+    <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDv6Jkk-7XqeCMTy14Fjs_upMAjVM7uNVg",
+    authDomain: "shift-happens-auto-sales.firebaseapp.com",
+    projectId: "shift-happens-auto-sales",
+    storageBucket: "shift-happens-auto-sales.firebasestorage.app",
+    messagingSenderId: "224158026936",
+    appId: "1:224158026936:web:690dd13405f6b1bfc4b84d",
+    measurementId: "G-09D7MLNSNS"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Login form submission handler
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+
+    try {
+        // Authenticate user
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+        // Fetch user data from Firestore
+        const userDocRef = doc(db, "users", userCredential.user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+            const storedPassword = userDoc.data().password;
+
+            // Compare passwords
+            if (storedPassword !== password) {
+                // Update the password in Firestore
+                await updateDoc(userDocRef, { password: password });
+                console.log("Password updated in Firestore.");
+            }
+        } else {
+            console.error("User document does not exist in Firestore.");
+        }
+
+        // Redirect to dashboard
+        window.location.href = "admin-dashboard.html";
+    } catch (error) {
+        // Display error message
+        console.error("Login error:", error.code, error.message);
+        errorMessage.textContent = "Invalid email or password.";
+        errorMessage.style.display = "block";
+
+        // Clear the form fields
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
+    }
+});
+
+    </script>
+
+    <!-- Navbar Toggle for Mobile -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuIcon = document.getElementById('menu-icon');
+        const navbar = document.querySelector('.navbar');
+
+        if (menuIcon && navbar) {
+            menuIcon.addEventListener('click', () => {
+                navbar.classList.toggle('active');
+            });
+        }
+    });
+</script>
+</body>
+
+</html>
