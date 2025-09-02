@@ -169,6 +169,10 @@ span {
     color: var(--main-color);
 }
 
+.contact {
+    background: var(--second-bg-color);
+}
+
 .about {
     display: flex;
     justify-content: center;
@@ -214,11 +218,15 @@ span {
 }
 
 .services-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+}
+
+.services-container .services-box:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 50%; /* adjust as needed for desired box size */
 }
 
 .services-container .services-box {
@@ -354,7 +362,7 @@ span {
     padding: 1.5rem;
     font-size: 1.6rem;
     color: var(--text-color);
-    background: var(--second-bg-color);
+    background: var(--bg-color);
     border-radius: .8rem;
     margin: .7rem 0;
 }
@@ -452,12 +460,12 @@ span {
 .about,
 .services,
 .gallery,
-.contact,
 .footer {
     background: var (--bg-color); /* Aqua background for sections */
 }
 
 .about,
+.contact,
 .gallery,
 .footer {
     background: var (--second-bg-color); /* Mint background for alternate sections */
@@ -736,7 +744,7 @@ span {
 }
 
 .translucent-container {
-    background: rgba(176, 223, 219, 0.8); /* Light Mint color with 80% opacity */
+    background: var(--bg-color); /* Light Mint color with 80% opacity */
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
@@ -884,3 +892,184 @@ span {
 .icon-align .length-text {
     display: inline-block; /* Ensure the text stays inline */
 }
+
+/* =========================
+   Testimonials (Google-style cards)
+   ========================= */
+   .testimonials {
+    background: var(--bg-color);
+    padding: 6rem 0;
+    max-height: 20vh;
+  }
+  
+  .testimonials .heading {
+    margin-bottom: 3rem;
+  }
+  
+  /* Carousel shell */
+  .testimonial-carousel {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  /* Viewport + track */
+  .testimonial-viewport {
+    overflow: hidden;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  
+  .testimonial-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+  }
+  
+  /* Each slide centers its card and prevents full-width stretching */
+  .testimonial-slide {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;  /* centers the card */
+    padding: 2rem 0;
+  }
+  
+  /* Google-like review card (vertical rectangle) */
+  .g-review-card {
+    width: 100%;
+    max-width: 380px;                 /* controls card width */
+    background: #fff;                 /* typical Google card */
+    color: var(--text-color);
+    border: 1px solid #e0e3eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    padding: 1.6rem;
+  }
+  
+  /* Card header: avatar + name/date */
+  .g-review-head {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .g-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #7a5cff, #5cd2ff);
+    user-select: none;
+    overflow: hidden;
+  }
+  .g-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* if you switch to photos */
+    display: block;
+  }
+  
+  .g-person {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+  }
+  .g-name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .g-meta {
+    font-size: 1.2rem;
+    opacity: .8;
+  }
+  
+  /* Stars + date row */
+  .g-stars-row {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    margin-bottom: .8rem;
+  }
+  .g-stars {
+    display: inline-flex;
+    gap: .2rem;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: #fbbc04; /* Google yellow */
+  }
+  .g-date {
+    font-size: 1.2rem;
+    color: #5f6368;
+  }
+  
+  /* Review text */
+  .g-text {
+    font-size: 1.5rem;
+    line-height: 1.7;
+  }
+  
+  /* Carousel buttons */
+  .tstl-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--main-color);
+    color: var(--second-bg-color);
+    border-radius: 50%;
+    width: 4.2rem;
+    height: 4.2rem;
+    display: grid;
+    place-items: center;
+    border: .2rem solid var(--main-color);
+    cursor: pointer;
+    transition: .3s ease;
+    z-index: 2;
+  }
+  .tstl-btn:hover {
+    background: var(--text-color);
+    color: var(--main-color);
+    box-shadow: 0 0 1rem var(--main-color);
+  }
+  .tstl-btn i { font-size: 2.4rem; }
+  .tstl-btn.prev { left: -1.2rem; }
+  .tstl-btn.next { right: -1.2rem; }
+  
+  /* Dots */
+  .testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: .8rem;
+    margin-top: 1.6rem;
+  }
+  .testimonial-dot {
+    width: .9rem;
+    height: .9rem;
+    border-radius: 50%;
+    background: var(--bg-color);
+    border: .2rem solid var(--main-color);
+    cursor: pointer;
+    transition: background .3s ease, transform .3s ease;
+  }
+  .testimonial-dot[aria-selected="true"] {
+    background: var(--main-color);
+    transform: scale(1.1);
+  }
+  
+  /* ===== Responsive ===== */
+  @media (max-width: 992px) {
+    .g-review-card { max-width: 360px; }
+    .tstl-btn.prev { left: .4rem; }
+    .tstl-btn.next { right: .4rem; }
+  }
+  @media (max-width: 576px) {
+    .g-review-card { max-width: 94vw; }   /* keep it comfortably within mobile viewport */
+    .testimonial-slide { padding: 1.4rem 0; }
+    .g-text { font-size: 1.45rem; }
+  }
+  

@@ -425,6 +425,7 @@
                             <option value="">Select a service</option>
                             <option value="sauna-rental">Sauna Rental</option>
                             <option value="busy-bees">Busy Bees</option>
+                            <option value="slavic-steam-ceremony">Slavic Steam Ceremony</option>
                             <option value="ritual-rejuvenation">Ritual Rejuvenation</option>
                             <option value="bachelorettes-birthdays">Bachelorettes and Birthdays</option>
                         </select>
@@ -442,8 +443,9 @@
                         <select id="new-addons" name="addons" multiple>
                             <option value="basic-facial">Basic Facial</option>
                             <option value="body-scrub">Body Scrub</option>
-                            <option value="oak-leaf-steam">Oak Leaf Whisk Steam</option>
-                            <option value="disposable-underwear-flip-flops">Disposable Underwear + Flip Flops</option>
+                            <option value="oak-leaf-steam">Oak Leaf Broom</option>
+                            <option value="scrub-steam">Body Scrub & Steam</option>
+                            <option value="all-inclusive">All Inclusive</option>
                         </select>
                     </div>
                     <div class="input-box">
@@ -503,6 +505,7 @@
                         <option value="">All</option>
                         <option value="sauna-rental">Sauna Rental</option>
                         <option value="busy-bees">Busy Bees</option>
+                        <option value="slavic-steam-ceremony">Slavic Steam Ceremony</option>
                         <option value="ritual-rejuvenation">Ritual Rejuvenation</option>
                         <option value="bachelorettes-birthdays">Bachelorettes and Birthdays</option>
                     </select>
@@ -658,8 +661,9 @@
                         <select id="appointment-addons" name="addons" multiple>
                             <option value="basic-facial">Basic Facial</option>
                             <option value="body-scrub">Body Scrub</option>
-                            <option value="oak-leaf-steam">Oak Leaf Whisk Steam</option>
-                            <option value="disposable-underwear-flip-flops">Disposable Underwear + Flip Flops</option>
+                            <option value="oak-leaf-steam">Oak Leaf Broom</option>
+                            <option value="scrub-steam">Body Scrub & Steam</option>
+                            <option value="all-inclusive">All Inclusive</option>
                         </select>
                     </div>
                     <div class="input-box">
@@ -1226,10 +1230,13 @@
                 for (let i = 1; i <= 6; i++) {
                     peopleSelect.innerHTML += `<option value="${i}">${i}</option>`;
                 }
-                ["2.5 hrs", "3 hrs", "3.5 hrs", "4 hrs"].forEach(duration => {
+                ["3 hrs", "3.5 hrs", "4 hrs", "4.5 hrs", "5 hrs", "5.5 hrs", "6 hrs"].forEach(duration => {
                     durationSelect.innerHTML += `<option value="${duration}">${duration}</option>`;
                 });
             } else if (service === "busy-bees") {
+                durationBox.style.display = "block";
+                durationSelect.innerHTML += `<option value="2.5 hrs">2.5 hrs</option>`;
+            } else if (service === "slavic-steam-ceremony") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="2.5 hrs">2.5 hrs</option>`;
             } else if (service === "ritual-rejuvenation") {
@@ -1238,7 +1245,7 @@
             } else if (service === "bachelorettes-birthdays") {
                 peopleBox.style.display = "block";
                 durationBox.style.display = "block";
-                for (let i = 1; i <= 6; i++) {
+                for (let i = 3; i <= 6; i++) {
                     peopleSelect.innerHTML += `<option value="${i}">${i}</option>`;
                 }
                 durationSelect.innerHTML += `<option value="4 hrs">4 hrs</option>`;
@@ -1264,14 +1271,18 @@
         document.addEventListener('DOMContentLoaded', () => {
             populateTimeOptions();
             document.getElementById('create-appointment-button').addEventListener('click', () => {
-                const time = document.getElementById('new-appointment-time').value;
-                const period = document.getElementById('new-appointment-period').value;
-                const timeWithPeriod = `${time} ${period}`;
+                const time = document.getElementById('new-appointment-time').value; // "01:30"
+const period = document.getElementById('new-appointment-period').value; // "AM"/"PM"
+const [hh, mm] = time.split(':').map(Number);
+let hour24 = hh % 12;
+if (period === 'PM') hour24 += 12;
+const time24 = `${String(hour24).padStart(2, '0')}:${String(mm).padStart(2, '0')}`; // "13:30"
+
 
                 const newAppointmentData = {
                     service: document.getElementById('new-appointment-service').value,
                     date: document.getElementById('new-appointment-date').value,
-                    time: timeWithPeriod,
+                    time: time24,        // <-- store 24h "HH:MM"
                     firstName: document.getElementById('new-first-name').value,
                     lastName: document.getElementById('new-last-name').value,
                     phone: document.getElementById('new-phone').value,
