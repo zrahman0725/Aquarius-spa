@@ -349,3 +349,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  const promoPopup = document.getElementById('promo-popup');
+  const promoImage = document.getElementById('promo-image');
+  const closeBtn = document.querySelector('.promo-close');
+
+  const promoImages = [
+    'images/WhatsApp Image 2025-10-09 at 20.42.18.jpeg',
+    'images/WhatsApp Image 2025-10-09 at 20.42.20.jpeg'
+  ];
+
+  // Randomly pick one image
+  const randomImage = promoImages[Math.floor(Math.random() * promoImages.length)];
+  promoImage.src = randomImage;
+
+  // Show popup 10 seconds after page load
+  setTimeout(() => {
+    promoPopup.style.display = 'flex';
+  }, 3000); // 10000 ms = 10 seconds
+
+  // Close popup when clicking X or outside
+  closeBtn.addEventListener('click', () => promoPopup.style.display = 'none');
+  promoPopup.addEventListener('click', e => {
+    if (e.target === promoPopup) promoPopup.style.display = 'none';
+  });
+});
+

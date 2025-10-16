@@ -178,11 +178,13 @@
                         <label for="services">Select Service:</label>
                         <select id="services" name="service" required onchange="updateServiceOptions()">
                             <option value="">Select a service</option>
+                            <option value="fall-promo">Fall Promo</option>
                             <option value="sauna-rental">Sauna Rental</option>
                             <option value="busy-bees">Busy Bees</option>
                             <option value="slavic-steam-ceremony">Salavic Steam Ceremony</option>
                             <option value="ritual-rejuvenation">Ritual Rejuvenation</option>
                             <option value="bachelorettes-birthdays">Bachelorettes and Birthdays</option>
+
                         </select>
                     </div>
                     <div class="input-box" id="people-box" style="display: none;">
@@ -324,6 +326,9 @@
             } else if (service === "busy-bees") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="2.5 hrs">2.5 hrs</option>`;
+            } else if (service === "fall-promo") {
+                durationBox.style.display = "block";
+                durationSelect.innerHTML += `<option value="1.5 hrs">1.5 hrs</option>`;
             } else if (service === "slavic-steam-ceremony") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="2.5 hrs">2.5 hrs</option>`;

@@ -115,8 +115,15 @@
             <div class="services-box">
                 <i class='bx bxs-paint'></i>
                 <h3>Promos</h3>
-                <p>Take advantage of our special promotions to enjoy luxurious spa treatments at discounted rates. Perfect for those looking to experience premium relaxation without breaking the bank. Keep an eye out for limited-time offers and seasonal deals.</p>
-                <a href="#" class="btn" data-title="Promos" data-description="N/A" data-length="N/A" data-price="N/A" data-details="Description:| <span class='small-text'>Experience relaxation like never before! Aquarius Spa now offers exciting seasonal promotions throughout the year, giving you the perfect chance to unwind and enjoy our services at a special rate. Keep an eye out for upcoming offers and events designed to help you relax, refresh, and rejuvenate. For details on current promotions, please call us at 403-681-9617. Each visit ensures your comfort during your spa experience. Treat yourself to a day of wellness and renewal at Aquarius Spa.</span>">Read More</a>
+                <p>Take advantage of our special promotions to enjoy luxurious spa treatments at discounted rates. Perfect for those looking to experience premium relaxation without breaking the bank. Keep an eye out for limited-time offers and seasonal deals.</p><p>*NEW PROMO! VIEW DETAILS BELOW*</p>
+                <a href="#" class="btn" 
+                    data-title="Fall Promotion" 
+                    data-description="Single Session" 
+                    data-length="1 (hour)" 
+                    data-price="$90" 
+                    data-details="Description:| <span class='small-text'>Celebrate the autumn season with our rejuvenating Fall Promotion. Begin your experience with a 30-minute steam session designed to open pores, improve circulation, and melt away stress. Then unwind completely with a 30-minute professional massage that releases tension and restores balance to your body and mind. This package is ideal for guests seeking quick yet complete relaxation during the cozy fall months. | Available for a limited time only — book your appointment today!</span>">
+                    Read More
+                    </a>
             </div>
 
             <div class="services-box">
@@ -322,7 +329,7 @@
             {
                 author: "Summer Rose",
                 rating: 5,
-                text: "Peaceful, great herbal tea and a perfect place to forget my thoughts. By the time I was ready for my facial, I was so relaxed I almost fell asleep. Highly recommend!",
+                text: "Peaceful, great herbal tea and a perfect place to forget my thoughts. I was so relaxed during my facial I almost fell asleep. Highly recommend!",
                 date: "3 weeks ago"
             },
             {
@@ -334,16 +341,35 @@
             {
                 author: "Natalia Kulbeda",
                 rating: 5,
-                text: "Super relaxing and rejuvenating! I tried their body treatment and loved it. Great service and atmosphere — I’ll come again for sure.",
+                text: "Super relaxing and rejuvenating! I tried their popular body treatment and loved it. Great service and atmosphere — I’ll come again for sure.",
                 date: "24 weeks ago"
+            },
+            {
+                author: "AntibotiC",
+                rating: 5,
+                text: "Top notch service! Really love the steam room, sauna, and lounge area. The new photo zone is awesome. Will come back again!",
+                date: "24 weeks ago"
+            },
+            {
+                author: "Lean Neumann",
+                rating: 5,
+                text: "Very cute, clean, and relaxing place to spend an afternoon. Staff were very friendly and professional. Perfect spot for friends.",
+                date: "29 weeks ago"
+            },
+            {
+                author: "Branka Novovic",
+                rating: 5,
+                text: "Very cozy and clean. The staff is welcoming and the service is excellent. Highly recommend for anyone wanting a different and great experience.",
+                date: "35 weeks ago"
             },
             {
                 author: "Arlene Marko",
                 rating: 5,
-                text: "A hidden gem! Staff were very friendly and made me feel welcome. The relaxation area was private and comfortable — we will be going back!",
+                text: "A fantastic hidden gem! Friendly staff, comfortable private relaxation area, and thoughtful touches. We will be going back!",
                 date: "38 weeks ago"
             }
             ];
+
 
         
           const track = document.querySelector('.testimonial-track');
@@ -416,6 +442,17 @@
           startAuto();
         });
         </script>
+
+        <!-- Full Image Promo Popup -->
+        <div id="promo-popup">
+        <div class="promo-popup-inner">
+            <img id="promo-image" src="" alt="Fall Promotion" class="promo-full-image">
+            <a href="booking.html" class="promo-cta-btn">Book Now</a>
+            <span class="promo-close">&times;</span>
+        </div>
+        </div>
+
+
         
 </body>
 
