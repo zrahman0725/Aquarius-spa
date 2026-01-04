@@ -178,7 +178,7 @@
                         <label for="services">Select Service:</label>
                         <select id="services" name="service" required onchange="updateServiceOptions()">
                             <option value="">Select a service</option>
-                            <option value="fall-promo">Mini Spa Promo</option>
+                            <option value="mini-spa-promo">Mini Spa Promo</option>
                             <option value="couples-promo">Couples Spa Promo</option>
                             <option value="sauna-rental">Sauna Rental</option>
                             <option value="busy-bees">Busy Bees</option>
@@ -327,7 +327,7 @@
             } else if (service === "busy-bees") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="2.5 hrs">2.5 hrs</option>`;
-            } else if (service === "fall-promo") {
+            } else if (service === "mini-spa-promo") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="1 hrs">1 hrs</option>`;
             } else if (service === "couples-promo") {
