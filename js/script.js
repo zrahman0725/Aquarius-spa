@@ -355,8 +355,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const closeBtn = document.querySelector('.promo-close');
 
   const promoImages = [
-    'images/WhatsApp Image 2025-10-09 at 20.42.18.jpeg',
-    'images/WhatsApp Image 2025-10-09 at 20.42.20.jpeg'
+    'images/minispa_promo.jpeg',
+    'images/couples_promo.jpeg'
   ];
 
   // Randomly pick one image

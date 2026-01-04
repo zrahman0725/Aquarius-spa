@@ -423,7 +423,8 @@
                         <label for="new-appointment-service">Select Service:</label>
                         <select id="new-appointment-service" name="service" required onchange="updateNewServiceOptions()">
                             <option value="">Select a service</option>
-                            <option value="fall-promo">Fall Promo</option>
+                            <option value="fall-promo">Mini Spa Promo</option>
+                            <option value="couples-promo">Couples Spa Promo</option>
                             <option value="sauna-rental">Sauna Rental</option>
                             <option value="busy-bees">Busy Bees</option>
                             <option value="slavic-steam-ceremony">Slavic Steam Ceremony</option>
@@ -504,7 +505,8 @@
                     <label for="popup-filter-service">Service:</label>
                     <select id="popup-filter-service">
                         <option value="">All</option>
-                        <option value="fall-promo">Fall Promo</option>
+                        <option value="fall-promo">Mini Spa Promo</option>
+                        <option value="couples-promo">Couples Spa Promo</option>
                         <option value="sauna-rental">Sauna Rental</option>
                         <option value="busy-bees">Busy Bees</option>
                         <option value="slavic-steam-ceremony">Slavic Steam Ceremony</option>
@@ -1240,8 +1242,11 @@
                 durationSelect.innerHTML += `<option value="2.5 hrs">2.5 hrs</option>`;
             } else if (service === "fall-promo") {
                 durationBox.style.display = "block";
+                durationSelect.innerHTML += `<option value="1 hrs">1 hrs</option>`;
+            } else if (service === "couples-promo") {
+                durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="1.5 hrs">1.5 hrs</option>`;
-            }else if (service === "slavic-steam-ceremony") {
+            } else if (service === "slavic-steam-ceremony") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="2.5 hrs">2.5 hrs</option>`;
             } else if (service === "ritual-rejuvenation") {
