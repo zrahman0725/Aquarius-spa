@@ -354,24 +354,48 @@ document.addEventListener('DOMContentLoaded', function () {
   const promoImage = document.getElementById('promo-image');
   const closeBtn = document.querySelector('.promo-close');
 
+  // If this page doesn't have the promo popup, do nothing
+  if (!promoPopup || !promoImage || !closeBtn) return;
+
+  // Your two promo images (order can be changed here)
   const promoImages = [
     'images/minispa_promo.jpeg',
     'images/couples_promo.jpeg'
   ];
 
-  // Randomly pick one image
-  const randomImage = promoImages[Math.floor(Math.random() * promoImages.length)];
-  promoImage.src = randomImage;
+  // Optional: start with a random one, then show the other after closing
+  promoImages.sort(() => Math.random() - 0.5);
 
-  // Show popup 10 seconds after page load
-  setTimeout(() => {
+  let currentIndex = 0;
+
+  function showPopup() {
+    promoImage.src = promoImages[currentIndex];
     promoPopup.style.display = 'flex';
-  }, 3000); // 10000 ms = 10 seconds
+  }
+
+  function hidePopup() {
+    promoPopup.style.display = 'none';
+  }
+
+  function handleClose() {
+    hidePopup();
+
+    // If there is another promo to show, show it right after closing the first
+    if (currentIndex < promoImages.length - 1) {
+      currentIndex += 1;
+
+      // small delay so it feels like "close -> next shows"
+      setTimeout(showPopup, 250);
+    }
+  }
+
+  // Show first popup after delay (keep your existing delay)
+  setTimeout(showPopup, 3000);
 
   // Close popup when clicking X or outside
-  closeBtn.addEventListener('click', () => promoPopup.style.display = 'none');
+  closeBtn.addEventListener('click', handleClose);
   promoPopup.addEventListener('click', e => {
-    if (e.target === promoPopup) promoPopup.style.display = 'none';
+    if (e.target === promoPopup) handleClose();
   });
 });
 
