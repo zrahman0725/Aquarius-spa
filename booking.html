@@ -178,8 +178,8 @@
                         <label for="services">Select Service:</label>
                         <select id="services" name="service" required onchange="updateServiceOptions()">
                             <option value="">Select a service</option>
-                            <option value="mini-spa-promo">Mini Spa Promo</option>
-                            <option value="couples-promo">Couples Spa Promo</option>
+                            <option value="mini-spa">Mini Spa For One</option>
+                            <option value="couples-package">Couples Spa Package</option>
                             <option value="sauna-rental">Sauna Rental</option>
                             <option value="busy-bees">Busy Bees</option>
                             <option value="slavic-steam-ceremony">Salavic Steam Ceremony</option>
@@ -327,10 +327,10 @@
             } else if (service === "busy-bees") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="2.5 hrs">2.5 hrs</option>`;
-            } else if (service === "mini-spa-promo") {
+            } else if (service === "mini-spa") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="1 hrs">1 hrs</option>`;
-            } else if (service === "couples-promo") {
+            } else if (service === "couples-package") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="1.5 hrs">1.5 hrs</option>`;
             } else if (service === "slavic-steam-ceremony") {
