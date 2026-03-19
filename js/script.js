@@ -360,7 +360,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // Your two promo images (order can be changed here)
   const promoImages = [
     'images/minispa_promo.jpeg',
-    'images/couples_promo.jpeg'
+    'images/couples_promo.jpeg',
+    'images/glowspa_promo.jpeg',
+    'images/facial_promo.jpeg',
   ];
 
   // Optional: start with a random one, then show the other after closing
