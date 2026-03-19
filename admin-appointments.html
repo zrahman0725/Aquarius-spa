@@ -425,6 +425,8 @@
                             <option value="">Select a service</option>
                             <option value="mini-spa">Mini Spa For One</option>
                             <option value="couples-package">Couples Spa Package</option>
+                            <option value="glow-facial">Glow & B.E.M. Facial</option>
+                            <option value="glow-package">Steam BEM Glow Package</option>
                             <option value="sauna-rental">Sauna Rental</option>
                             <option value="busy-bees">Busy Bees</option>
                             <option value="slavic-steam-ceremony">Slavic Steam Ceremony</option>
@@ -507,6 +509,8 @@
                         <option value="">All</option>
                         <option value="mini-spa">Mini Spa For One</option>
                         <option value="couples-package">Couples Spa Package</option>
+                        <option value="glow-facial">Glow & B.E.M. Facial</option>
+                        <option value="glow-package">Steam BEM Glow Package</option>
                         <option value="sauna-rental">Sauna Rental</option>
                         <option value="busy-bees">Busy Bees</option>
                         <option value="slavic-steam-ceremony">Slavic Steam Ceremony</option>
@@ -1244,6 +1248,12 @@
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="1 hrs">1 hrs</option>`;
             } else if (service === "couples-package") {
+                durationBox.style.display = "block";
+                durationSelect.innerHTML += `<option value="1.5 hrs">1.5 hrs</option>`;
+            } else if (service === "glow-package") {
+                durationBox.style.display = "block";
+                durationSelect.innerHTML += `<option value="1.5 hrs">1.5 hrs</option>`;
+            } else if (service === "glow-facial") {
                 durationBox.style.display = "block";
                 durationSelect.innerHTML += `<option value="1.5 hrs">1.5 hrs</option>`;
             } else if (service === "slavic-steam-ceremony") {
