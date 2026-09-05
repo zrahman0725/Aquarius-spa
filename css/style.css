@@ -1242,11 +1242,11 @@ span {
 .heart-divider span:not(.heart) {
     height: 2px;
     width: 375px;
-    background-color: #CDB9AE;
+    background-color: #004d40;
 }
 
 .heart {
-    color: #A47053;
+    color: #004d40;
     font-size: 20px;
     font-family: Arial, sans-serif;
     line-height: 1;
@@ -1293,7 +1293,7 @@ span {
 
 .service-price {
     font-family: 'Allura', cursive;
-    color: #A47053;
+    color: #004d40;
     font-size: 20px;
     font-weight: 400;
     text-align: center;
