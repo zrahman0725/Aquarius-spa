@@ -1299,3 +1299,110 @@ span {
     text-align: center;
     margin-bottom: 10px;
 }
+
+        .services-carousel {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 5rem; /* Add padding to prevent overlap with header */
+        }
+
+        .services-box {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .services-box img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin: 0 auto 2rem;
+        }
+
+        .services-box i {
+            font-size: 7rem;
+            color: var(--main-color);
+        }
+
+        .services-box h3 {
+            font-size: 2.6rem;
+            margin: 1rem 0;
+        }
+
+        .services-box p {
+            font-size: 1.6rem;
+            margin: 1rem 0 3rem;
+        }
+
+        .services-carousel {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 5rem;
+}
+
+.services-box {
+    display: flex;
+    margin-bottom: 2rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-img {
+    flex: 1;
+    max-width: 50%;
+    overflow: hidden;
+}
+
+.service-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.service-description {
+    flex: 2;
+    padding: 1rem 2rem;
+    background-color: #f9f9f9;
+}
+
+.service-description h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.service-description p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.service-description p.people,
+.service-description p.duration,
+.service-description p.price {
+    display: flex;
+    align-items: center;
+}
+
+.service-description p.people i,
+.service-description p.duration i,
+.service-description p.price i {
+    margin-right: 0.5rem;
+}
+
+.service-description .btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #26c6da;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.service-description .btn:hover {
+    background-color: #00796b;
+}
